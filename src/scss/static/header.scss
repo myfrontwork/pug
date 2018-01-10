@@ -1,0 +1,173 @@
+.header {
+  background: $color-B1;
+  border-bottom: 1px solid #c5c5c5;
+  box-shadow: 0 1px 2px rgba(black, .1);
+}
+.header-inner {
+  height: $header-height;
+  padding: {
+    left: 56px; // 로고
+    right: 17px;
+  }
+  display: flex;
+}
+
+// 로고, 서비스명
+.header-masthead {
+  flex: 2;
+}
+.header-masthead-name {
+  color: #727272;
+  margin: 12px 0 0;
+  position: relative;
+  z-index: 1;
+  line-height: 20px;
+  font: {
+    size: 18px;
+    weight: 700;
+  }
+  letter-spacing: (-0.1em / 3);
+
+  .brand {
+    color: $color-W1;
+    font: inherit;
+  }
+}
+.header-masthead-icon {
+  @include icon(symbol);
+  @include absolute(left top);
+}
+
+// 내비게이션 메뉴
+.header-nav {
+  @include flex-static;
+}
+.header-nav-item {
+  height: $header-height;
+  position: relative;
+}
+
+// 내비게이션 메뉴 드랍다운
+.header-nav-item-more {
+  border-color: $static-ui-bd-color;
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+
+  &.is-active {
+    transform: rotate(180deg);
+  }
+}
+.header-nav-item-dropdown {
+  @extend %dropdown-pointing;
+  border: {
+    top-left-radius: 0;
+    top-right-radius: 0;
+  }
+  margin-top: -1px;
+  left: auto;
+  right: -12px;
+
+  &::before {
+    left: auto;
+    right: 18px;
+  }
+}
+.header-nav-item-dropdown-ctrl {
+  margin-top: 8px;
+  text-align: right;
+}
+
+// 내비게이션 메뉴 > 유저정보
+.header-userbox {
+  height: 100%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.header-userbox-img {
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  position: relative;
+
+  img {
+    display: inline-block;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    margin: auto 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+.header-userbox-name {
+  color: $color-T1;
+  font: {
+    size: 13px;
+    weight: bold;
+  }
+}
+.header-userbox-level {
+  color: $color-T-b1;
+  margin-left: 12px;
+  padding-left: 10px;
+  position: relative;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+
+  // 구분선
+  &::before {
+    content: "";
+    border-left: 1px solid $color-L2;
+    height: 15px;
+    @include absolute(left center);
+  }
+}
+
+// 드랍다운 내 유저박스
+.userbox {
+  width: 295px;
+  padding-left: 2px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+}
+.userbox-img {
+  border-radius: 50%;
+  width: 50px;
+  max-height: 50px;
+  margin-right: 17px;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 50px;
+    height: auto;
+  }
+}
+.userbox-body {
+  flex: 1;
+  line-height: 15px;
+  font-size: 13px;
+}
+.userbox-name {
+  font-weight: bold;
+}
+.userbox-email {
+  color: lighten($color-T1, 20);
+  margin-top: 4px;
+}
+.userbox-level {
+  color: $color-T-b1;
+  margin-top: 4px;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+}

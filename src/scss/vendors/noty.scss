@@ -1,0 +1,136 @@
+$noty-types: info, success, warning;
+
+// 베이직 검은 반투명 토스트 (type: info, success, warning)
+.noty_theme__basic {
+  color: white;
+  @include layer-shadow;
+  width: 380px;
+  margin: 4px 0; // `box-shadow`용 안전 마진
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  @include non-selectable;
+
+  .noty_body {
+    background: rgba(black, .7);
+    border: 0;
+    border-radius: 4px;
+    margin: auto;
+    padding: 12px 20px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    line-height: 20px;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .noty_buttons {
+    padding: 0 10px .5em 10px;
+  }
+  
+  // 메시지상자
+  @each $type in $noty-types {
+    &.noty_type__#{$type} {
+      .noty_body {
+        &::before {
+          content: "";
+          @include icon("noty-#{$type}");
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+}
+
+// 흰색 불투명 토스트 (type: loading)
+.noty_theme__clean {
+  color: $color-T1;
+  background: $color-B1;
+  border: solid 1px $color-L3;
+  border-radius: $ui-box-radius;
+  @include layer-shadow;
+  display: table;
+  width: 350px;
+  margin: 4px 0;
+  overflow: hidden;
+  position: relative;
+  @include non-selectable;
+
+  .noty_body {
+    display: table-cell;
+    margin: auto;
+    padding: 20px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    line-height: 20px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .noty_buttons {
+    padding: 0 10px .5em 10px;
+  }
+  
+  // 로딩상자
+  &.noty_type__loading {
+    .noty_body {
+      &::before {
+        @extend %icon;
+        content: "";
+        @include background($image: "loading.gif");
+        width: 36px;
+        height: 36px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+.noty-in {
+  opacity: 0;
+  animation: noty-fade-slide .4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.noty-out {
+  opacity: 1;
+  animation: noty-fade-slide .4s cubic-bezier(0.55, 0.055, 0.675, 0.19) reverse;
+}
+
+@keyframes noty-fade-slide {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 25px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// modal: true일 때 나타날 오버레이
+.noty_modal {
+  background-color: $color-B1;
+  opacity: .6;
+  
+  &.noty_modal_open {
+    animation: noty-modal-fade .3s ease-out;
+  }
+  &.noty_modal_close {
+    animation: noty-modal-fade .2s ease-out reverse;
+  }
+}
+
+@keyframes noty-modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: .6;
+  }
+}
+
+// blur fix
+#noty_layout__center {
+  transform: translate(-50%, -50%) !important;
+}

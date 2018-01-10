@@ -1,0 +1,32 @@
+mixin modeSwitch(label, id, checked)
+  li.main-nav-switch-item
+    input.main-nav-switch-radio(type="radio", name="modeViewSelect", id=id, checked=checked)
+    label.main-nav-switch-label(for=id)= label
+
+mixin calendarNav(title, activePanelIndex, useAlt)
+  .main-nav
+    // 기본: "is-active", 검색결과 보기: (없음)
+    .main-nav-front(class=useAlt ? null : "is-active")
+      h2.main-nav-title= title
+      .main-nav-move
+        +iconButton("이전", null, "caret-left").main-nav-move-prev
+        +iconButton("다음", null, "caret-right").main-nav-move-next
+        +aButton("오늘").main-nav-move-today
+
+    // 기본: (없음), 검색결과 보기: "is-active"
+    .main-nav-front-alt(class=useAlt ? "is-active" : null)
+      +iconButton("뒤로가기", null, "prev").main-nav-back
+      .main-nav-search-count
+        | 검색결과 
+        em.value 0
+        | 개
+
+    // 기본: "is-active", 검색결과 보기: (없음)
+    ul.main-nav-switch(class=useAlt ? null : "is-active")
+      // name, id 값은 테스트를 위해 임의로 지정되었습니다. 추가개발시 필요에 맞게 바꾸셔도 됩니다.
+      - var switches = ["일", "주", "월", "일정"];
+      each name, i in switches
+        +modeSwitch(name, `modeViewSelect${i}`, (i === activePanelIndex))
+  
+    .main-nav-rear
+      +search("main-nav-search")(placeholder="캘린더")

@@ -1,0 +1,50 @@
+.textfield {
+  color: $textfield-text-color;
+  background: $textfield-bg-color;
+  border: 1px solid $textfield-bd-color;
+  border-radius: $ui-box-radius;
+  display: inline-block;
+  height: $ui-box-height;
+  margin: 1px 0;
+  padding: (($ui-box-height - $ui-line-height) / 2) 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  line-height: $ui-line-height;
+  appearance: none;
+
+  @include placeholder {
+    color: $textfield-placeholder-color;
+  }
+
+  &:enabled:hover {
+    //background-color: $textfield-bg-color-hover;
+    //border-color: $textfield-bd-color-hover;
+  }
+  &:enabled:focus {
+    //background-color: $textfield-bg-color-active;
+    //border-color: $textfield-bd-color-active;
+    outline-width: 0;
+  }
+
+  &:disabled,
+  &:read-only {
+    @include inactive;
+  }
+  &:read-only {
+    background: $textfield-bg-color !important;
+    border-color: $textfield-bd-color !important;
+    @include non-selectable;
+  }
+
+  &.w-full {
+    display: block;
+    width: 100%;
+  }
+}
+
+textarea.textfield {
+  height: auto;
+  //resize: vertical;
+  resize: none;
+  @include scrollable;
+}

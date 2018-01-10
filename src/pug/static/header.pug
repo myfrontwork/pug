@@ -1,0 +1,27 @@
+header.header(role="banner")
+  .header-inner(role="presentation")
+    // 서비스명
+    .header-masthead
+      h1.header-masthead-name
+        em.brand 한컴
+        |  플래너
+      span.header-masthead-icon(role="presentation")
+    // 유저정보
+    nav.header-nav
+      .header-nav-item
+        .header-userbox
+          i.header-userbox-img
+            img(src="./ui/images/_chicken.png", alt="")
+          strong.header-userbox-name 홍길동
+          span.header-userbox-level Freemium
+          +iconButton("추가 메뉴 보기", null, "caret-down").header-nav-item-more
+        .header-nav-item-dropdown
+          .userbox
+            .userbox-img
+              img(src="./ui/images/_chicken.png", alt="")
+            .userbox-body
+              .userbox-name 홍길동
+              .userbox-email ab56@hancom.com
+              .userbox-level Freemium
+          .header-nav-item-dropdown-ctrl
+            +aButton("로그아웃")(class="js-modal-closer")

@@ -1,0 +1,59 @@
+mixin textfield(value, placeholder)
+  input.textfield(type="text", value=value, placeholder=placeholder)&attributes(attributes)
+
+mixin textarea(value, placeholder)
+  textarea.textfield(placeholder=placeholder)&attributes(attributes)= value
+
+mixin aButton(text, href, icon)
+  - href = href || "javascript:;";
+  a(class="button" + (icon ? " has-icon" : ""), role="button", href=href, title=text)&attributes(attributes)
+    if (icon)
+      i(class=`icon-${icon}`)
+    |#{text}
+
+mixin iconButton(text, href, icon)
+  a.icon-button(role="button", href=href || "javascript:;", title=text)&attributes(attributes)
+    span.nonvisual= text
+    if (icon)
+      i(class=`icon-${icon}`)
+
+mixin checkbox(label)
+  span.checkbox
+    input.checkbox-input(type="checkbox")&attributes(attributes)
+    label.checkbox-label(for=attributes.id)= label
+
+mixin radio(label)
+  span.radio
+    input.radio-input(type="radio")&attributes(attributes)
+    label.radio-label(for=attributes.id)= label
+
+mixin select(options, query)
+  select.js-select(data-config=query ? JSON.stringify(query) : null)&attributes(attributes)
+    if (query && query.placeholder)
+      // placeholder를 사용했을 땐 최상위에 빈 option이 필요합니다. -- https://select2.org/placeholders
+      option
+    each option in options
+      option(value=option.value, selected=option.default)= option.text
+
+mixin search(name)
+  // form으로 바꾸하려면 다음 마크업을 사용해 주세요.
+    <form action="" method="">
+        <div class="#{name} js-search-ui" role="search">
+            <input class="#{name}-field" type="search" value="주간보고">
+            <span class="#{name}-ctrl" role="presentation">
+                <button class="#{name}-reset" type="reset" title="초기화">
+                    <span class="nonvisual">초기화</span>
+                </button>
+                <button class="#{name}-submit" type="submit" title="검색">
+                    <span class="nonvisual">검색</span>
+                </button>
+            </span>
+        </div>
+    </form>
+  div(class=`${name} js-search-ui`, role="search")
+    input(class=`${name}-field js-search-field`, type="search")&attributes(attributes)
+    span(class=`${name}-ctrl`, role="presentation")
+      a(class=`${name}-reset js-search-reset`, role="button", title="초기화")
+        span.nonvisual 초기화
+      a(class=`${name}-submit`, role="button", title="검색")
+        span.nonvisual 검색

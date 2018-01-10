@@ -1,0 +1,216 @@
+extends includes/layout-blank
+
+block title
+  title 모듈 | 한컴 플래너
+  
+block content
+  table.tbl-idx
+    caption 모듈 목록
+    colgroup
+      col(style="width: 10em;")
+      col(style="width: auto;")
+    thead
+      th 분류
+      th 예시
+    tbody
+      tr
+        th 아이콘
+        td
+          +icon("symbol")
+          +icon("grid")
+          +icon("grid-hover")
+          +icon("grid-active")
+          +icon("list")
+          +icon("list-hover")
+          +icon("list-active")
+          +icon("noty-info")
+          +icon("noty-success")
+          +icon("noty-warning")
+          +icon("view")
+          +icon("view-hover")
+          +icon("view-active")
+          +icon("close-circle")
+          +icon("close-circle-hover")
+          +icon("close-circle-active")
+          +icon("map-pointer")
+          +icon("map-pointer-hover")
+          +icon("map-pointer-active")
+          +icon("prev")
+          +icon("prev-hover")
+          +icon("prev-active")
+          +icon("caret-down")
+          +icon("caret-down-hover")
+          +icon("caret-down-active")
+          +icon("caret-left")
+          +icon("caret-left-hover")
+          +icon("caret-left-active")
+          +icon("caret-right")
+          +icon("caret-right-hover")
+          +icon("caret-right-active")
+          +icon("caret-up")
+          +icon("caret-up-hover")
+          +icon("caret-up-active")
+          +icon("close")
+          +icon("close-hover")
+          +icon("close-active")
+          +icon("check")
+          +icon("check-white")
+          +icon("refresh")
+          +icon("refresh-hover")
+          +icon("refresh-active")
+          +icon("alarm")
+          +icon("attached")
+          +icon("notice")
+          +icon("repeat")
+          +icon("drag")
+          +icon("unfold")
+          +icon("fold")
+      tr
+        th 목록
+        td
+          +list([
+            {text: "항목 1"},
+            {text: "항목 2"},
+            {text: "항목 3"},
+            {text: "항목 4"}
+          ])(style="width: 200px;")
+      tr
+        th 입력 필드
+        td
+          +textfield(null, "기본")
+          +textfield("비활성화")(disabled)
+          +textfield("읽기 전용")(readonly)
+      tr
+        th 버튼
+        td
+          div
+            +aButton("기본")
+            button.button 기본
+          div
+            +aButton("글자가 매우 긴 경우")
+            button.button 글자가 매우 긴 경우
+          div
+            +aButton("아이콘", null, "notice")
+            button.button.has-icon
+              +icon("notice")
+              | 아이콘
+          div
+            +aButton("비활성화")(class="is-disabled")
+            button.button(disabled) 비활성화
+          div
+            +aButton("아이콘", null, "notice")(class="is-disabled")
+            button.button.has-icon(disabled)
+              +icon("notice")
+              |아이콘
+      tr
+        th 아이콘 버튼
+        td
+          div
+            +iconButton("뒤로", null, "prev")
+            +iconButton("닫기", null, "close")
+      tr
+        th 체크박스
+        td
+          +checkbox("기본")(name="chk", id="chk2")
+          +checkbox("체크")(name="chk", id="chk1", checked)
+          +checkbox("반체크")(name="chk", id="chk3")
+          +checkbox("비활성화")(name="chk", id="chk4", disabled)
+          script.
+            document.getElementById("chk3").indeterminate = true;
+      tr
+        th 라디오
+        td
+          +radio("기본")(name="rd", id="rd2")
+          +radio("체크")(name="rd", id="rd1", checked)
+          +radio("비활성화")(name="rd", id="rd3", disabled)
+      tr
+        th 선택상자
+        td
+          +select([
+            {value: "opt1", text: "옵션 1"},
+            {value: "opt2", text: "옵션 2"},
+            {value: "opt3", text: "옵션 3"}
+          ], {placeholder: "활성 선택상자", width: "130px"})
+          +select([
+            {value: "opt1", text: "옵션 1"},
+            {value: "opt2", text: "옵션 2"},
+            {value: "opt3", text: "옵션 3"}
+          ], {placeholder: "비활성 선택상자", width: "130px"})(disabled)
+          div
+            | 비활성 선택상자는 select 태그에 
+            code disabled
+            | 속성만 추가하면 됩니다.
+          div
+            pre
+              | select2.update("#mySelector", [
+              |   {value: 0, text: "foo"},
+              |   {value: 1, text: "bar"},
+              |   {value: 2, text: "baz"}
+              | ]);
+          div
+            code select2.disable("#mySelector");
+          div
+            code select2.enable("#mySelector");
+      tr
+        th 팝업
+        td
+          table(style="border-spacing: 5px;")
+            tr(style="vertical-align: top;")
+              td
+                +confirmModal("확인 팝업", "팝업 메시지", [
+                  {link: null, text: "취소"},
+                  {link: null, text: "확인"}
+                ])(class="is-active", style="margin: 0; position: static;")
+              td
+                +selectModal("선택 팝업", "팝업 메시지", [
+                  {name: "selectModalTest", text: "선택지 1", selected: true},
+                  {name: "selectModalTest", text: "선택지 2"},
+                  {name: "selectModalTest", text: "선택지 3"}
+                ], [
+                  {link: null, text: "취소"},
+                  {link: null, text: "확인"}
+                ])(class="is-active", style="margin: 0; position: static;")
+        tr
+          th 날짜/시간 선택
+          td
+            table(style="border-spacing: 5px;")
+              tr(style="vertical-align: top;")
+                td
+                  .js-datepicker(data-config=`{"showButtonPanel":false}`)
+                td
+                  +textfield("2017.11.27")(class="js-datepicker")
+                  +timepicker("오전 09:00")
+                  +timepicker("오후 03:30", false)
+            div
+              code timepicker.disable("#mySelector");
+            div
+              code timepicker.enable("#mySelector");
+        tr
+          th 알림상자 추가
+          td
+            div
+              +aButton("알림 유형 info")(onclick="noty.add({ text: '전체 화면을 종료하려면 Esc 버튼을 누르세요.', type: 'info' });")
+              |&nbsp;
+              code noty.add({ text: '전체 화면을 종료하려면 Esc 버튼을 누르세요.', type: 'info' });
+            div
+              +aButton("알림 유형 success")(onclick="noty.add({ text: '연결이 해제되었습니다.', type: 'success' });")
+              |&nbsp;
+              code noty.add({ text: '연결이 해제되었습니다.', type: 'success' });
+            div
+              +aButton("알림 유형 warning")(onclick="noty.add({ text: '종료일이 시작일보다 이전인 <br>일정은 만들 수 없습니다.', type: 'warning' });")
+              |&nbsp;
+              code noty.add({ text: '종료일이 시작일보다 이전인 &lt;br&gt;일정은 만들 수 없습니다.', type: 'warning' });
+            div
+              +aButton("알림 유형 loading")(onclick="noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });")
+              |&nbsp;
+              code noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });
+        tr
+          th 알림상자 제거
+          td
+            pre
+              | var myNoty = noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });
+              | noty.remove(myNoty);
+            div
+              +aButton("알림 모두 끄기")(onclick="noty.remove();")
+              |&nbsp;
+              code noty.remove();

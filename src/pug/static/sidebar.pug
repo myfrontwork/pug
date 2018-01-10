@@ -1,0 +1,43 @@
+mixin myGroupListItem(text, index, color, forGoogle)
+  li.my-groups-list-item(class=isActive ? "is-active" : null)&attributes(attributes)
+    input.my-groups-list-item-check(type="checkbox", id=`myGroup${index}`)
+    label.my-groups-list-item-label(for=`myGroup${index}`)
+      span.tick(class=`bg-clr-${color}`)
+        +icon("check-white")
+      |#{text}
+    a.my-groups-list-item-refresh(class=forGoogle ? "js-modal-gcalendar-sync-opener" : null, role="button", href="javascript:;" title="새로고침")
+      +icon("refresh")
+    +iconButton("추가 메뉴 보기", null, "caret-down").my-groups-list-item-more
+    .my-groups-list-item-onoff
+      if (forGoogle)
+        // 연결되지 않았을 때
+        .my-groups-list-item-onoff-ctrl
+          a.my-groups-list-item-onoff-on.js-modal-closer.js-modal-gcalendar-link-opener(role="button", href="javascript:;") 구글 캘린더 연결
+        // 연결됐을 때
+      .my-groups-list-item-onoff-entry
+        span.my-groups-list-item-onoff-entry-id adfag212
+        a.my-groups-list-item-onoff-off.js-modal-closer(class=forGoogle ? "js-modal-gcalendar-unlink-opener" : null, role="button", href="javascript:;") 해제
+      // 캘린더 설정
+      .my-groups-list-item-onoff-ctrl
+        a.my-groups-list-item-onoff-on.js-modal-closer.js-modal-calendar-edit-opener(role="button", href="javascript:;") 캘린더 설정
+
+aside.sidebar(role="complementary")
+  // 새 일정
+  section.sidebar-widget.add-new-event
+    button.add-new-event-button 새 일정
+
+  // 미니 캘린더
+  section.sidebar-widget.mini-calendar
+    .js-datepicker(data-config=`{"showButtonPanel":false}`, data-view="mini-month-view")
+      
+  // 그룹 리스트
+  section.sidebar-widget
+    h2.sidebar-widget-heading
+      a.sidebar-widget-toggler.is-active(role="button", href="javascript:;", data-toggle="collapse") 캘린더
+    .sidebar-widget-content
+      ul.my-groups
+        // name, id는 테스트를 위해 임시로 삽입돼 있습니다. 추가 개발시 필요에 맞게 수정해주세요.
+        - var i = 1;
+        +myGroupListItem("내 캘린더", i++, 3)
+        +myGroupListItem("구글 캘린더", i++, 1, true)
+        +myGroupListItem("대한민국 휴일", i++, 2)

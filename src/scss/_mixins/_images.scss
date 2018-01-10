@@ -1,0 +1,32 @@
+// 매개변수 경로에 $image-path를 접두하고 url 형식으로 반환
+@function image-url($subpath: null) {
+  @if $subpath {
+    @return url($image-path + $subpath);
+  } @else {
+    @return null;
+  }
+}
+
+// 백그라운드 이미지를 설정
+// @include background($image: "logo.png", $size: cover);
+@mixin background($color: null, $image: null, $repeat: no-repeat, $position: null, $size: null) {
+  background: $color image-url($image) $repeat $position;
+  background-size: $size;
+}
+
+// 반응형 플루이드 이미지
+@mixin fluid-image($axis: horiazontal) {
+  @if $axis == vertical {
+    width: auto;
+    max-height: 100%;
+  } @else {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// modules/icons.scss에 정의되어 있는 기존의 아이콘에 현재 셀렉터를 extend
+// @include icon(check)
+@mixin icon($name) {
+  @extend .icon-#{$name};
+}

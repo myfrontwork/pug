@@ -1,0 +1,8 @@
+extends includes/layout
+block title
+  title 일정목록 |한컴 플래너
+block navigation
+  +calendarNav("2017.11.16", 3)
+block view
+  .main-view-panel.is-active
+    include views/list

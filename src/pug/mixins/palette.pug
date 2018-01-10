@@ -1,0 +1,16 @@
+mixin paletteItem(token, index, isActive)
+  input.palette-state(type="radio", name=`palette${token}`, id=`palette${token}${index}`, value=index, checked=isActive)
+  label.palette-item(for=`palette${token}${index}`, class=`bg-clr-${index}`)
+    i.icon-check-white
+
+mixin palette(token, showCurrent)
+  .palette(class=showCurrent ? "js-color-picker" : null)
+    if (showCurrent)
+      .palette-current
+        span.palette-current-item.bg-clr-1
+    .palette-group
+      -
+        token = token || new Date().getTime();
+        var i = 0;
+      while (i < 10)
+        +paletteItem(token, ++i, (i === 1))

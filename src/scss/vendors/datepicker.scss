@@ -1,0 +1,201 @@
+$datepicker-width                   : 180px;
+$datepicker-gutter                  : 15px;
+$datepicker-header-height           : 15px;
+$datepicker-cell-height             : 20px;
+$datepicker-bg-color                : $color-B1;
+$datepicker-bd-color                : $color-L3;
+$datepicker-text-color              : $color-T2;
+$datepicker-text-color-strong       : $color-T1;
+
+$datepicker-cell-bg-color           : $color-none;
+$datepicker-cell-bg-color-hover     : $color-B3;
+$datepicker-cell-bg-color-current   : $color-B-b1;
+$datepicker-cell-bg-color-holiday   : #bf4545;
+
+$datepicker-cell-bd-color           : $color-none;
+$datepicker-cell-bd-color-current   : $color-L-b1;
+
+// 컨테이너
+.ui-datepicker {
+  background: $datepicker-bg-color;
+  border: 1px solid $datepicker-bd-color;
+  @include layer-shadow;
+  width: $datepicker-width;
+  margin: 3px 0;
+  padding: 13px $datepicker-gutter 8px;
+  box-sizing: border-box;
+  
+  // 헤더
+  .ui-datepicker-header {
+    height: $datepicker-header-height;
+    margin-bottom: $datepicker-gutter;
+    padding: 0;
+  }
+  // 이전, 다음 버튼
+  .ui-datepicker-prev,
+  .ui-datepicker-next {
+    @extend .icon-button;
+    border: 1px solid $datepicker-bd-color;
+    width: 15px !important;
+    height: 15px !important;
+    position: absolute;
+    top: 0 !important;
+
+    .ui-icon {
+      position: static !important;
+      margin: 0 !important;
+    }
+  }
+  // 이전 버튼
+  .ui-datepicker-prev {
+    border: {
+      top-right-radius: 0;
+      bottom-right-radius: 0;
+    }
+    left: 3px !important;
+
+    .ui-icon {
+      @extend .icon-caret-left;
+    }
+    &.ui-state-hover {
+      .ui-icon {
+        @extend .icon-caret-left-hover;
+      }
+    }
+    &:active {
+      .ui-icon {
+        @extend .icon-caret-left-active;
+      }
+    }
+  }
+  // 다음 버튼
+  .ui-datepicker-next {
+    border: {
+      top-left-radius: 0;
+      bottom-left-radius: 0;
+    }
+    right: 3px !important;
+
+    .ui-icon {
+      @extend .icon-caret-right;
+    }
+    &.ui-state-hover {
+      .ui-icon {
+        @extend .icon-caret-right-hover;
+      }
+    }
+    &:active {
+      .ui-icon {
+        @extend .icon-caret-right-active;
+      }
+    }
+  }
+  
+  // 달력 제목
+  .ui-datepicker-title {
+    color: $datepicker-text-color-strong;
+    margin: 0 20px;
+    line-height: $datepicker-header-height;
+    text-align: center;
+    font: {
+      size: 14px;
+      weight: bold;
+    }
+    
+    select {
+      // 선택상자
+      &.ui-datepicker-month,
+      &.ui-datepicker-year {
+
+      }
+    }
+  }
+
+  // 달력
+  .ui-datepicker-calendar {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    line-height: $datepicker-cell-height;
+    text-align: center;
+    white-space: nowrap;
+    font: {
+      size: 11px;
+      weight: normal;
+    }
+    thead {
+      color: $datepicker-text-color-strong;
+    }
+    th,
+    td {
+      border: 0;
+      height: $datepicker-cell-height;
+      padding: 0;
+      line-height: $datepicker-cell-height;
+      font: inherit;
+    }
+    // 날짜 (a: 클릭가능 날짜, span: 클릭불가 날짜)
+    .ui-state-default {
+      color: $datepicker-text-color;
+      background: $color-none;
+      border: 1px solid $color-none;
+      display: block;
+      height: 100%;
+      padding: 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .ui-state-hover {
+      background-color: $color-B3;
+    }
+    .ui-state-active {
+      font-weight: bold;
+    }
+    .ui-datepicker-current-day {
+      .ui-state-default {
+        background-color: $color-B-b1;
+        border-color: $color-L-b1;
+      }
+    }
+    .ui-datepicker-week-end {
+      &:not(:last-child) {
+        .ui-state-default {
+          color: #bf4545;
+        }
+      }
+    }
+    .ui-datepicker-other-month {
+      opacity: .4;
+    }
+  }
+
+  // 제어 버튼 모음
+  .ui-datepicker-buttonpane {
+    background: $color-none;
+    border: solid $datepicker-bd-color;
+    border-width: 1px 0 0;
+    margin: 7px (-$datepicker-gutter) 0;
+    padding: 5px $datepicker-gutter 0;
+    text-align: center;
+
+    button {
+      @extend .button;
+      float: none !important;
+      margin: 0 3px;
+
+      &.ui-datepicker-current {
+        float: left;
+        width: 70px;
+      }
+
+      &.ui-datepicker-close {
+        display: none !important;
+      }
+    }
+  }
+}
+.ui-datepicker-inline {
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+}

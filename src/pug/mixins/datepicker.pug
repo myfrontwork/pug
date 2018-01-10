@@ -1,0 +1,9 @@
+mixin datepicker(y, m, d)
+  +textfield([y, m, d].join(".")).js-datepicker
+
+mixin timepicker(currentTime, state)
+  - var isDisabled = state === false;
+  .timepicker.js-timepicker(class=isDisabled ? "is-disabled" : null)&attributes(attributes)
+    input.timepicker-input(type="text", value=currentTime, autocomplete="off", disabled=isDisabled)
+    a.timepicker-caret(href="javascript:;")
+      b

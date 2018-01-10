@@ -1,0 +1,43 @@
+%dropdown {
+  color: $color-T1;
+  background: $color-B1;
+  border: 1px solid $color-L5;
+  border-radius: $ui-box-radius;
+  @include layer-shadow(15%);
+  display: none;
+  padding: 12px;
+  @include absolute(left top 100%);
+  z-index: 10;
+
+  &.is-active {
+    display: block;
+    //animation: open-menu .1s ease-in;
+  }
+}
+%dropdown-pointing {
+  @extend %dropdown;
+  
+  &::before {
+    content: "";
+    background: $color-B1;
+    border: solid $color-L5;
+    border-width: 1px 1px 0 0;
+    width: 10px;
+    height: 10px;
+    @include absolute(left 18px bottom 100%);
+    z-index: -1;
+    transform: rotate(-45deg) translateY(7px);
+    pointer-events: none;
+  }
+}
+
+@keyframes open-menu {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

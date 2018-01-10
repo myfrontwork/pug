@@ -1,0 +1,66 @@
+// 포커스 아웃라인 제거
+@mixin focus-unstyled {
+  &:focus {
+    outline-width: 0;
+  }
+}
+
+// 커서 및 클릭 액션 설정
+@mixin clickable($clickable: true) {
+  @if $clickable {
+    cursor: pointer;
+    touch-action: manipulation;
+  } @else {
+    cursor: default;
+    touch-action: none;
+  }
+}
+
+// 드래그 선택 방지
+@mixin non-selectable {
+  user-select: none;
+  -webkit-tab-highlight-color: $color-none;
+  -webkit-touch-callout: none;
+}
+
+// webkit 브라우저에서의 scrollbar 스타일링
+@mixin scrollbar($width: $scrollbar-width, $track-color: $color-B4, $thumb-color: $color-B7) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $track-color;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: $color-none;
+  }
+}
+
+// 스크롤 설정
+@mixin scrollable($max-width: null, $max-height: null) {    
+  max-width: $max-width;
+  max-height: $max-height;
+
+  @if $max-width == null {
+    overflow-y: auto;
+  } @else if $max-height == null {
+    overflow-x: auto;
+  } @else {
+    overflow: auto;
+  }
+
+  -webkit-overflow-scrolling: touch;
+
+  @include scrollbar($scrollbar-width, $color-B4, $color-B7);
+}
+
+// CSS4 :placeholder-shown polyfill (+JavaScript)
+@mixin placeholder-shown {
+  &:placeholder-shown,
+  .placeholder-shown {
+    @content;
+  }
+}

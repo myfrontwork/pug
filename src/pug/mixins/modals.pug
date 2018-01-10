@@ -1,0 +1,35 @@
+mixin confirmModal(title, message, actions)
+  aside.modal.modal-simple(role="dialog")&attributes(attributes)
+    .modal-inner(role="presentation")
+      header.modal-head
+        h2.modal-head-title= title
+        a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+          +icon("close")
+          span.nonvisual 닫기
+      .modal-body
+        .modal-content
+          .modal-dialog
+            p= message
+        .modal-actions
+          each action in actions
+            a.modal-actions-item(class=action.text === "취소" ? "js-modal-closer" : null, role="button", href=action.link || "javascript:;")= action.text
+
+mixin selectModal(title, message, options, actions)
+  aside.modal.modal-simple.modal-select(role="dialog")&attributes(attributes)
+    .modal-inner(role="presentation")
+      header.modal-head
+        h2.modal-head-title= title
+        a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+          +icon("close")
+          span.nonvisual 닫기
+      .modal-body
+        .modal-content
+          .modal-dialog
+            p= message
+            .modal-select-group
+              - var i = 1;
+              each option in options
+                +radio(option.text)(name=option.name, id=option.name + (i++), checked=option.selected)
+        .modal-actions
+          each action in actions
+            a.modal-actions-item(class=action.text === "취소" ? "js-modal-closer" : null, role="button", href=action.link || "javascript:;")= action.text

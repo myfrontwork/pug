@@ -1,0 +1,89 @@
+@mixin button-unstyled($no-color: false) {
+  @if $no-color {
+    color: inherit;
+    background: $color-none;
+    border: 0;
+  }
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  text: {
+    align: center;
+    decoration: none;
+  }
+  font: inherit;
+  @include clickable(true);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+%button-basic {
+  @include button-unstyled;
+  color: $button-text-color;
+  background: $button-bg-color;
+  border: 1px solid $button-bd-color;
+  border-radius: $ui-box-radius;
+  margin: 1px 0;
+  line-height: $ui-line-height;
+  @include text-ellipsis;
+  @include non-selectable;
+  @include focus-unstyled;
+
+  // hovered
+  &:hover {
+    color: $button-text-color-hover;
+    background-color: $button-bg-color-hover;
+    border-color: $button-bd-color-hover;
+  }
+  // touched
+  &:active {
+    color: $button-text-color-active;
+    background-color: $button-bg-color-active;
+    border-color: $button-bd-color-active;
+  }
+  // disabled  
+  &:disabled,
+  &.is-disabled {
+    color: $button-text-color !important;
+    background: $button-bg-color !important;
+    border: 1px solid $button-bd-color !important;
+    @include inactive;
+    filter: grayscale(100%);
+  }
+}
+%button-borderless {
+  @extend %button-basic;
+  border-color: $color-none;
+}
+
+.button {
+  @extend %button-basic;
+  min-width: 50px;
+  max-width: 112px;
+  height: $ui-box-height;
+  padding: (($ui-box-height - $ui-line-height - 2px) / 2) 5px;
+
+  // 글자 앞에 아이콘을 포함하는 버튼
+  &.has-icon {
+    margin-right: 3px;
+    padding-right: 7px;
+    display: inline-flex;
+    align-items: center;
+    
+    [class^="icon"] {
+      margin-right: 4px;
+    }
+  }
+}
+
+// 아이콘 버튼
+.icon-button {
+  @extend %button-basic;
+  width: 24px;
+  height: 24px;
+  vertical-align: bottom;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

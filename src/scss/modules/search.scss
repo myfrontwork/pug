@@ -1,0 +1,89 @@
+%search-container {
+  width: 214px;
+  position: relative;
+}
+%search-field {
+  @extend .textfield;
+  width: 100%;
+  height: 30px;
+  padding: {
+    left: 11px;
+    right: 48px;
+  }
+  font-size: 12px;
+
+  @include placeholder {
+    color: $color-T3;
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: $color-B2;
+  }
+  &:focus {
+    background-color: $color-B4;
+  }
+}
+%search-control {
+  @include absolute(right 8px center);
+  display: flex;
+  align-items: center;
+}
+%search-button {
+  @include button-unstyled(true);
+  width: 16px;
+  height: 16px;
+  position: relative;
+  @include focus-unstyled;
+
+  &::before {
+    @include absolute(left top);
+  }
+}
+%search-reset {
+  @extend %search-button;
+  margin-right: 6px;
+
+  &::before {
+    content: "";
+    @extend .icon-close-circle;
+  }
+  &:hover {
+    &::before {
+      @extend .icon-close-circle-hover;
+    }
+  }
+  &:active {
+    &::before {
+      @extend .icon-close-circle-active;
+    }
+  }
+}
+%search-submit {
+  @extend %search-button;
+
+  &::before {
+    content: "";
+    @extend .icon-view;
+  }
+  &:hover {
+    &::before {
+      @extend .icon-view-hover;
+    }
+  }
+  &:active {
+    &::before {
+      @extend .icon-view-active;
+    }
+  }
+}
+
+// @example
+// @include hide-reset-when-empty("& ~ .main-nav-search-ctrl .main-nav-search-reset");
+@mixin hide-reset-when-empty($subselector) {
+  @include placeholder-shown {
+    #{$subselector} {
+      display: none;
+    }
+  }
+}

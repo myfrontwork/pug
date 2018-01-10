@@ -1,0 +1,38 @@
+mixin scheduleListItem(obj)
+  li.sch-list-item
+    a.sch-list-item-link.js-modal-schedule-view-opener(class=`txt-clr-${obj.color || 0}`, href="javascript:;")
+      span.time= obj.time
+      span.name= obj.name
+      span.icon
+        if (obj.repeat)
+          +icon-repeat
+        if (obj.alarm)
+          +icon-alarm
+        if (obj.alarm)
+          +icon-attached
+
+aside.modal.modal-simple.modal-schedule-reveal(role="dialog")
+  .modal-inner(role="presentation")
+    header.modal-head
+      h2.modal-head-title 2017.11.16 (목)
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        .sch-list
+          ul.sch-list-group
+            +scheduleListItem({ color: 1, time: "오전 9:00", name: "회의", alarm: true })
+            +scheduleListItem({ color: 3, time: "오전 10:30", name: "컨퍼런스" })
+            +scheduleListItem({ color: 5, time: "오후 1:30", name: "미팅", repeat: true, alarm: true, file: true })
+            +scheduleListItem({ color: 7, time: "오후 3:00", name: "타임스퀘어 약속" })
+            +scheduleListItem({ color: 9, time: "오후 4:30", name: "병원", alarm: true })
+            +scheduleListItem({ color: 8, time: "오후 7:00", name: "저녁약속" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })
+            +scheduleListItem({ color: 10, time: "오후 9:30", name: "(제목 없음)" })

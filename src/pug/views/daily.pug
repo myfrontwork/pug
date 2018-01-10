@@ -1,0 +1,101 @@
+// [모드] 일간
+.mode-view.mv-cols.mv-cols-day(data-view="cols-view")
+
+  // 상단 고정 영역
+  .mv-cols-head(data-part="cols-main-top")
+    // 스크롤바 영역 이외
+    .mv-cols-head-content
+      table.mv-cols-head-table
+        tbody
+          // 일요일 ~ 토요일
+          tr.mv-cols-head-dayname
+            th.mv-cols-head-dayname-offset
+            th.mv-cols-head-dayname-item.date-today
+              span.label 11.16 (수)
+              span.lunar (음) 10.1
+          // 종일일정
+          tr.mv-cols-head-daylong
+            td.mv-cols-head-daylong-offset
+              span.label 종일
+            td
+              .mv-cols-head-daylong-group
+                // 종일일정: 배경
+                .mv-cols-head-daylong-bg
+                  table.mv-cols-head-daylong-bg-table
+                    tbody
+                        td.mv-cols-head-daylong-bg-item.date-today
+                // 종일일정: 내용
+                .mv-cols-head-daylong-data
+                  table.mv-cols-head-daylong-data-table
+                    tbody
+                      tr
+                        td.mv-cols-head-daylong-data-item
+                          +daylongEvent({ txtColor: 4, bgColor: 4, bdColor: 4, daylong: true, name: "일정내용" })
+                      tr
+                        td.mv-cols-head-daylong-data-item
+                          +daylongEvent({ txtColor: 6, bgColor: 6, bdColor: 6, daylong: true, name: "일정내용" })
+                      tr
+                        td.mv-cols-head-daylong-data-item
+                          +daylongEvent({ txtColor: 7, bgColor: 7, bdColor: 7, daylong: true, name: "일정내용" })
+                      tr
+                        td.mv-cols-head-daylong-data-item
+                          +daylongEvent({ txtColor: 10, bgColor: 10, bdColor: 10, daylong: true, name: "일정내용" })
+                      tr
+                        td.mv-cols-head-daylong-data-item
+                          +daylongEvent({ txtColor: 2, bgColor: 2, bdColor: 2, daylong: true, name: "일정내용" })
+    // 스크롤바 영역
+    .mv-cols-head-scroll
+      .placeholder
+    // IE 대응용 백그라운드 분리 hack
+    .mv-cols-head-bg(role="presentation")
+  // /상단 고정 영역
+
+  // 시간별 일정 영역(스크롤 가능)
+  .mv-cols-body(data-part="cols-main-body")
+    table.mv-cols-body-grid
+      td.mv-cols-body-grid-offset
+        .mv-cols-body-grid-timeline
+          +colsTimelineCell("12시", "오전")
+          +colsTimelineCell("1시")
+          +colsTimelineCell("2시")
+          +colsTimelineCell("3시")
+          +colsTimelineCell("4시")
+          +colsTimelineCell("5시")
+          +colsTimelineCell("6시")
+          +colsTimelineCell("7시")
+          +colsTimelineCell("8시")
+          +colsTimelineCell("9시")
+          +colsTimelineCell("10시")
+          +colsTimelineCell("11시")
+          +colsTimelineCell("12시", "오후")
+          +colsTimelineCell("1시")
+          +colsTimelineCell("2시")
+          +colsTimelineCell("3시")
+          +colsTimelineCell("4시")
+          +colsTimelineCell("5시")
+          +colsTimelineCell("6시")
+          +colsTimelineCell("7시")
+          +colsTimelineCell("8시")
+          +colsTimelineCell("9시")
+          +colsTimelineCell("10시")
+          +colsTimelineCell("11시")
+      // 수
+      td.mv-cols-body-grid-col.date-today
+        .mv-cols-body-grid-group
+          - var i = 48;
+          while (--i)
+            - var selected = 20 < i && i < 28;
+            .mv-cols-body-grid-cell.js-sch-cell(role="gridcell", class=selected ? "time-selected" : null)
+          // top 값: (19px * rowIndex - 1), (한컴) 수정
+          .sch-group.sch-time.row-2(style=`top: ${19 * 18}px;  left: 0%; width: 50%; z-index: ;`)
+            +partialEvent({ txtColor: 10, bgColor: 10, bdColor: 10, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", alarm: true, attached: true, repeat: true  })
+          .sch-group.sch-time.row-2(style=`top: ${19 * 18}px;  left: 50%; width: 50%; z-index: ;`)
+            +partialEvent({ txtColor: 9, bgColor: 9, bdColor: 9, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+          .sch-group.sch-time.row-3(style=`top: ${19 * 28}px; left: 0%; width: 100%; z-index: ;`)
+            +partialEvent({ txtColor: 8, bgColor: 8, bdColor: 8, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+
+          // 현재 시각 표시
+          .now-indicator(style="top: 460px;")
+      // /수
+  // /시간별 일정 영역(스크롤 가능)
+// /[모드] 일간

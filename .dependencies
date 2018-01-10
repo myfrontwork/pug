@@ -1,0 +1,44 @@
+# Hancom Planner: Frontend Dependencies
+
+[jQuery 3.2.1]
+- Description   : Syntax sugar, Cross platform
+- Source        : https://github.com/jquery/jquery
+- License       : MIT License
+- Location      : /public/vendors/jquery
+
+[jQuery UI 1.21.1 Custom build]
+- Description   : UI helpers
+- Components    : Position, Disable Selection, Form Reset Mixin, Keycode, Datepicker
+- Source        : https://github.com/jquery/jquery-ui
+- License       : MIT License
+- Location      : /public/vendors/jquery-ui-1.12.1.custom
+
+[jQuery Timepicker]
+- Description   : Time picker (input + select box)
+- Source        : https://github.com/jonthornton/jquery-timepicker
+- License       : MIT License
+- Location      : /public/vendors/jquery-timepicker
+
+[Tether]
+- Description   : Element positionning
+- Source        : https://github.com/HubSpot/tether
+- License       : MIT License
+- Location      : /public/vendors/noty
+
+[Noty]
+- Description   : Toast notification
+- Source        : https://github.com/needim/noty
+- License       : MIT License
+- Location      : /public/vendors/select2
+
+[Select2]
+- Description   : Select box
+- Source        : https://github.com/select2/select2
+- License       : MIT License
+- Location      : /public/vendors/tether
+
+[Underscore: `debounce` function]
+- Description   : Event handler optimization
+- Source        : https://github.com/jashkenas/underscore/blob/master/underscore.js#L879
+- License       : MIT License
+- Location      : /public/ui/script.js

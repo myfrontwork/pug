@@ -1,0 +1,129 @@
+//- mixins
+include mixins
+
+-
+  var useExtendedClass = true;
+  var extend = cls => useExtendedClass ? cls : null;
+
+doctype
+html(lang="ko", dir="ltr")
+  head
+    block head
+      include metatags
+      block title
+        title 한컴 플래너
+      include styles
+  body
+    block body
+      // 헤더
+      include ../static/header
+      // /헤더
+
+      // 컨텐츠
+      .content
+
+        // 메뉴 패널
+        block sidebar
+          include ../static/sidebar
+        // /메뉴 패널
+        
+        // 캘린더
+        main.main(role="main")
+
+          // 캘린더 제어판
+          //- include calendar navigation mixin "before" the block starts
+          include ../static/navigation
+          block navigation
+          // /캘린더 제어판
+
+          // 캘린더 상세
+          .main-view
+            include ../views/grid
+            block view
+          // /캘린더 상세
+
+        // /캘린더
+
+      // /컨텐츠
+
+      // 팝업 공용 오버레이
+      include overlay
+      // /팝업 공용 오버레이
+
+      // [popup] 캘린더 설정
+      include ../modals/calendar-edit
+      // /[popup] 캘린더 설정
+
+      // [popup] 숨겨진 일정 보기
+      include ../modals/schedule-reveal
+      // /[popup] 숨겨진 일정 보기
+
+      // [popup] 일정 보기
+      include ../modals/schedule-view
+      // /[popup] 일정 보기
+
+      // [popup] 일정 편집
+      include ../modals/schedule-edit
+      // /[popup] 일정 편집
+
+      // [alert] 반복 일정 편집
+      +selectModal("알림", "반복일정을 수정하시겠습니까?", [
+        {name: "editRptSchedule", text: "이 일정만 수정", selected: true},
+        {name: "editRptSchedule", text: "이 일정부터 이후 일정 모두 수정"}
+      ], [
+        {link: null, text: "취소"},
+        {link: null, text: "확인"}
+      ]).modal-repeating-schedule-edit
+      // [alert] 반복 일정 편집
+
+      // [popup] 일정 편집: 반복 설정
+      include ../modals/schedule-edit-interval
+      // /[popup] 일정 편집: 반복 설정
+
+      // [popup] 일정 편집: 파일 선택
+      include ../modals/schedule-add-file
+      // /[popup] 일정 편집: 파일 선택
+
+      // [alert] 일정 삭제
+      +confirmModal("알림", "일정을 삭제하시겠습니까?", [
+        {text: "취소"},
+        {text: "확인"}
+      ]).modal-schedule-delete
+      // /[alert] 일정 삭제
+
+      // [popup] 반복 일정 삭제
+      include ../modals/schedule-delete-related
+      // /[popup] 반복 일정 삭제
+
+      // [alert] 지도 삭제
+      +confirmModal("지도 삭제", "지도를 삭제하시겠습니까?", [
+        {text: "취소"},
+        {text: "확인"}
+      ]).modal-map-delete
+      // /[alert] 지도 삭제
+
+      // [alert] 구글 캘린더 연결
+      +confirmModal("구글 캘린더 연결", "구글 캘린더를 연결하시겠습니까?", [
+        {text: "취소"},
+        {text: "확인"}
+      ]).modal-gcalendar-link
+      // /[alert] 구글 캘린더 연결
+
+      // [alert] 구글 캘린더 동기화
+      +confirmModal("구글 캘린더 동기화", "구글 캘린더가 연결되었습니다. 동기화를 진행하시겠습니까?", [
+        {text: "나중에"},
+        {text: "확인"}
+      ]).modal-gcalendar-sync
+      // /[alert] 구글 캘린더 동기화
+
+      // [alert] 구글 캘린더 연결 해제
+      +confirmModal("구글 캘린더 연결 해제", "구글 캘린더를 연결 해제하시겠습니까?", [
+        {text: "취소"},
+        {text: "확인"}
+      ]).modal-gcalendar-unlink
+      // /[alert] 구글 캘린더 연결 해제
+
+      block script
+        include scripts
+        - var googleApiKey = "AIzaSyBSOF-AhsQt9ZZk2DXVbOLAMZgEJVe85CE";
+        script(src=`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}`, async, defer)

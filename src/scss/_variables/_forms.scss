@@ -1,0 +1,80 @@
+// 공통
+$ui-line-height             : 16px !default;
+$ui-box-height              : 20px !default;
+$ui-box-radius              : 2px !default;
+$ui-alpha-fade              : 30% !default;
+
+// 목록 상자
+$list-bg-color              : $color-none;
+$list-bg-color-hover        : $color-B-b1;
+$list-bg-color-active       : $color-B-b3;
+$list-bg-color-selected     : $color-B-b2;
+
+$list-bd-color              : $color-none;
+$list-bd-color-hover        : $color-L-b2;
+$list-bd-color-active       : $color-L-b2;
+$list-bd-color-selected     : $color-L-b2;
+
+$list-text-color            : $color-T1;
+$list-text-color-hover      : $color-T-b1;
+$list-text-color-active     : $color-T-b1;
+$list-text-color-selected   : $color-T-b1;
+
+$list-caret-color           : $color-T3;
+$list-caret-color-hover     : $color-T3;
+$list-caret-color-active    : $color-T3;
+$list-caret-color-selected  : $color-T3;
+
+// 라디오 버튼 & 체크박스
+$choice-gap-after           : 15px;
+$choice-icon-size           : 14px;
+$choice-icon-gap-after      : 4px;
+
+$choice-check-size          : 6px;
+$choice-check-color         : $color-T-b1;
+$choice-check-color-neutral : $color-T3; // :indeterminate
+
+$choice-bg-color            : $color-B1;
+$choice-bg-color-hover      : $color-B-b1;
+$choice-bg-color-active     : $color-B-b3;
+
+$choice-bd-color            : $color-L5;
+$choice-bd-color-hover      : $color-L-b2;
+$choice-bd-color-active     : $color-L-b2;
+
+$choice-text-color          : $color-T1;
+$choice-text-color-hover    : $color-T-b2;
+$choice-text-color-active   : $color-T1;
+
+// 입력 필드(<input/>, <textarea/>), 선택상자(<select/>)
+$textfield-bg-color             : $color-B1;
+$textfield-bg-color-hover       : $color-B-b1;
+$textfield-bg-color-active      : $color-B-b3;
+
+$textfield-bd-color             : $color-L5;
+$textfield-bd-color-hover       : $color-L-b2;
+$textfield-bd-color-active      : $color-L-b2;
+
+$textfield-text-color           : $color-T1;
+$textfield-placeholder-color    : rgba($color-T1, .5);
+
+$textfield-caret-color          : $color-T3;
+$textfield-caret-color-hover    : $color-T-b1;
+$textfield-caret-color-active   : $color-T-b1;
+
+// 버튼
+$button-bg-color            : $color-B1;
+$button-bg-color-hover      : $color-B-b1;
+$button-bg-color-active     : $color-B-b3;
+$button-bg-color-selected   : $color-B-b3;
+
+$button-bd-color            : $color-L5;
+$button-bd-color-light      : $color-L3;
+$button-bd-color-hover      : $color-L-b2;
+$button-bd-color-active     : $color-L-b2;
+$button-bd-color-selected   : $color-L-b2;
+
+$button-text-color          : $color-T1;
+$button-text-color-hover    : $color-T-b1;
+$button-text-color-active   : $color-T-b1;
+$button-text-color-selected : $color-T-b1;

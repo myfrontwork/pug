@@ -1,0 +1,47 @@
+mixin scheduleBox(event, addTime, addIcon)
+  .sch(class=`clr-${event.color} row-${event.vspan || 0}`, tabindex="0")
+    .sch-pad(role="presentation")
+      if (addTime && addIcon)
+        span.sch-def
+          if (addTime)
+            b.sch-when= event.time + " "
+          if (addIcon)
+            span.sch-type
+              if (event.repeat)
+                +icon-repeat
+              if (event.alarm)
+                +icon-alarm
+              if (event.alarm)
+                +icon-attached
+      span.sch-desc= event.name
+
+mixin scheduleLine(event, addTime, addIcon)
+  .sch(class=`clr-${event.color} row-${event.vspan || 0}`, tabindex="0")
+    .sch-pad(role="presentation")
+      span.sch-def
+        if (addTime)
+          b.sch-when= event.time + " "
+        span.sch-desc= event.name
+      if (addIcon)
+        span.sch-type
+          if (event.repeat)
+            +icon-repeat
+          if (event.alarm)
+            +icon-alarm
+          if (event.alarm)
+            +icon-attached
+
+mixin scheduleGroup(index, event, addTime, addIcon)
+  - var items = event.items || [event];
+
+  .sch-group(class=`${event.plain ? "sch-time" : "box-sch"} col-${event.span || 1} off-${event.pos || 0}`, style=`margin-top: ${index * 20}px`)
+    each e in items
+      if (event.plain)
+        +scheduleLine(e, addTime, addIcon)
+      else
+        +scheduleBox(e, addTime, addIcon)
+
+mixin scheduleRest(count)
+  // 숨겨진 일정 갯수
+  .sch-rest
+    a.sch-rest-click(role="button", href="javascript:;", title="일정 더 보기")= "+" + (count || 0)

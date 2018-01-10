@@ -1,0 +1,28 @@
+aside.modal.modal-advanced.modal-calendar-edit(role="dialog")
+  .modal-inner(role="presentation")
+    header.modal-head
+      h2.modal-head-title 캘린더 설정
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        fieldset.modal-fieldset
+          legend.modal-fieldset-legend
+            span.text 설정
+          .modal-fieldset-row
+            .modal-fieldset-row-label 캘린더명:
+            .modal-fieldset-row-field
+              +textfield
+          .modal-fieldset-row
+            .modal-fieldset-row-label 설명:
+            .modal-fieldset-row-field
+              +textarea.w-full(rows="3")
+          .modal-fieldset-row
+            .modal-fieldset-row-label 캘린더 색상:
+            .modal-fieldset-row-field
+              +palette("calendarEdit", false)
+      .modal-actions
+        .modal-actions-group
+          a.modal-actions-item(role="button", href="javascript:;") 확인
+          a.modal-actions-item.js-modal-closer(role="button", href="javascript:;") 취소

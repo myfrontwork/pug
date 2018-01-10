@@ -1,0 +1,128 @@
+.modal-schedule-edit {
+  width: 600px;
+  height: auto;
+  margin: 0;
+  top: auto;
+  left: auto;
+
+  .modal-fieldset-row-label {
+    width: 60px;
+  }
+  .modal-fieldset-row {
+    // 일시
+    &.date {
+      .textfield {
+        width: 77px;
+      }
+      .timepicker {
+        margin-left: 6px;
+      }
+      .joiner {
+        background: $color-L5;
+        width: 8px;
+        height: 1px;
+        margin: 0 6px;
+      }
+    }
+    // 반복
+    &.repeat {
+      .checkbox {
+        margin-right: 0;
+
+        & + .checkbox {
+          margin-left: 30px;
+        }
+      }
+      .js-modal-schedule-edit-inr-opener {
+        min-width: 50px;
+        max-width: 50px;
+        margin: 0 0 0 8px;
+      }
+      &:not(.is-repeating) {
+        .js-modal-schedule-edit-inr-opener,
+        .schedule-inr {
+          display: none;
+        }
+      }
+    }
+    // 장소
+    &.location {
+      .textfield {
+        @include flex-expand;
+      }
+      .addin {
+        width: 30px;
+        height: 20px;
+        margin-left: 4px;
+      }
+    }
+    // 파일 첨부
+    &.attachment {
+      .added-file {
+        display: none;
+      }
+      &.has-attachment {
+        .add-file {
+          display: none;
+        }
+        .added-file {
+          display: block;
+        }
+      }
+    }
+  }
+  // 검색어 제안 영역
+  .modal-fieldset-row-sugg {
+    display: none;
+    background: $color-B1;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1px;
+    @include absolute(left top 100%);
+    z-index: 3000; // select2: 2000
+
+    &.is-active {
+      display: block;
+    }
+
+    .list {
+      border-radius: $ui-box-radius;
+      @include scrollable(null, 100px);
+    }
+  }
+  // 일정색상 피커 영역
+  .palette {
+    margin-top: 2px;
+    margin-left: 16px;
+  }
+}
+
+// 구글 맵 영역
+.modal-fieldset-row-map {
+  display: none;
+  margin-top: 8px;
+  @include aspect-ratio(16, 9);
+
+  &.is-active {
+    display: block;
+  }
+}
+// 아이콘 state에 따라 스타일 변경
+.js-location-map-show {
+  &:hover {
+    .icon-map-pointer {
+      @extend .icon-map-pointer-hover;
+    }
+    .icon-close {
+      @extend .icon-close-hover;
+    }
+  }
+  &:active {
+    .icon-map-pointer {
+      @extend .icon-map-pointer-active;
+    }
+    .icon-close {
+      @extend .icon-close-active;
+    }
+  }
+}

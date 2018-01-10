@@ -1,0 +1,73 @@
+.modal-schedule-view {
+  width: 500px;
+  height: auto;
+  margin: 0;
+  top: auto;
+  left: auto;
+
+  .textfield {
+    border: {
+      color: $color-L3;
+      radius: 3px;
+    }
+  }
+
+  .modal-fieldset-label {
+    margin-bottom: 10px;
+  }
+  .modal-sch-def {
+    border-bottom: 1px solid $color-L3;
+    display: block;
+    margin-bottom: 5px;
+    padding-bottom: 4px;
+    line-height: 17px;
+    font: {
+      size: 15px;
+      weight: bold;
+    }
+  }
+  .modal-sch-icon {
+    border-radius: 50%;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .modal-sch-name {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .modal-sch-desc {
+    display: block;
+  }
+
+  .modal-fieldset-row {
+    padding-left: 0;
+    
+    .addin {
+      width: 30px;
+      height: 20px;
+      margin-left: 4px;
+    }
+  }
+  .modal-fieldset-row-label {
+    width: 60px;
+  }
+
+  // 색상
+  @for $i from 1 through length($schedule-color-map) {
+    &[data-schedule-color="#{$i}"] {
+      .modal-sch-icon {
+        &.bg-clr-#{$i}{
+          @extend .bg-clr-#{$i};
+        }
+      }
+      .modal-sch-name {
+        &.txt-clr-#{$i}{
+          @extend .txt-clr-#{$i};
+        }
+      }
+    }
+  }
+}

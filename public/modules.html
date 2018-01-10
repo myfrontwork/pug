@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>모듈 | 한컴 플래너</title>
+    <link rel="stylesheet" href="./vendors/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <link rel="stylesheet" href="./vendors/noty/noty.css">
+    <link rel="stylesheet" href="./vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="./ui/style.css">
+    <style>
+        code,
+        pre {
+            background: hsl(48, 52%, 92%);
+            color: hsl(48, 52%, 25%);
+            margin: .1em 0 1em;
+            padding: 2px .25em;
+            font-family: "Source Sans Pro", "Consolas", "Monaco", "monospace", monospace;
+            line-height: normal;
+            letter-spacing: 0;
+            overflow-wrap: break-word;
+        }
+
+        ::selection {
+            background: hsl(145, 63%, 49%);
+            color: white;
+        }
+
+        .link {
+            color: hsl(205, 70%, 44%);
+            text-decoration: underline;
+            text-decoration-color: hsla(205, 70%, 44%, .25);
+            text-underline-position: under;
+            cursor: pointer;
+        }
+
+        .link:hover {
+            text-decoration-color: hsla(205, 70%, 44%, .75);
+        }
+
+        .link[rel="external"]::after {
+            content: "";
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5cHgiIGhlaWdodD0iOXB4IiB2aWV3Qm94PSIwIDAgOSA5Ij48cGF0aCBmaWxsPSIjMjQ3REJGIiBkPSJNNyw1djRIMFYyaDR2MUgxdjVoNVY1SDd6IE01LDB2MWgyLjI5M0w0LjA1LDQuMjQzTDQuNzU3LDQuOTVMOCwxLjcwN1Y0aDFWMEg1eiIvPjwvc3ZnPg==) no-repeat;
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            margin-left: .2em;
+            position: relative;
+            top: -.25em;
+            vertical-align: middle;
+        }
+
+        ul.notelist,
+        ul.notelist ul {
+            padding-left: 2em;
+            list-style-type: disc;
+        }
+
+        dl.history>dt {
+            font-weight: 700;
+        }
+
+        dl.history>dd {
+            display: list-item;
+            margin-left: 2em;
+            list-style-type: disc;
+        }
+
+        .info {
+            color: hsl(208, 100%, 40%);
+        }
+
+        .success {
+            color: hsl(89, 89%, 30%);
+        }
+
+        .warning {
+            color: hsl(36, 100%, 36%);
+        }
+
+        .error {
+            color: hsl(357, 92%, 43%);
+        }
+
+        .content-blank {
+            width: 1020px;
+            margin: 0 auto;
+            padding: 15px 10px 30px;
+            box-sizing: border-box;
+        }
+
+        .tbl-idx {
+            width: 100%;
+            margin: 1em 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            line-height: 22px;
+            font-size: 13px;
+        }
+
+        .tbl-idx>caption {
+            background: hsl(218, 57%, 42%);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+            color: white;
+            text-shadow: 0 1px 1px hsla(0, 0%, 0%, .05);
+            padding: .75em 1rem;
+            text-align: left;
+            font-size: 1.25em;
+            font-weight: normal;
+        }
+
+        .tbl-idx>tbody>tr {
+            vertical-align: top;
+        }
+
+        .tbl-idx>*>tr>th,
+        .tbl-idx>*>tr>td {
+            background: white;
+            padding: .5em 1rem;
+            text-align: left;
+        }
+
+        .tbl-idx>*>tr>th {
+            font-weight: normal;
+        }
+
+        .tbl-idx>thead>tr>th,
+        .tbl-idx>tfoot>tr>td {
+            color: white;
+            padding-top: .65em;
+            padding-bottom: .65em;
+            text-align: left;
+        }
+
+        .tbl-idx>thead>tr>th,
+        .tbl-idx>tfoot>tr>td {
+            background: hsl(218, 54%, 54%);
+            text-shadow: 0 1px 1px hsla(0, 0%, 0%, .05);
+        }
+
+        .tbl-idx>tfoot>tr>td {
+            text-align: right;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .tbl-idx>tbody>tr>th,
+        .tbl-idx>tbody>tr>td {
+            border: 1px solid hsl(0, 0%, 87%);
+            border-width: 0 0 1px 1px;
+            position: relative;
+        }
+
+        .tbl-idx>tbody>tr>td:last-child {
+            border-right-width: 1px;
+        }
+
+        .tbl-idx>tbody>tr:nth-child(even)>th,
+        .tbl-idx>tbody>tr:nth-child(even)>td {
+            background: hsl(0, 0%, 98%);
+        }
+
+        .tbl-idx .index {
+            text-align: center;
+        }
+
+        .tbl-idx .tag {
+            margin-left: .5em;
+        }
+
+        .tbl-idx .note ul {
+            margin: 0;
+            padding-left: 1.75em;
+            font-size: 93.3333%;
+            line-height: 1.4em;
+            word-break: keep-all;
+        }
+
+        .tbl-idx .note ul li {
+            margin: .125em 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 컨텐츠-->
+    <div class="content-blank">
+        <table class="tbl-idx">
+            <caption>모듈 목록</caption>
+            <colgroup>
+                <col style="width: 10em;">
+                <col style="width: auto;">
+            </colgroup>
+            <thead>
+                <th>분류</th>
+                <th>예시</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>아이콘</th>
+                    <td>
+                        <i class="icon-symbol" role="presentation"></i>
+                        <i class="icon-grid" role="presentation"></i>
+                        <i class="icon-grid-hover" role="presentation"></i>
+                        <i class="icon-grid-active" role="presentation"></i>
+                        <i class="icon-list" role="presentation"></i>
+                        <i class="icon-list-hover" role="presentation"></i>
+                        <i class="icon-list-active" role="presentation"></i>
+                        <i class="icon-noty-info" role="presentation"></i>
+                        <i class="icon-noty-success" role="presentation"></i>
+                        <i class="icon-noty-warning" role="presentation"></i>
+                        <i class="icon-view" role="presentation"></i>
+                        <i class="icon-view-hover" role="presentation"></i>
+                        <i class="icon-view-active" role="presentation"></i>
+                        <i class="icon-close-circle" role="presentation"></i>
+                        <i class="icon-close-circle-hover" role="presentation"></i>
+                        <i class="icon-close-circle-active" role="presentation"></i>
+                        <i class="icon-map-pointer" role="presentation"></i>
+                        <i class="icon-map-pointer-hover" role="presentation"></i>
+                        <i class="icon-map-pointer-active" role="presentation"></i>
+                        <i class="icon-prev" role="presentation"></i>
+                        <i class="icon-prev-hover" role="presentation"></i>
+                        <i class="icon-prev-active" role="presentation"></i>
+                        <i class="icon-caret-down" role="presentation"></i>
+                        <i class="icon-caret-down-hover" role="presentation"></i>
+                        <i class="icon-caret-down-active" role="presentation"></i>
+                        <i class="icon-caret-left" role="presentation"></i>
+                        <i class="icon-caret-left-hover" role="presentation"></i>
+                        <i class="icon-caret-left-active" role="presentation"></i>
+                        <i class="icon-caret-right" role="presentation"></i>
+                        <i class="icon-caret-right-hover" role="presentation"></i>
+                        <i class="icon-caret-right-active" role="presentation"></i>
+                        <i class="icon-caret-up" role="presentation"></i>
+                        <i class="icon-caret-up-hover" role="presentation"></i>
+                        <i class="icon-caret-up-active" role="presentation"></i>
+                        <i class="icon-close" role="presentation"></i>
+                        <i class="icon-close-hover" role="presentation"></i>
+                        <i class="icon-close-active" role="presentation"></i>
+                        <i class="icon-check" role="presentation"></i>
+                        <i class="icon-check-white" role="presentation"></i>
+                        <i class="icon-refresh" role="presentation"></i>
+                        <i class="icon-refresh-hover" role="presentation"></i>
+                        <i class="icon-refresh-active" role="presentation"></i>
+                        <i class="icon-alarm" role="presentation"></i>
+                        <i class="icon-attached" role="presentation"></i>
+                        <i class="icon-notice" role="presentation"></i>
+                        <i class="icon-repeat" role="presentation"></i>
+                        <i class="icon-drag" role="presentation"></i>
+                        <i class="icon-unfold" role="presentation"></i>
+                        <i class="icon-fold" role="presentation"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <th>목록</th>
+                    <td>
+                        <ul class="list list-frame" style="width: 200px;">
+                            <li class="list-item">
+                                <a class="list-item-link" href="javascript:;">항목 1</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="list-item-link" href="javascript:;">항목 2</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="list-item-link" href="javascript:;">항목 3</a>
+                            </li>
+                            <li class="list-item">
+                                <a class="list-item-link" href="javascript:;">항목 4</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>입력 필드</th>
+                    <td>
+                        <input class="textfield" type="text" placeholder="기본" />
+                        <input class="textfield" type="text" value="비활성화" disabled="disabled" />
+                        <input class="textfield" type="text" value="읽기 전용" readonly="readonly" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>버튼</th>
+                    <td>
+                        <div>
+                            <a class="button" role="button" href="javascript:;" title="기본">기본</a>
+                            <button class="button">기본</button>
+                        </div>
+                        <div>
+                            <a class="button" role="button" href="javascript:;" title="글자가 매우 긴 경우">글자가 매우 긴 경우</a>
+                            <button class="button">글자가 매우 긴 경우</button>
+                        </div>
+                        <div>
+                            <a class="button has-icon" role="button" href="javascript:;" title="아이콘">
+                                <i class="icon-notice"></i>아이콘</a>
+                            <button class="button has-icon">
+                                <i class="icon-notice" role="presentation"></i>아이콘</button>
+                        </div>
+                        <div>
+                            <a class="button is-disabled" role="button" href="javascript:;" title="비활성화">비활성화</a>
+                            <button class="button" disabled>비활성화</button>
+                        </div>
+                        <div>
+                            <a class="button has-icon is-disabled" role="button" href="javascript:;" title="아이콘">
+                                <i class="icon-notice"></i>아이콘</a>
+                            <button class="button has-icon" disabled>
+                                <i class="icon-notice" role="presentation"></i>아이콘</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>아이콘 버튼</th>
+                    <td>
+                        <div>
+                            <a class="icon-button" role="button" href="javascript:;" title="뒤로"><span class="nonvisual">뒤로</span>
+                                <i class="icon-prev"></i>
+                            </a>
+                            <a class="icon-button" role="button" href="javascript:;" title="닫기"><span class="nonvisual">닫기</span>
+                                <i class="icon-close"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>체크박스</th>
+                    <td><span class="checkbox"><input class="checkbox-input" type="checkbox" name="chk" id="chk2"/><label class="checkbox-label" for="chk2">기본</label></span><span class="checkbox"><input class="checkbox-input" type="checkbox" name="chk" id="chk1" checked="checked"/><label class="checkbox-label" for="chk1">체크</label></span>
+                        <span
+                            class="checkbox">
+                            <input class="checkbox-input" type="checkbox" name="chk" id="chk3" />
+                            <label class="checkbox-label" for="chk3">반체크</label>
+                            </span><span class="checkbox"><input class="checkbox-input" type="checkbox" name="chk" id="chk4" disabled="disabled"/><label class="checkbox-label" for="chk4">비활성화</label></span>
+                            <script>
+                                document.getElementById("chk3").indeterminate = true;
+                            </script>
+                    </td>
+                </tr>
+                <tr>
+                    <th>라디오</th>
+                    <td><span class="radio"><input class="radio-input" type="radio" name="rd" id="rd2"/><label class="radio-label" for="rd2">기본</label></span><span class="radio"><input class="radio-input" type="radio" name="rd" id="rd1" checked="checked"/><label class="radio-label" for="rd1">체크</label></span>
+                        <span
+                            class="radio">
+                            <input class="radio-input" type="radio" name="rd" id="rd3" disabled="disabled" />
+                            <label class="radio-label" for="rd3">비활성화</label>
+                            </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>선택상자</th>
+                    <td>
+                        <select class="js-select" data-config="{&quot;placeholder&quot;:&quot;활성 선택상자&quot;,&quot;width&quot;:&quot;130px&quot;}">
+                            <!-- placeholder를 사용했을 땐 최상위에 빈 option이 필요합니다. -- https://select2.org/placeholders-->
+                            <option></option>
+                            <option value="opt1">옵션 1</option>
+                            <option value="opt2">옵션 2</option>
+                            <option value="opt3">옵션 3</option>
+                        </select>
+                        <select class="js-select" data-config="{&quot;placeholder&quot;:&quot;비활성 선택상자&quot;,&quot;width&quot;:&quot;130px&quot;}" disabled="disabled">
+                            <!-- placeholder를 사용했을 땐 최상위에 빈 option이 필요합니다. -- https://select2.org/placeholders-->
+                            <option></option>
+                            <option value="opt1">옵션 1</option>
+                            <option value="opt2">옵션 2</option>
+                            <option value="opt3">옵션 3</option>
+                        </select>
+                        <div>비활성 선택상자는 select 태그에 <code>disabled</code>속성만 추가하면 됩니다.</div>
+                        <div><pre>select2.update("#mySelector", [
+  {value: 0, text: "foo"},
+  {value: 1, text: "bar"},
+  {value: 2, text: "baz"}
+]);</pre></div>
+                        <div><code>select2.disable("#mySelector");</code></div>
+                        <div><code>select2.enable("#mySelector");</code></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>팝업</th>
+                    <td>
+                        <table style="border-spacing: 5px;">
+                            <tr style="vertical-align: top;">
+                                <td>
+                                    <aside class="modal modal-simple is-active" role="dialog" style="margin: 0; position: static;">
+                                        <div class="modal-inner" role="presentation">
+                                            <header class="modal-head">
+                                                <h2 class="modal-head-title">확인 팝업</h2>
+                                                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                                                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+                                            </header>
+                                            <div class="modal-body">
+                                                <div class="modal-content">
+                                                    <div class="modal-dialog">
+                                                        <p>팝업 메시지</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-actions">
+                                                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                                                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </td>
+                                <td>
+                                    <aside class="modal modal-simple modal-select is-active" role="dialog" style="margin: 0; position: static;">
+                                        <div class="modal-inner" role="presentation">
+                                            <header class="modal-head">
+                                                <h2 class="modal-head-title">선택 팝업</h2>
+                                                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                                                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+                                            </header>
+                                            <div class="modal-body">
+                                                <div class="modal-content">
+                                                    <div class="modal-dialog">
+                                                        <p>팝업 메시지</p>
+                                                        <div class="modal-select-group"><span class="radio"><input class="radio-input" type="radio" name="selectModalTest" id="selectModalTest1" checked="checked"/><label class="radio-label" for="selectModalTest1">선택지 1</label></span>
+                                                            <span
+                                                                class="radio">
+                                                                <input class="radio-input" type="radio" name="selectModalTest" id="selectModalTest2" />
+                                                                <label class="radio-label" for="selectModalTest2">선택지 2</label>
+                                                                </span><span class="radio"><input class="radio-input" type="radio" name="selectModalTest" id="selectModalTest3"/><label class="radio-label" for="selectModalTest3">선택지 3</label></span></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-actions">
+                                                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                                                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <tr>
+                        <th>날짜/시간 선택</th>
+                        <td>
+                            <table style="border-spacing: 5px;">
+                                <tr style="vertical-align: top;">
+                                    <td>
+                                        <div class="js-datepicker" data-config="{&quot;showButtonPanel&quot;:false}"></div>
+                                    </td>
+                                    <td>
+                                        <input class="textfield js-datepicker" type="text" value="2017.11.27" />
+                                        <div class="timepicker js-timepicker">
+                                            <input class="timepicker-input" type="text" value="오전 09:00" autocomplete="off" />
+                                            <a class="timepicker-caret" href="javascript:;">
+                                                <b></b>
+                                            </a>
+                                        </div>
+                                        <div class="timepicker js-timepicker is-disabled">
+                                            <input class="timepicker-input" type="text" value="오후 03:30" autocomplete="off" disabled="disabled" />
+                                            <a class="timepicker-caret" href="javascript:;">
+                                                <b></b>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div><code>timepicker.disable("#mySelector");</code></div>
+                            <div><code>timepicker.enable("#mySelector");</code></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>알림상자 추가</th>
+                        <td>
+                            <div>
+                                <a class="button" role="button" href="javascript:;" title="알림 유형 info" onclick="noty.add({ text: '전체 화면을 종료하려면 Esc 버튼을 누르세요.', type: 'info' });">알림 유형 info</a>&nbsp;<code>noty.add({ text: '전체 화면을 종료하려면 Esc 버튼을 누르세요.', type: 'info' });</code></div>
+                            <div>
+                                <a class="button" role="button" href="javascript:;" title="알림 유형 success" onclick="noty.add({ text: '연결이 해제되었습니다.', type: 'success' });">알림 유형 success</a>&nbsp;<code>noty.add({ text: '연결이 해제되었습니다.', type: 'success' });</code></div>
+                            <div>
+                                <a class="button" role="button" href="javascript:;" title="알림 유형 warning" onclick="noty.add({ text: '종료일이 시작일보다 이전인 &lt;br&gt;일정은 만들 수 없습니다.', type: 'warning' });">알림 유형 warning</a>&nbsp;<code>noty.add({ text: '종료일이 시작일보다 이전인 &lt;br&gt;일정은 만들 수 없습니다.', type: 'warning' });</code></div>
+                            <div>
+                                <a class="button" role="button" href="javascript:;" title="알림 유형 loading" onclick="noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });">알림 유형 loading</a>&nbsp;<code>noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });</code></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>알림상자 제거</th>
+                        <td><pre>var myNoty = noty.add({ text: '검색결과를 불러오는 중', type: 'loading' });
+noty.remove(myNoty);</pre>
+                            <div>
+                                <a class="button" role="button" href="javascript:;" title="알림 모두 끄기" onclick="noty.remove();">알림 모두 끄기</a>&nbsp;<code>noty.remove();</code></div>
+                        </td>
+                    </tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /컨텐츠-->
+    <!-- UI 스크립트-->
+    <script src="./vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="./vendors/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="./vendors/jquery-timepicker/jquery.timepicker.min.js"></script>
+    <script src="./vendors/noty/noty.min.js"></script>
+    <script src="./vendors/select2/select2.min.js"></script>
+    <script src="./ui/script.js"></script>
+    <!-- /UI 스크립트-->
+</body>
+
+</html>

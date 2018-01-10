@@ -1,0 +1,78 @@
+.radio {
+  display: inline-block;
+  margin-right: $choice-gap-after;
+  overflow: hidden;
+  vertical-align: middle;
+}
+.radio-input {
+  @include nonvisual;
+}
+.radio-label {
+  color: $choice-text-color;
+  min-height: $ui-box-height;
+  padding-left: $choice-icon-size + $choice-icon-gap-after;
+  position: relative;
+  line-height: $ui-line-height;
+  @include non-selectable;
+
+  &::before,
+  &::after {
+    content: "";
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    box-sizing: border-box;
+  }
+  // outer circle
+  &::before {
+    background: $choice-bg-color;
+    border: 1px solid $choice-bd-color;
+    width: $choice-icon-size;
+    height: $choice-icon-size;
+    top: ($ui-line-height - $choice-icon-size) / 2;
+    left: 0;
+    z-index: 0;
+  }
+  // inner dot
+  &::after {
+    background: $choice-check-color;
+    width: $choice-check-size;
+    height: $choice-check-size;
+    top: ($ui-line-height - $choice-check-size) / 2;
+    left: ($choice-icon-size - $choice-check-size) / 2;
+    visibility: hidden;
+    z-index: 1;
+  }
+
+  // checked
+  .radio-input:checked ~ & {
+    &::after {
+      visibility: visible;
+    }
+  }
+  // enabled
+  .radio-input:enabled ~ & {
+    // hovered
+    &:hover {
+      color: $choice-text-color-hover;
+
+      &::before {
+        background-color: $choice-bg-color-hover;
+        border-color: $choice-bd-color-hover;
+      }
+    }
+    // clicked
+    &:active {
+      color: $choice-text-color-active;
+
+      &::before {
+        background-color: $choice-bg-color-active;
+        border-color: $choice-bd-color-active;
+      }
+    }
+  }
+  // disabled
+  .radio-input:disabled ~ & {
+    @include inactive;
+  }
+}

@@ -1,0 +1,48 @@
+aside.modal.modal-advanced.modal-schedule-view(role="dialog", data-schedule-color="1")
+  .modal-inner(role="presentation")
+    header.modal-head
+      h2.modal-head-title 일정
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        fieldset.modal-fieldset
+          legend.modal-fieldset-label
+            span.modal-sch-def
+              // 일정 색상에 따라 className 변경 clr-1 ~ 10
+              i.modal-sch-icon.bg-clr-2
+              span.modal-sch-name.txt-clr-2 회의
+            span.modal-sch-desc 2017.11.14 (월) 오전 9:00 ~ 오전 9:30
+          .modal-fieldset-row
+            .modal-fieldset-row-label 반복:
+            .modal-fieldset-row-field 매주
+          .modal-fieldset-row
+            .modal-fieldset-row-label 위치:
+            .modal-fieldset-row-field
+              .modal-fieldset-row-field-wrap
+                a.modal-fieldset-link(href="javascript:;") 한컴타워 6층 회의실
+                +iconButton("지도 확인", null, "map-pointer").addin.js-location-map-show
+              // 구글 지도
+              .modal-fieldset-row-map.js-location-map#mdLocationMapView
+              // /구글 지도
+          .modal-fieldset-row
+            .modal-fieldset-row-label 캘린더:
+            .modal-fieldset-row-field 내 캘린더
+          .modal-fieldset-row
+            .modal-fieldset-row-label 첨부파일:
+            .modal-fieldset-row-field 플래너화면설계서.show
+          .modal-fieldset-row
+            .modal-fieldset-row-label 알림:
+            .modal-fieldset-row-field 1시간 전
+          .modal-fieldset-row
+            .modal-fieldset-row-label 메모:
+            .modal-fieldset-row-field
+              +textarea("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")(class="w-full", rows="3", readonly)
+
+      .modal-actions
+        .modal-actions-group
+          a.modal-actions-item.js-modal-schedule-edit-opener(role="button", href="javascript:;") 일정 편집
+          a.modal-actions-item.js-modal-schedule-delete-opener(role="button", href="javascript:;") 삭제
+        .modal-actions-group
+          a.modal-actions-item.js-modal-closer(role="button", href="javascript:;") 취소

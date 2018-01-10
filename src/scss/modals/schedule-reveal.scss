@@ -1,0 +1,38 @@
+.modal-schedule-reveal {
+  width: 212px;
+  height: 220px;
+  margin: 0;
+  top: auto;
+  left: auto;
+}
+.sch-list {
+  width: 100%;
+  @include scrollable(null, 190px);
+}
+.sch-list-group {
+  @extend .list;
+}
+.sch-list-item {
+  @extend .list-item;
+}
+.sch-list-item-link {
+  @extend .list-item-link;
+  display: flex;
+  align-items: center;
+
+  .time {
+    margin-right: .25em;
+  }
+  .name {
+    @include text-ellipsis;
+  }
+  .icon {
+    @include flex-static;
+    display: inline-flex;
+    align-items: center;
+
+    [class^="icon"] {
+      margin-left: 4px;
+    }
+  }
+}

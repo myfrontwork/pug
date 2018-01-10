@@ -1,0 +1,195 @@
+.modal {
+  color: $modal-text-color;
+  background: $modal-bg-color;
+  border: 1px solid $modal-bd-color;
+  @include layer-shadow(15%);
+  width: $modal-min-width;
+  margin: auto;
+  z-index: 2000; // 오버레이: 2000, select2: 2000
+  @include fixed(left 50% top 50%);
+  box-sizing: border-box;
+
+  &:not(.is-active) {
+    display: none;
+  }
+}
+.modal-inner {
+  height: 100%;
+  @include flex-vertical;
+}
+.modal-head {
+  background: $modal-head-bg-color;
+  border: solid $modal-head-bd-color;
+  border-width: 0 0 1px;
+  height: $modal-head-height;
+  padding: 0 $modal-gutter;
+  box-sizing: border-box;
+  @include flex-static;
+  display: flex;
+  align-items: center;
+  line-height: $ui-line-height;
+}
+.modal-head-title {
+  margin: 0;
+  @include flex-expand;
+  font-size: 12px;
+}
+.modal-closer {
+  width: 13px;
+  height: 13px;
+  position: relative;
+
+  .icon-close {
+    @include absolute(left top);
+  }
+  &:hover {
+    .icon-close { @extend .icon-close-hover; }
+  }
+  &:active {
+    .icon-close { @extend .icon-close-active; }
+  }
+}
+.modal-body {
+}
+.modal-content {
+}
+.modal-dialog {
+  width: 100%;
+  padding: 0 $modal-gutter;
+  box-sizing: border-box;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+.modal-actions-item {
+  @include button-unstyled;
+  color: $modal-button-text-color;
+  background: $modal-button-bg-color;
+  border: 1px solid $modal-button-bd-color;
+  border-radius: $ui-box-radius;
+  width: 80px;
+  padding: 5px;
+  line-height: $ui-line-height;
+  @include non-selectable;
+
+  // hovered
+  &:hover {
+    background-color: $modal-button-bg-color-hover;
+    border-color: $modal-button-bd-color-hover;
+  }
+  // touched
+  &:active {
+    background-color: $modal-button-bg-color-active;
+    border-color: $modal-button-bd-color-active;
+  }
+  &:focus {
+    border-color: $modal-button-bd-color-focus;
+    border-color: -webkit-focus-ring-color;
+    box-shadow: 0 0 0 1px $modal-button-bd-color-focus;
+    outline: 0;
+  }
+  // disabled
+  &:disabled,
+  &--disabled {
+    color: $modal-button-text-color !important;
+    background: $modal-button-bg-color !important;
+    border: 1px solid $modal-button-bd-color !important;
+    @include inactive;
+  }
+}
+
+@mixin modal-size($width: null, $height: null) {
+  width: $width;
+  height: $height;
+  margin: {
+    top: if($height, -($height / 2), null);
+    left: if($width, -($width / 2), null);
+  }
+}
+
+// [모듈] 탭 전환
+.modal-content-switch {
+  @include list-unstyled;
+  color: $color-T1;
+  display: flex;
+  line-height: 12px;
+  font-size: 12px;
+}
+.modal-content-switch-item {
+  padding: 0 10px 6px;
+  position: relative;
+
+  & + & {
+    margin-left: 1px;
+
+    &::before {
+      content: "";
+      border-left: 1px solid $color-L3;
+      height: 12px;
+      @include absolute(left -1px 0);
+    }
+  }
+}
+.modal-content-switch-radio {
+  @include nonvisual;
+}
+.modal-content-switch-label {
+  @include clickable;
+
+  &::after {
+    content: "";
+    background: #6182d6;
+    display: none;
+    width: 100%;
+    height: 2px;
+    @include absolute(bottom left);
+  }
+  .modal-content-switch-radio:checked + & {
+    &::after {
+      display: block;
+    }
+  }
+}
+
+.modal-content-panel {
+  &:not(.is-active) {
+    display: none;
+  }
+}
+
+// [모듈] 검색상자
+.modal-content-search {
+  @extend %search-container;
+}
+.modal-content-search-field {
+  @extend %search-field;
+}
+.modal-content-search-ctrl {
+   @extend %search-control;
+}
+.modal-content-search-reset {
+  @extend %search-reset;
+}
+.modal-content-search-submit {
+  @extend %search-submit;
+}
+
+// 오버레이
+.overlay {
+  opacity: 0;
+  @include overwrap(fixed);
+  visibility: hidden;
+  z-index: 2000;
+  transition: opacity .2s cubic-bezier(0.215, 0.61, 0.355, 1), visibility 0s linear .2s;
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s cubic-bezier(0.215, 0.61, 0.355, 1), visibility 0s linear 0s;
+  }
+}
+.overlay-black {
+  background: rgba(black, .3);
+}

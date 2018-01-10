@@ -1,0 +1,66 @@
+// 공통
+$color-none : transparent;
+
+// 배경색
+$color-B1   : #fff;
+$color-B2   : #fafafa;  // 메뉴바, 서식바 상태바
+$color-B3   : #f5f5f5;  // 썸네일, 작업창, 슬라이드 노트, 스크롤버튼
+$color-B4   : #f0f0f0;  // 스크롤버튼, 룰러 썸네일 탭, 작업창 탭
+$color-B5   : #ebebeb;
+$color-B6   : #e0e0e0;  // 메뉴바 탭 배경색
+$color-B7   : #dcdcdc;  // 문서영역 배경색
+$color-B8   : #ccc;     // 스크롤버튼
+$color-B-b0 : #e7eaf4;  // 대화상자 타이틀 배경색
+$color-B-b1 : #e9eefb;  // 버튼(selected)
+$color-B-b2 : #d9e2f6;  // 버튼(hover)
+$color-B-b3 : #c0cdec;  // 버튼(active)
+
+// 테두리색
+$color-L1   : #fff;
+$color-L2   : #e0e0e0;  // 툴바 세로 구분선, 하단 구분선, 컨트롤박스 테두리선
+$color-L3   : #d8d8d8;  // 메뉴바/서식바/상태바 세로 구분선, 작업창 가로 구분선
+$color-L4   : #ccc;     // 기본 / 썸네일, 툴바 그림자(30%), 작업창
+$color-L5   : #c5c5c5;  // 메뉴탭 상단
+$color-L6   : #b4b4b4;  // 서식바 하단, 상태바 상단, 스크롤, 룰러
+$color-L7   : #ababab;  // 문서 테두리
+$color-L-b0 : #d1d7e8;  // 대화상자 타이틀 하단선
+$color-L-b1 : #b5c2e3;  // 툴박스(checked)
+$color-L-b2 : #90a5dc;  // 메뉴바 개체탭, 툴박스(hover, active)
+$color-L-b3 : #748bc9;
+$color-L-b4 : #6182d6;  // 썸네일(hover)
+$color-L-b5 : #4f6bb0;
+
+// 글자, 아이콘
+$color-T1   : #333;     // 기본 / 메뉴바, 툴바, 컨트롤, 작업창 내용
+$color-T2   : #5a5a5a;  // 작업창 제목, 상황선, 썸네일(default)
+$color-T3   : #7f7f7f;  // 슬라이드 노트
+$color-T-b1 : #335095;
+$color-T-b2 : #5775c1;
+
+// 메뉴 탭
+$color-W1   : #4c73d5;
+$color-W2   : #3e62bb;
+$color-W3   : #335095;
+$color-W5   : #e2e6f1;
+$color-W7   : #96a6cd;
+
+// 헤더, 사이드바, 내비게이션 등의 스태틱 UI
+$static-ui-bd-color: $color-L3;
+
+// 사이드바 캘린더 색상? (확인 필요)
+$my-group-colors: #fc9461, #87b946, #5e81d5;
+// 캘린더 색상
+$calendar-colors: #f8742e, #f9be1b, #88b94a, #6683d7;
+// 일정 색상
+$schedule-color-map: (
+    (entity: #ff8585, text: #f01919),
+    (entity: #ff9a5c, text: #e05400),
+    (entity: #ffc024, text: #b07c00),
+    (entity: #aee240, text: #4f9101),
+    (entity: #5eda95, text: #029242),
+    (entity: #84e9f9, text: #0186ac),
+    (entity: #6cbef7, text: #0c65d2),
+    (entity: #ff81ce, text: #d21d8c),
+    (entity: #b899ff, text: #6a39d9),
+    (entity: #c4c4c4, text: #505050)
+);

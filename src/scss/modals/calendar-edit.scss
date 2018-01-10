@@ -1,0 +1,16 @@
+.modal-calendar-edit {
+  //width: 600px;
+  @include modal-size(600px);
+  margin-top: -200px;
+
+  .modal-fieldset-row-label {
+    width: 80px;
+  }
+
+  .palette {
+    padding: 3px 0 2px;
+  }
+  .palette-item-hidden {
+    @include nonvisual;
+  }
+}

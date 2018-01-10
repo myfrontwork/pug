@@ -1,0 +1,311 @@
+// 레이아웃
+.mv-month {
+  @extend %view;
+  @include flex-vertical;
+  text-align: left;
+  font-size: 12px;
+
+  // 종일일정
+  .all-sche {
+    @extend %schedule;
+    margin: 0 2px 2px;
+    line-height: 16px;
+    width: inherit;
+
+    .sch-pad {
+      padding: 0 6px;
+      display: flex;
+    }
+  }
+  // 부분일정
+  .sch-time {
+    @extend %schedule;
+    @extend %schedule-row;
+    margin: 0 2px 2px;
+    background-color: transparent; //(한컴)추가
+    border-color: transparent; //(한컴)추가
+    .sch-clr {
+      border: {
+        width: 0;
+      }
+      
+      // 컬러 브릭 색상은 부분일정의 `txt-clr-N`을 참조
+      @for $i from 1 through length($schedule-color-map) {
+        &.txt-clr-#{$i} {
+          .sch-def::before {
+            @extend .bg-clr-#{$i};
+          }
+        }
+      }
+    }
+    .sch-pad {
+      padding: 0 7px;
+      display: flex;
+    }
+    // 컬러 브릭
+    .sch-def {
+      &::before {
+        content: "";
+        background: $color-L5;
+        border-radius: 50%;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.mv-month-head {
+  @include table-unstyled;
+}
+.mv-month-body {
+  @include flex-expand;
+  @include flex-vertical;
+}
+
+// 일월화수목금토
+.mv-month-head {
+  background-color: #f7f7f7;
+  border: 1px solid $color-L2;
+  border-width: 1px 0;
+  height: $view-head-height;
+  position: relative;
+  box-sizing: border-box;
+  text-align: left;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+}
+.mv-month-head-dayname {
+  @include calendar-table-group;
+  height: $view-head-height;
+  margin-top: -1px;
+  box-sizing: border-box;
+}
+.mv-month-head-dayname-item {
+  border: 1px solid transparent;
+  height: $view-head-height - 1px;
+  padding-left: 10px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  text-align: left;
+
+  &.holiday {
+    @extend %cell-holiday;
+  }
+}
+
+// 달력의 반복되는 행 구간
+@for $i from 1 through 10 {
+  .mv-month-body-row:nth-child(#{$i}){
+    z-index: #{$i} !important;
+  }
+}
+.mv-month-body-row {
+  background: $color-B1;
+  min-height: 70px; // 이 높이 아래로 줄어들지 말 것 (daynumber: 27px) + (sch*1: 21px) + (rest: 21px) + (bottomBorder: 1px)
+  //margin-top: -1px; (한컴)수정
+  position: relative; // 일정 박스를 표시할 기준점. 이 하위 노드에는 relative/absolute를 쓰지 말 것
+  @include flex-expand;
+  &.current {
+    z-index: 10 !important;
+  }
+}
+
+// 셀 배경 + 테두리선
+.mv-month-body-row-bg {
+  @include overwrap;
+  z-index: 0;
+
+  .sch-view-line {
+    @include calendar-table-group;
+    height: 100%;
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+.mv-month-body-row-bg-cell {
+  border-left: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  height: 100%;
+  padding: 0; // ***
+  position: relative;
+  &.holiday {
+    @extend %cell-holiday;
+  }
+  &.week-selected {
+    @extend %cell-week-selected;
+  }
+  &.weekend-selected {
+    @extend %cell-week-selected;
+  }
+  &.day-selected {
+    @extend %cell-week-selected;
+  }
+  // &.pastdays {
+  //   @extend %cell-pastdays;
+  // }
+  &.date-today {
+    background-color: $color-B-b1 !important;
+    position:relative;
+    &::before{
+    content:"\a0";
+    position: absolute;
+    display: inline-block;
+    width: inherit;
+    top: -1.5px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 1px solid $color-L-b1 !important;
+    overflow:hidden;
+    }
+    & span{
+      display: none;
+      text-indent: -500000px;
+    }
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .mv-month-body-row-bg{
+    bottom: 0px;
+  }
+  .mv-month-body-row-bg-cell{
+    position:static;
+  }
+  .mv-month-body-row-bg-cell.date-today {
+    position: relative;
+    display: table-cell;
+    height: 100%;
+    span{
+      background-color: $color-B-b1 !important;
+      display: inline-block;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      position: static;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+// 날짜, 일정
+.mv-month-body-row-data {
+  @include overwrap;
+  overflow: visible; // 안전장치 (한컴)수정
+  z-index: 2;
+
+  .sch-grid {
+    @include calendar-table-group;
+
+    & > tbody {
+      &::after {
+        content: "";
+        display: table-row;
+        height: 100%;
+      }
+    }
+    tr {
+      &.is-hidden {
+        visibility: hidden; // JS 토글러 모듈을 위해 `display: none;`을 쓰지 말 것
+      }
+    }
+  }
+}
+%mv-month-body-row-data-cell {
+  background: $color-none !important;
+  border: 1px solid $color-none !important;
+  padding: 0;
+  vertical-align: top;
+  box-sizing: border-box;
+  z-index: 1; //(한컴)추가
+  position: relative; //(한컴)추가
+}
+
+// 날짜 셀
+.mv-month-body-row-data-day {
+  td {
+    @extend %mv-month-body-row-data-cell;
+    height: 27px;
+
+    .day-number {
+      color: inherit;
+      float: left;
+      height: 12px;
+      margin: 9px 0 0 10px;
+      font-size: 12px;
+      line-height: 14px;
+      text-decoration: none;
+      @include clickable;
+      -webkit-touch-callout: none; /* iOS Safari */ //(한컴)추가
+      -webkit-user-select: none; /* Safari */ //(한컴)추가
+      -khtml-user-select: none; /* Konqueror HTML */ //(한컴)추가
+      -moz-user-select: none; /* Firefox */ //(한컴)추가
+      -ms-user-select: none; /* Internet Explorer/Edge */ //(한컴)추가
+      user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */ //(한컴)추가
+      &:hover{
+        text-decoration: underline; //(한컴)추가
+      }
+    }
+
+    &.holiday {
+      @extend %cell-holiday;
+    }
+    &.week-selected {
+      @extend %cell-week-selected;
+    }
+    &.weekend-selected {
+      @extend %cell-weekend-selected;
+    }
+    &.pastdays {
+      //@extend %cell-pastdays;
+    }
+    &.offrange {
+      .day-number {
+        opacity: .5;
+      }
+    }
+    &.date-today {
+      @extend %cell-date-today;
+      background-color: $color-none;
+      border-color: $color-none;
+    }
+  }
+}
+
+// 데이터 테이블 >> 일정 행
+.mv-month-body-row-data-sch {
+  td {
+    @extend %mv-month-body-row-data-cell;
+  }
+}
+
+// 데이터 테이블 >> 일정 행
+// 숨겨진 일정 카운터 (+n)
+.mv-month-body-row-data-rest {
+  display: table;
+  width: 100%;
+  @include absolute(bottom 7px);
+  z-index: 1; //(한컴)추가
+  td {
+    width: (100% / 7);
+  }
+  
+  // 스크린이 너무 작아질 경우 모든 카운터를 감춤
+  //.mv-month.hide-rest-counts & {
+  //  display: none;
+  //}
+}
+.mv-month-body-row-data-rest-count {
+  color: $color-T-b2;
+  float: right;
+  margin-right: 8px;
+  line-height: 14px;
+  text-decoration: none;
+  @include clickable;
+}

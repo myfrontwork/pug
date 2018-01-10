@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>일정목록 |한컴 플래너</title>
+    <link rel="stylesheet" href="./vendors/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    <link rel="stylesheet" href="./vendors/noty/noty.css">
+    <link rel="stylesheet" href="./vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="./ui/style.css">
+</head>
+
+<body>
+    <!-- 헤더-->
+    <header class="header" role="banner">
+        <div class="header-inner" role="presentation">
+            <!-- 서비스명-->
+            <div class="header-masthead">
+                <h1 class="header-masthead-name"><em class="brand">한컴</em> 플래너</h1><span class="header-masthead-icon" role="presentation"></span></div>
+            <!-- 유저정보-->
+            <nav class="header-nav">
+                <div class="header-nav-item">
+                    <div class="header-userbox">
+                        <i class="header-userbox-img">
+                            <img src="./ui/images/_chicken.png" alt="">
+                        </i><strong class="header-userbox-name">홍길동</strong><span class="header-userbox-level">Freemium</span>
+                        <a class="icon-button header-nav-item-more" role="button" href="javascript:;" title="추가 메뉴 보기"><span class="nonvisual">추가 메뉴 보기</span>
+                            <i class="icon-caret-down"></i>
+                        </a>
+                    </div>
+                    <div class="header-nav-item-dropdown">
+                        <div class="userbox">
+                            <div class="userbox-img">
+                                <img src="./ui/images/_chicken.png" alt="">
+                            </div>
+                            <div class="userbox-body">
+                                <div class="userbox-name">홍길동</div>
+                                <div class="userbox-email">ab56@hancom.com</div>
+                                <div class="userbox-level">Freemium</div>
+                            </div>
+                        </div>
+                        <div class="header-nav-item-dropdown-ctrl">
+                            <a class="button js-modal-closer" role="button" href="javascript:;" title="로그아웃">로그아웃</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- /헤더-->
+    <!-- 컨텐츠-->
+    <div class="content">
+        <!-- 메뉴 패널-->
+        <aside class="sidebar" role="complementary">
+            <!-- 새 일정-->
+            <section class="sidebar-widget add-new-event">
+                <button class="add-new-event-button">새 일정</button>
+            </section>
+            <!-- 미니 캘린더-->
+            <section class="sidebar-widget mini-calendar">
+                <div class="js-datepicker" data-config="{&quot;showButtonPanel&quot;:false}" data-view="mini-month-view"></div>
+            </section>
+            <!-- 그룹 리스트-->
+            <section class="sidebar-widget">
+                <h2 class="sidebar-widget-heading">
+                    <a class="sidebar-widget-toggler is-active" role="button" href="javascript:;" data-toggle="collapse">캘린더</a>
+                </h2>
+                <div class="sidebar-widget-content">
+                    <ul class="my-groups">
+                        <!-- name, id는 테스트를 위해 임시로 삽입돼 있습니다. 추가 개발시 필요에 맞게 수정해주세요.-->
+                        <li class="my-groups-list-item">
+                            <input class="my-groups-list-item-check" type="checkbox" id="myGroup1">
+                            <label class="my-groups-list-item-label" for="myGroup1"><span class="tick bg-clr-3"><i class="icon-check-white" role="presentation"></i></span>내 캘린더</label>
+                            <a class="my-groups-list-item-refresh" role="button" href="javascript:;" title="새로고침">
+                                <i class="icon-refresh" role="presentation"></i>
+                            </a>
+                            <a class="icon-button my-groups-list-item-more" role="button" href="javascript:;" title="추가 메뉴 보기"><span class="nonvisual">추가 메뉴 보기</span>
+                                <i class="icon-caret-down"></i>
+                            </a>
+                            <div class="my-groups-list-item-onoff">
+                                <div class="my-groups-list-item-onoff-entry"><span class="my-groups-list-item-onoff-entry-id">adfag212</span>
+                                    <a class="my-groups-list-item-onoff-off js-modal-closer" role="button" href="javascript:;">해제</a>
+                                </div>
+                                <!-- 캘린더 설정-->
+                                <div class="my-groups-list-item-onoff-ctrl">
+                                    <a class="my-groups-list-item-onoff-on js-modal-closer js-modal-calendar-edit-opener" role="button" href="javascript:;">캘린더 설정</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="my-groups-list-item">
+                            <input class="my-groups-list-item-check" type="checkbox" id="myGroup2">
+                            <label class="my-groups-list-item-label" for="myGroup2"><span class="tick bg-clr-1"><i class="icon-check-white" role="presentation"></i></span>구글 캘린더</label>
+                            <a class="my-groups-list-item-refresh js-modal-gcalendar-sync-opener" role="button" href="javascript:;" title="새로고침">
+                                <i class="icon-refresh" role="presentation"></i>
+                            </a>
+                            <a class="icon-button my-groups-list-item-more" role="button" href="javascript:;" title="추가 메뉴 보기"><span class="nonvisual">추가 메뉴 보기</span>
+                                <i class="icon-caret-down"></i>
+                            </a>
+                            <div class="my-groups-list-item-onoff">
+                                <!-- 연결되지 않았을 때-->
+                                <div class="my-groups-list-item-onoff-ctrl">
+                                    <a class="my-groups-list-item-onoff-on js-modal-closer js-modal-gcalendar-link-opener" role="button" href="javascript:;">구글 캘린더 연결</a>
+                                </div>
+                                <!-- 연결됐을 때-->
+                                <div class="my-groups-list-item-onoff-entry"><span class="my-groups-list-item-onoff-entry-id">adfag212</span>
+                                    <a class="my-groups-list-item-onoff-off js-modal-closer js-modal-gcalendar-unlink-opener" role="button" href="javascript:;">해제</a>
+                                </div>
+                                <!-- 캘린더 설정-->
+                                <div class="my-groups-list-item-onoff-ctrl">
+                                    <a class="my-groups-list-item-onoff-on js-modal-closer js-modal-calendar-edit-opener" role="button" href="javascript:;">캘린더 설정</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="my-groups-list-item">
+                            <input class="my-groups-list-item-check" type="checkbox" id="myGroup3">
+                            <label class="my-groups-list-item-label" for="myGroup3"><span class="tick bg-clr-2"><i class="icon-check-white" role="presentation"></i></span>대한민국 휴일</label>
+                            <a class="my-groups-list-item-refresh" role="button" href="javascript:;" title="새로고침">
+                                <i class="icon-refresh" role="presentation"></i>
+                            </a>
+                            <a class="icon-button my-groups-list-item-more" role="button" href="javascript:;" title="추가 메뉴 보기"><span class="nonvisual">추가 메뉴 보기</span>
+                                <i class="icon-caret-down"></i>
+                            </a>
+                            <div class="my-groups-list-item-onoff">
+                                <div class="my-groups-list-item-onoff-entry"><span class="my-groups-list-item-onoff-entry-id">adfag212</span>
+                                    <a class="my-groups-list-item-onoff-off js-modal-closer" role="button" href="javascript:;">해제</a>
+                                </div>
+                                <!-- 캘린더 설정-->
+                                <div class="my-groups-list-item-onoff-ctrl">
+                                    <a class="my-groups-list-item-onoff-on js-modal-closer js-modal-calendar-edit-opener" role="button" href="javascript:;">캘린더 설정</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
+        <!-- /메뉴 패널-->
+        <!-- 캘린더-->
+        <main class="main" role="main">
+            <!-- 캘린더 제어판-->
+            <div class="main-nav">
+                <!-- 기본: "is-active", 검색결과 보기: (없음)-->
+                <div class="main-nav-front is-active">
+                    <h2 class="main-nav-title">2017.11.16</h2>
+                    <div class="main-nav-move">
+                        <a class="icon-button main-nav-move-prev" role="button" href="javascript:;" title="이전"><span class="nonvisual">이전</span>
+                            <i class="icon-caret-left"></i>
+                        </a>
+                        <a class="icon-button main-nav-move-next" role="button" href="javascript:;" title="다음"><span class="nonvisual">다음</span>
+                            <i class="icon-caret-right"></i>
+                        </a>
+                        <a class="button main-nav-move-today" role="button" href="javascript:;" title="오늘">오늘</a>
+                    </div>
+                </div>
+                <!-- 기본: (없음), 검색결과 보기: "is-active"-->
+                <div class="main-nav-front-alt">
+                    <a class="icon-button main-nav-back" role="button" href="javascript:;" title="뒤로가기"><span class="nonvisual">뒤로가기</span>
+                        <i class="icon-prev"></i>
+                    </a>
+                    <div class="main-nav-search-count">검색결과 <em class="value">0</em>개</div>
+                </div>
+                <!-- 기본: "is-active", 검색결과 보기: (없음)-->
+                <ul class="main-nav-switch is-active">
+                    <!-- name, id 값은 테스트를 위해 임의로 지정되었습니다. 추가개발시 필요에 맞게 바꾸셔도 됩니다.-->
+                    <li class="main-nav-switch-item">
+                        <input class="main-nav-switch-radio" type="radio" name="modeViewSelect" id="modeViewSelect0">
+                        <label class="main-nav-switch-label" for="modeViewSelect0">일</label>
+                    </li>
+                    <li class="main-nav-switch-item">
+                        <input class="main-nav-switch-radio" type="radio" name="modeViewSelect" id="modeViewSelect1">
+                        <label class="main-nav-switch-label" for="modeViewSelect1">주</label>
+                    </li>
+                    <li class="main-nav-switch-item">
+                        <input class="main-nav-switch-radio" type="radio" name="modeViewSelect" id="modeViewSelect2">
+                        <label class="main-nav-switch-label" for="modeViewSelect2">월</label>
+                    </li>
+                    <li class="main-nav-switch-item">
+                        <input class="main-nav-switch-radio" type="radio" name="modeViewSelect" id="modeViewSelect3" checked>
+                        <label class="main-nav-switch-label" for="modeViewSelect3">일정</label>
+                    </li>
+                </ul>
+                <div class="main-nav-rear">
+                    <!-- form으로 바꾸하려면 다음 마크업을 사용해 주세요.<form action="" method="">
+    <div class="main-nav-search js-search-ui" role="search">
+        <input class="main-nav-search-field" type="search" value="주간보고">
+        <span class="main-nav-search-ctrl" role="presentation">
+            <button class="main-nav-search-reset" type="reset" title="초기화">
+                <span class="nonvisual">초기화</span>
+            </button>
+            <button class="main-nav-search-submit" type="submit" title="검색">
+                <span class="nonvisual">검색</span>
+            </button>
+        </span>
+    </div>
+</form>-->
+                    <div class="main-nav-search js-search-ui" role="search">
+                        <input class="main-nav-search-field js-search-field" type="search" placeholder="캘린더" /><span class="main-nav-search-ctrl" role="presentation"><a class="main-nav-search-reset js-search-reset" role="button" title="초기화"><span class="nonvisual">초기화</span></a>
+                        <a class="main-nav-search-submit" role="button" title="검색"><span class="nonvisual">검색</span></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- /캘린더 제어판-->
+            <!-- 캘린더 상세-->
+            <div class="main-view">
+                <div class="main-view-panel is-active">
+                    <!-- [모드] 일정 목록-->
+                    <div class="mode-view mv-list mv-list-range" data-view="list-view">
+                        <table class="mv-list-table">
+                            <caption class="nonvisual">일정 목록</caption>
+                            <thead>
+                                <tr>
+                                    <th class="col-date" scope="col">날짜</th>
+                                    <th class="col-time" scope="col">시간</th>
+                                    <th class="col-desc" scope="col">일정</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- -->
+                                <tr class="holiday txt-clr-2">
+                                    <td class="date">2017.11.12 (일)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-7"></i>종일</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="7">일정관리 시스템 미팅</a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-2">
+                                    <td class="date">2017.11.13 (월)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-3"></i>종일</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="3">한컴오피스 NEO2<span class="icons"><i class="icon-repeat" role="presentation" title="반복일정"></i><i class="icon-notice" role="presentation" title="알림"></i><i class="icon-attached" role="presentation" title="첨부파일"></i></span></a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-2">
+                                    <td class="date" rowspan="2">2017.11.14 (화)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-9"></i>오전 9:00 ~ 오전 10:00</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="9">한컴오피스 NEO2</a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-5 row-selected">
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-4"></i>오전 9:00 ~ 오전 10:00</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="4">일정관리 시스템 미팅</a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-5">
+                                    <td class="date">2017.11.16 (목)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-2"></i>종일</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="2">Foo</a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-5">
+                                    <td class="date">2017.11.16 (목)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-1"></i>종일</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="1">Bar</a>
+                                    </td>
+                                </tr>
+                                <tr class="txt-clr-7">
+                                    <td class="date">2017.11.16 (목)</td>
+                                    <td class="time">
+                                        <i class="sch-color bg-clr-6"></i>오전 9:00 ~ 오전 10:00</td>
+                                    <td class="desc">
+                                        <!-- data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.-->
+                                        <!-- 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.-->
+                                        <a class="list-sch" href="javascript:;" data-color="6">Baz</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /[모드] 일정 목록-->
+                </div>
+            </div>
+            <!-- /캘린더 상세-->
+        </main>
+        <!-- /캘린더-->
+    </div>
+    <!-- /컨텐츠-->
+    <!-- 팝업 공용 오버레이-->
+    <div class="overlay overlay-black" id="overlay" role="presentation"></div>
+    <!-- /팝업 공용 오버레이-->
+    <!-- [popup] 캘린더 설정-->
+    <aside class="modal modal-advanced modal-calendar-edit" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">캘린더 설정</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <fieldset class="modal-fieldset">
+                        <legend class="modal-fieldset-legend"><span class="text">설정</span></legend>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">캘린더명:</div>
+                            <div class="modal-fieldset-row-field">
+                                <input class="textfield" type="text" />
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">설명:</div>
+                            <div class="modal-fieldset-row-field">
+                                <textarea class="textfield w-full" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">캘린더 색상:</div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="palette">
+                                    <div class="palette-group">
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit1" value="1" checked="checked" />
+                                        <label class="palette-item bg-clr-1" for="palettecalendarEdit1">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit2" value="2" />
+                                        <label class="palette-item bg-clr-2" for="palettecalendarEdit2">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit3" value="3" />
+                                        <label class="palette-item bg-clr-3" for="palettecalendarEdit3">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit4" value="4" />
+                                        <label class="palette-item bg-clr-4" for="palettecalendarEdit4">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit5" value="5" />
+                                        <label class="palette-item bg-clr-5" for="palettecalendarEdit5">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit6" value="6" />
+                                        <label class="palette-item bg-clr-6" for="palettecalendarEdit6">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit7" value="7" />
+                                        <label class="palette-item bg-clr-7" for="palettecalendarEdit7">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit8" value="8" />
+                                        <label class="palette-item bg-clr-8" for="palettecalendarEdit8">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit9" value="9" />
+                                        <label class="palette-item bg-clr-9" for="palettecalendarEdit9">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettecalendarEdit" id="palettecalendarEdit10" value="10" />
+                                        <label class="palette-item bg-clr-10" for="palettecalendarEdit10">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 캘린더 설정-->
+    <!-- [popup] 숨겨진 일정 보기-->
+    <aside class="modal modal-simple modal-schedule-reveal" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">2017.11.16 (목)</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="sch-list">
+                        <ul class="sch-list-group">
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-1" href="javascript:;"><span class="time">오전 9:00</span><span class="name">회의</span><span class="icon"><i class="icon-notice" role="presentation" title="알림"></i><i class="icon-attached" role="presentation" title="첨부파일"></i></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-3" href="javascript:;"><span class="time">오전 10:30</span><span class="name">컨퍼런스</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-5" href="javascript:;"><span class="time">오후 1:30</span><span class="name">미팅</span><span class="icon"><i class="icon-repeat" role="presentation" title="반복일정"></i><i class="icon-notice" role="presentation" title="알림"></i><i class="icon-attached" role="presentation" title="첨부파일"></i></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-7" href="javascript:;"><span class="time">오후 3:00</span><span class="name">타임스퀘어 약속</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-9" href="javascript:;"><span class="time">오후 4:30</span><span class="name">병원</span><span class="icon"><i class="icon-notice" role="presentation" title="알림"></i><i class="icon-attached" role="presentation" title="첨부파일"></i></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-8" href="javascript:;"><span class="time">오후 7:00</span><span class="name">저녁약속</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                            <li class="sch-list-item">
+                                <a class="sch-list-item-link js-modal-schedule-view-opener txt-clr-10" href="javascript:;"><span class="time">오후 9:30</span><span class="name">(제목 없음)</span><span class="icon"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 숨겨진 일정 보기-->
+    <!-- [popup] 일정 보기-->
+    <aside class="modal modal-advanced modal-schedule-view" role="dialog" data-schedule-color="1">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">일정</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <fieldset class="modal-fieldset">
+                        <legend class="modal-fieldset-label"><span class="modal-sch-def"><!-- 일정 색상에 따라 className 변경 clr-1 ~ 10--><i class="modal-sch-icon bg-clr-2"></i><span class="modal-sch-name txt-clr-2">회의</span></span><span class="modal-sch-desc">2017.11.14 (월) 오전 9:00 ~ 오전 9:30</span></legend>
+                        <div
+                            class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">반복:</div>
+                            <div class="modal-fieldset-row-field">매주</div>
+                </div>
+                <div class="modal-fieldset-row">
+                    <div class="modal-fieldset-row-label">위치:</div>
+                    <div class="modal-fieldset-row-field">
+                        <div class="modal-fieldset-row-field-wrap">
+                            <a class="modal-fieldset-link" href="javascript:;">한컴타워 6층 회의실</a>
+                            <a class="icon-button addin js-location-map-show" role="button" href="javascript:;" title="지도 확인"><span class="nonvisual">지도 확인</span>
+                                <i class="icon-map-pointer"></i>
+                            </a>
+                        </div>
+                        <!-- 구글 지도-->
+                        <div class="modal-fieldset-row-map js-location-map" id="mdLocationMapView"></div>
+                        <!-- /구글 지도-->
+                    </div>
+                </div>
+                <div class="modal-fieldset-row">
+                    <div class="modal-fieldset-row-label">캘린더:</div>
+                    <div class="modal-fieldset-row-field">내 캘린더</div>
+                </div>
+                <div class="modal-fieldset-row">
+                    <div class="modal-fieldset-row-label">첨부파일:</div>
+                    <div class="modal-fieldset-row-field">플래너화면설계서.show</div>
+                </div>
+                <div class="modal-fieldset-row">
+                    <div class="modal-fieldset-row-label">알림:</div>
+                    <div class="modal-fieldset-row-field">1시간 전</div>
+                </div>
+                <div class="modal-fieldset-row">
+                    <div class="modal-fieldset-row-label">메모:</div>
+                    <div class="modal-fieldset-row-field">
+                        <textarea class="textfield w-full" rows="3" readonly="readonly">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+                    </div>
+                </div>
+                </fieldset>
+            </div>
+            <div class="modal-actions">
+                <div class="modal-actions-group">
+                    <a class="modal-actions-item js-modal-schedule-edit-opener" role="button" href="javascript:;">일정 편집</a>
+                    <a class="modal-actions-item js-modal-schedule-delete-opener" role="button" href="javascript:;">삭제</a>
+                </div>
+                <div class="modal-actions-group">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </aside>
+    <!-- /[popup] 일정 보기-->
+    <!-- [popup] 일정 편집-->
+    <aside class="modal modal-advanced modal-schedule-edit" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <!-- 일정 색상에 따라 컬러를 바꿉니다.-->
+                <h2 class="modal-head-title">일정</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <fieldset class="modal-fieldset">
+                        <legend class="modal-fieldset-legend"><span class="text">필드 제목</span></legend>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">일정:</div>
+                            <div class="modal-fieldset-row-field">
+                                <input class="textfield" type="text" value="주간보고" />
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row date">
+                            <div class="modal-fieldset-row-label">날짜:</div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="modal-fieldset-row-field-wrap">
+                                    <input class="textfield js-datepicker" type="text" value="2017.11.16" />
+                                    <div class="timepicker js-timepicker">
+                                        <input class="timepicker-input" type="text" value="오전 10:30" autocomplete="off" />
+                                        <a class="timepicker-caret" href="javascript:;">
+                                            <b></b>
+                                        </a>
+                                    </div><span class="joiner"><span class="nonvisual">~</span></span>
+                                    <input class="textfield js-datepicker" type="text" value="2017.11.16" />
+                                    <div class="timepicker js-timepicker is-disabled">
+                                        <input class="timepicker-input" type="text" value="오전 10:30" autocomplete="off" disabled="disabled" />
+                                        <a class="timepicker-caret" href="javascript:;">
+                                            <b></b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 반복에 체크할 경우, 아래 `modal-fieldset-row repeat` className에 `repeating`을 추가해 주세요.-->
+                        <div class="modal-fieldset-row repeat">
+                            <div class="modal-fieldset-row-label"></div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="modal-fieldset-row-field-wrap"><span class="checkbox"><input class="checkbox-input" type="checkbox" name="row" id="setScheduleDaylong"/><label class="checkbox-label" for="setScheduleDaylong">종일</label></span><span class="checkbox"><input class="checkbox-input schedule-repeat" type="checkbox" name="row" id="setScheduleRepeat"/><label class="checkbox-label" for="setScheduleRepeat">반복</label></span>
+                                    <a
+                                        class="button js-modal-schedule-edit-inr-opener" role="button" href="javascript:;" title="수정 버튼">수정 버튼</a>
+                                </div>
+                                <div class="schedule-inr">반복: 매주</div>
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row location">
+                            <div class="modal-fieldset-row-label">위치:</div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="modal-fieldset-row-field-wrap js-input-select">
+                                    <input class="textfield js-input-select-field" type="text" />
+                                    <a class="icon-button addin js-location-map-show" role="button" href="javascript:;" title="지도 확인"><span class="nonvisual">지도 확인</span>
+                                        <i class="icon-map-pointer"></i>
+                                    </a>
+                                    <a class="icon-button addin js-modal-map-delete-opener" role="button" href="javascript:;" title="지도 삭제"><span class="nonvisual">지도 삭제</span>
+                                        <i class="icon-close"></i>
+                                    </a>
+                                    <!-- 위치 검색어 제안-->
+                                    <div class="modal-fieldset-row-sugg js-input-select-dropdown">
+                                        <ul class="list list-frame">
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">한컴타워</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">한컴빌딩</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">한컴시큐어</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                            <li class="list-item">
+                                                <a class="list-item-link" href="javascript:;">항목</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /위치 검색어 제안-->
+                                </div>
+                                <!-- 구글 지도-->
+                                <div class="modal-fieldset-row-map js-location-map" id="mdLocationMapEdit"></div>
+                                <!-- /구글 지도-->
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row my-calendar">
+                            <div class="modal-fieldset-row-label">캘린더:</div>
+                            <div class="modal-fieldset-row-field">
+                                <select class="js-select" data-config="{&quot;placeholder&quot;:&quot;캘린더를 선택해 주세요.&quot;,&quot;width&quot;:&quot;216px&quot;}">
+                                    <!-- placeholder를 사용했을 땐 최상위에 빈 option이 필요합니다. -- https://select2.org/placeholders-->
+                                    <option></option>
+                                    <option value="test1">내 캘린더</option>
+                                    <option value="test2">구글 캘린더</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row attachment">
+                            <div class="modal-fieldset-row-label">첨부:</div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="add-file">
+                                    <input class="add-file-input nonvisual" type="file">
+                                    <a class="button has-icon js-modal-schedule-add-file-opener" role="button" href="javascript:;" title="파일 첨부">
+                                        <i class="icon-attached"></i>파일 첨부</a>
+                                </div>
+                                <div class="added-file"></div>
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">메모:</div>
+                            <div class="modal-fieldset-row-field">
+                                <textarea class="textfield w-full" rows="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-fieldset-row">
+                            <div class="modal-fieldset-row-label">일정 색상:</div>
+                            <div class="modal-fieldset-row-field">
+                                <div class="palette js-color-picker">
+                                    <div class="palette-current"><span class="palette-current-item bg-clr-1"></span></div>
+                                    <div class="palette-group">
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit1" value="1" checked="checked" />
+                                        <label class="palette-item bg-clr-1" for="palettescheduleEdit1">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit2" value="2" />
+                                        <label class="palette-item bg-clr-2" for="palettescheduleEdit2">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit3" value="3" />
+                                        <label class="palette-item bg-clr-3" for="palettescheduleEdit3">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit4" value="4" />
+                                        <label class="palette-item bg-clr-4" for="palettescheduleEdit4">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit5" value="5" />
+                                        <label class="palette-item bg-clr-5" for="palettescheduleEdit5">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit6" value="6" />
+                                        <label class="palette-item bg-clr-6" for="palettescheduleEdit6">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit7" value="7" />
+                                        <label class="palette-item bg-clr-7" for="palettescheduleEdit7">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit8" value="8" />
+                                        <label class="palette-item bg-clr-8" for="palettescheduleEdit8">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit9" value="9" />
+                                        <label class="palette-item bg-clr-9" for="palettescheduleEdit9">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                        <input class="palette-state" type="radio" name="palettescheduleEdit" id="palettescheduleEdit10" value="10" />
+                                        <label class="palette-item bg-clr-10" for="palettescheduleEdit10">
+                                            <i class="icon-check-white"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="modal-fieldset-divider">
+                        <div class="modal-fieldset-row alarm">
+                            <div class="modal-fieldset-row-label">미리알림:</div>
+                            <div class="modal-fieldset-row-field">
+                                <select class="js-select" data-config="{&quot;width&quot;:&quot;77px&quot;}">
+                                    <option value="test1">없음</option>
+                                    <option value="test2">5분 전</option>
+                                    <option value="test3">10분 전</option>
+                                    <option value="test4">30분 전</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                        <a class="modal-actions-item js-modal-schedule-delete-opener" role="button" href="javascript:;">삭제</a>
+                    </div>
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 일정 편집-->
+    <!-- [alert] 반복 일정 편집-->
+    <aside class="modal modal-simple modal-select modal-repeating-schedule-edit" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">알림</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>반복일정을 수정하시겠습니까?</p>
+                        <div class="modal-select-group"><span class="radio"><input class="radio-input" type="radio" name="editRptSchedule" id="editRptSchedule1" checked="checked"/><label class="radio-label" for="editRptSchedule1">이 일정만 수정</label></span><span class="radio"><input class="radio-input" type="radio" name="editRptSchedule" id="editRptSchedule2"/><label class="radio-label" for="editRptSchedule2">이 일정부터 이후 일정 모두 수정</label></span></div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- [alert] 반복 일정 편집-->
+    <!-- [popup] 일정 편집: 반복 설정-->
+    <aside class="modal modal-advanced modal-schedule-edit-inr" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">반복 설정</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <fieldset class="modal-fieldset">
+                        <legend class="modal-fieldset-legend"><span class="text">반복 주기</span></legend>
+                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="setSchInr" id="setSchInr1" checked="checked"/><label class="radio-label" for="setSchInr1">매주</label></span></div>
+                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="setSchInr" id="setSchInr2"/><label class="radio-label" for="setSchInr2">매월</label></span></div>
+                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="setSchInr" id="setSchInr3"/><label class="radio-label" for="setSchInr3">매년</label></span></div>
+                    </fieldset>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 일정 편집: 반복 설정-->
+    <!-- [popup] 일정 편집: 파일 선택-->
+    <aside class="modal modal-advanced modal-schedule-add-file" role="dialog" data-file-view="list">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">파일 선택</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <ul class="modal-content-switch">
+                        <li class="modal-content-switch-item">
+                            <input class="modal-content-switch-radio" type="radio" name="modalFileMngTab" id="modalFileMngTabNetffice" checked>
+                            <label class="modal-content-switch-label" for="modalFileMngTabNetffice">넷피스 24</label>
+                        </li>
+                        <li class="modal-content-switch-item">
+                            <input class="modal-content-switch-radio" type="radio" name="modalFileMngTab" id="modalFileMngTabLocal">
+                            <label class="modal-content-switch-label" for="modalFileMngTabLocal">컴퓨터</label>
+                        </li>
+                    </ul>
+                    <div class="modal-content-ctrl">
+                        <!-- form으로 바꾸하려면 다음 마크업을 사용해 주세요.<form action="" method="">
+    <div class="modal-content-search js-search-ui" role="search">
+        <input class="modal-content-search-field" type="search" value="주간보고">
+        <span class="modal-content-search-ctrl" role="presentation">
+            <button class="modal-content-search-reset" type="reset" title="초기화">
+                <span class="nonvisual">초기화</span>
+            </button>
+            <button class="modal-content-search-submit" type="submit" title="검색">
+                <span class="nonvisual">검색</span>
+            </button>
+        </span>
+    </div>
+</form>-->
+                        <div class="modal-content-search js-search-ui" role="search">
+                            <input class="modal-content-search-field js-search-field" type="search" /><span class="modal-content-search-ctrl" role="presentation"><a class="modal-content-search-reset js-search-reset" role="button" title="초기화"><span class="nonvisual">초기화</span></a>
+                            <a class="modal-content-search-submit" role="button"
+                                title="검색"><span class="nonvisual">검색</span></a>
+                            </span>
+                        </div>
+                        <div class="modal-content-view">
+                            <a class="modal-content-view-toggler" role="button" href="javascript:;" title="격자 보기"><span class="nonvisual">격자 보기</span></a>
+                        </div>
+                    </div>
+                    <div class="modal-content-panel-group">
+                        <!-- 파일 선택: 넷피스 24-->
+                        <div class="modal-content-panel is-active">
+                            <!-- 파일: 리스트 뷰-->
+                            <div class="modal-content-panel-view for-list">
+                                <div class="file-list">
+                                    <div class="file-list-head">
+                                        <div class="file-list-head-row">
+                                            <div class="file-list-head-cell">이름</div>
+                                            <div class="file-list-head-cell">수정한 날짜</div>
+                                            <div class="file-list-head-cell">크기</div>
+                                        </div>
+                                        <div class="file-list-head-outset"></div>
+                                    </div>
+                                    <div class="file-list-body">
+                                        <div class="file-list-body-row folder">
+                                            <div class="file-list-body-cell">Documents</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell"></div>
+                                        </div>
+                                        <div class="file-list-body-row folder">
+                                            <div class="file-list-body-cell">Pictures</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell"></div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">2KB</div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">6KB</div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">7KB</div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">7KB</div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">7KB</div>
+                                        </div>
+                                        <div class="file-list-body-row file">
+                                            <div class="file-list-body-cell">파일.hwp</div>
+                                            <div class="file-list-body-cell">2014-12-26 오전 10:39</div>
+                                            <div class="file-list-body-cell">7KB</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /파일: 리스트 뷰-->
+                            <!-- 파일: 그리드 뷰-->
+                            <div class="modal-content-panel-view for-grid">
+                                <div class="file-grid">
+                                    <div class="file-grid-group">
+                                        <figure class="file-grid-item">
+                                            <a class="file-grid-item-block" href="javascript:;">
+                                                <div class="file-grid-item-preview"></div>
+                                                <figcaption class="file-grid-item-name">새 문서</figcaption>
+                                            </a>
+                                        </figure>
+                                        <figure class="file-grid-item">
+                                            <a class="file-grid-item-block" href="javascript:;">
+                                                <div class="file-grid-item-preview">
+                                                    <img class="file-grid-item-preview-thumb" src="./ui/images/_file-thumb-1.png" alt="급료대장">
+                                                </div>
+                                                <figcaption class="file-grid-item-name">급료대장</figcaption>
+                                            </a>
+                                        </figure>
+                                        <figure class="file-grid-item">
+                                            <a class="file-grid-item-block" href="javascript:;">
+                                                <div class="file-grid-item-preview">
+                                                    <img class="file-grid-item-preview-thumb" src="./ui/images/_file-thumb-1.png" alt="급료대장">
+                                                </div>
+                                                <figcaption class="file-grid-item-name">급료대장</figcaption>
+                                            </a>
+                                        </figure>
+                                        <figure class="file-grid-item horizontal">
+                                            <a class="file-grid-item-block" href="javascript:;">
+                                                <div class="file-grid-item-preview">
+                                                    <img class="file-grid-item-preview-thumb" src="./ui/images/_file-thumb-2.png" alt="간이기안문">
+                                                </div>
+                                                <figcaption class="file-grid-item-name">간이기안문</figcaption>
+                                            </a>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /파일: 그리드 뷰-->
+                        </div>
+                        <!-- /파일 선택: 넷피스 24-->
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 일정 편집: 파일 선택-->
+    <!-- [alert] 일정 삭제-->
+    <aside class="modal modal-simple modal-schedule-delete" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">알림</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>일정을 삭제하시겠습니까?</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[alert] 일정 삭제-->
+    <!-- [popup] 반복 일정 삭제-->
+    <aside class="modal modal-simple modal-schedule-delete-related" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">알림</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <fieldset class="modal-fieldset">
+                        <p class="modal-fieldset-notice">반복 일정을 삭제하시겠습니까?</p>
+                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption1" checked="checked"/><label class="radio-label" for="deleteRelatedOption1">이 일정만 삭제</label></span></div>
+                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption2"/><label class="radio-label" for="deleteRelatedOption2">이 일정부터 이후 일정 모두 삭제</label></span></div>
+                    </fieldset>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-actions-group">
+                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[popup] 반복 일정 삭제-->
+    <!-- [alert] 지도 삭제-->
+    <aside class="modal modal-simple modal-map-delete" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">지도 삭제</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>지도를 삭제하시겠습니까?</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[alert] 지도 삭제-->
+    <!-- [alert] 구글 캘린더 연결-->
+    <aside class="modal modal-simple modal-gcalendar-link" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">구글 캘린더 연결</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>구글 캘린더를 연결하시겠습니까?</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[alert] 구글 캘린더 연결-->
+    <!-- [alert] 구글 캘린더 동기화-->
+    <aside class="modal modal-simple modal-gcalendar-sync" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">구글 캘린더 동기화</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>구글 캘린더가 연결되었습니다. 동기화를 진행하시겠습니까?</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item" role="button" href="javascript:;">나중에</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[alert] 구글 캘린더 동기화-->
+    <!-- [alert] 구글 캘린더 연결 해제-->
+    <aside class="modal modal-simple modal-gcalendar-unlink" role="dialog">
+        <div class="modal-inner" role="presentation">
+            <header class="modal-head">
+                <h2 class="modal-head-title">구글 캘린더 연결 해제</h2>
+                <a class="modal-closer js-modal-closer" role="button" href="javascript:;">
+                    <i class="icon-close" role="presentation"></i><span class="nonvisual">닫기</span></a>
+            </header>
+            <div class="modal-body">
+                <div class="modal-content">
+                    <div class="modal-dialog">
+                        <p>구글 캘린더를 연결 해제하시겠습니까?</p>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- /[alert] 구글 캘린더 연결 해제-->
+    <script src="./vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="./vendors/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="./vendors/jquery-timepicker/jquery.timepicker.min.js"></script>
+    <script src="./vendors/noty/noty.min.js"></script>
+    <script src="./vendors/select2/select2.min.js"></script>
+    <script src="./ui/script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSOF-AhsQt9ZZk2DXVbOLAMZgEJVe85CE" async defer></script>
+</body>
+
+</html>

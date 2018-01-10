@@ -1,0 +1,40 @@
+extends includes/layout-blank
+
+mixin indexRow(i, name, filename, desc)
+  tr
+    th.index(scope="row")= i
+    td= name
+    td
+      a.link(href=`./${filename}`, target="_blank", title=`./${filename}`)= filename
+    td= desc
+
+block title
+  title 목차 | 한컴 플래너
+
+block content
+  table.tbl-idx
+    caption 목차
+    colgroup
+      col(style="width: 4em;")
+      col(style="width: 15em;")
+      col(style="width: 15em;")
+      col(style="width: auto;")
+    thead
+      th.index(scope="col") #
+      th(scope="col") 정의
+      th(scope="col") 페이지
+      th(scope="col") 비고
+    tbody
+      - var i = 1;
+      +indexRow(i++, "공개 버전", "app.html", "월/주/일간 & 일정목록 등을 모두 합친 버전.")
+      +indexRow(i++, "월간 보기", "monthly.html")
+      +indexRow(i++, "주간 보기", "weekly.html")
+      +indexRow(i++, "일간 보기", "daily.html")
+      +indexRow(i++, "선택한 범위 보기", "range.html")
+      +indexRow(i++, "일정목록", "list.html")
+      +indexRow(i++, "검색결과목록", "searched.html")
+      +indexRow("-", "모듈 목록", "modules.html", "재사용 가능한 HTML 템플릿 모음")
+      +indexRow("-", "설명문서", "docs.html", "퍼블리싱 구조에 대한 설명문서")
+    tfoot
+      tr
+        td(colspan="4") 플래너 퍼블리싱 리소스 목록

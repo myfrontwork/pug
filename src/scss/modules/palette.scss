@@ -1,0 +1,53 @@
+$palette-bullet-size: 16px; // 시안엔 15px로 나와있지만, 서브픽셀 깨짐을 최소화하기 위해 짝수값으로 변경
+
+// 스케쥴 색상 원형 아이콘
+%palette-item {
+  //background: $color-B4;
+  border-radius: 50%;
+  display: inline-block;
+  width: $palette-bullet-size;
+  height: $palette-bullet-size;
+}
+
+.palette {
+  height: $palette-bullet-size;
+  display: flex;
+  line-height: $palette-bullet-size;
+}
+.palette-current {
+  border-right: 1px solid $color-L3;
+  margin-right: 8px;
+  padding-right: 8px;
+}
+.palette-current-item {
+  @extend %palette-item;
+}
+.palette-group {
+  display: flex;
+}
+.palette-state {
+  @include nonvisual;
+}
+.palette-item {
+  @extend %palette-item;
+  margin-right: 8px;
+  position: relative;
+
+  .icon-check-white {
+    display: none;
+    margin: {
+      top: -6px;
+      left: -6px;
+    }
+    @include absolute(left 50% top 50%);
+  }
+
+  .palette-state:checked + & {
+    .icon-check-white {
+      display: block;
+    }
+  }
+}
+label.palette-item {
+  @include clickable;
+}

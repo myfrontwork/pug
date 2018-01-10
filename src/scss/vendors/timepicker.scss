@@ -1,0 +1,150 @@
+$timepicker-width: 92px;
+$timepicker-max-length: 7;
+
+%selectbox {
+  color: $textfield-text-color;
+  background: $textfield-bg-color;
+  border: 1px solid $textfield-bd-color;
+  border-radius: $ui-box-radius;
+}
+
+// 컨테이너
+.timepicker {
+  width: $timepicker-width;
+  height: auto;
+  margin: 1px 0;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  display: inline-flex;
+
+  &:not(.is-disabled):hover {
+    .timepicker-input {
+      border-color: $textfield-bd-color-hover;
+    }
+    .timepicker-caret {
+      background-color: $textfield-bg-color-hover;
+      border-color: $textfield-bd-color-hover;
+
+      b {
+        border-top-color: $textfield-caret-color-hover; 
+      }
+    }
+  }
+  &:not(.is-disabled):active {
+    .timepicker-input {
+      border-color: $textfield-bd-color-active;
+    }
+    .timepicker-caret {
+      background-color: $textfield-bg-color-active;
+      border-color: $textfield-bd-color-active;
+
+      b {
+        border-top-color: $textfield-caret-color-active;
+      }
+    }
+  }
+  &.is-disabled {
+    @include inactive;
+
+    &::after {
+      content: "";
+      @include overwrap;
+    }
+  }
+}
+// 인풋
+.timepicker-input {
+  @extend %selectbox;
+  width: 100%;
+  height: $ui-box-height;
+  padding: (($ui-box-height - $ui-line-height - 2px) / 2) 4px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  @include focus-unstyled;
+
+  &:focus {
+    border-color: $textfield-bd-color-active;
+
+    & ~ .timepicker-caret {
+      background-color: $textfield-bg-color-active;
+      border-color: $textfield-bd-color-active;
+
+      b {
+        border-top-color: $textfield-caret-color-active;
+      }
+    }
+  }
+}
+// 토글 버튼
+.timepicker-caret {
+  background: $color-none;
+  border-left: 1px solid $color-none;
+  width: 12px;
+  @include absolute(top 1px right 1px bottom 1px);
+  box-sizing: content-box;
+
+  b {
+    @include caret(bottom, $textfield-caret-color);
+    margin: {
+      top: -1px;
+      left: -2px;
+    }
+    @include absolute(left 50% top 50%);
+  }
+}
+
+.ui-timepicker-wrapper {
+  @extend %selectbox;
+  width: $timepicker-width;
+  margin-top: 2px;
+  padding: 2px;
+  z-index: 10001;
+  box-sizing: border-box;
+  @include focus-unstyled;
+  @include scrollable(null, 22px * $timepicker-max-length);
+
+  &::-webkit-scrollbar {
+    width: $scrollbar-width + 2px;
+  }
+  &::-webkit-scrollbar-track {
+    border-left: 2px solid $color-B1;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-left: 2px solid $color-B1;
+  }
+}
+.ui-timepicker-list {
+  @include list-unstyled;
+
+  li {
+    color: $list-text-color;
+    background: $list-bg-color;
+    border: 1px solid $list-bg-color;
+    border-radius: $ui-box-radius;
+    margin-bottom: 2px;
+    padding: (($ui-box-height - $ui-line-height - 2px) / 2) 5px;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    @include clickable;
+  }
+
+  &:hover {
+    .ui-timepicker-selected {
+      color: $list-text-color-selected;
+      background-color: $list-bg-color-selected;
+      border-color: $list-bd-color-selected;
+      cursor: default;
+    }
+  }
+}
+.ui-timepicker-list .ui-timepicker-selected,
+.ui-timepicker-list li:hover {
+  color: $list-text-color-hover;
+  background-color: $list-bg-color-hover;
+  border-color: $list-bd-color-hover;
+}
+.ui-timepicker-list .ui-timepicker-disabled {
+  @include inactive;
+  @include clickable(false);
+}

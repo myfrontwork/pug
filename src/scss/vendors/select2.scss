@@ -1,0 +1,184 @@
+$select2-max-length: 5;
+
+// !주의! Select2는 BEM에 기초해 있지만, 셀렉터를 nest시켰기 때문에
+// 이를 덮어쓰기하려면 똑같이 nest할 수밖에 없음
+.select2-container--basic {
+  margin: 1px 0;
+  z-index: 2000;
+  line-height: $ui-line-height;
+  font-size: $base-font-size;
+  @include focus-unstyled;
+
+  %select2__box--default {
+    color: $textfield-text-color;
+    background: $textfield-bg-color;
+    border: 1px solid $textfield-bd-color;
+    border-radius: $ui-box-radius;
+  }
+
+  .select2-selection {
+    height: auto;
+    overflow: hidden;
+    @include focus-unstyled;
+      
+    // select box
+    .select2-selection__rendered {
+      @extend %select2__box--default;
+      height: $ui-box-height;
+      padding: (($ui-box-height - $ui-line-height - 2px) / 2) 4px;
+      padding-right: 15px;
+      box-sizing: border-box;
+    }
+
+    // caret
+    .select2-selection__arrow {
+      background: $color-none;
+      border-left: 1px solid $color-none;
+      width: 12px;
+      @include absolute(top 1px right 1px bottom 1px);
+      box-sizing: content-box;
+
+      b {
+        @include caret(bottom, $textfield-caret-color);
+        margin: {
+          top: -1px;
+          left: -2px;
+        }
+        @include absolute(left 50% top 50%);
+      }
+    }
+
+    &:hover {
+      .select2-selection__rendered {
+        border-color: $textfield-bd-color-hover;
+      }
+
+      .select2-selection__arrow {
+        background-color: $textfield-bg-color-hover;
+        border-color: $textfield-bd-color-hover;
+
+        b {
+          border-top-color: $textfield-caret-color-hover; 
+        }
+      }
+    }
+    &:active {
+      .select2-selection__rendered {
+        border-color: $textfield-bd-color-active;
+      }
+
+      .select2-selection__arrow {
+        background-color: $textfield-bg-color-active;
+        border-color: $textfield-bd-color-active;
+
+        b {
+          border-top-color: $textfield-caret-color-active;
+        }
+      }
+    }
+  }
+  
+  // dropdown
+  .select2-dropdown {
+    @extend %select2__box--default;
+  }
+  // upward dropdown
+  .select2-dropdown--above {
+    top: -3px;
+  }
+  // downward dropdown
+  .select2-dropdown--below {
+    top: 1px;
+  }
+
+  .select2-results__options {
+    padding: 2px;
+    @include scrollable(null, 22px * $select2-max-length);
+
+    &::-webkit-scrollbar {
+      width: $scrollbar-width + 2px;
+    }
+    &::-webkit-scrollbar-track {
+      border-left: 2px solid $color-B1;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-left: 2px solid $color-B1;
+    }
+
+    .select2-results__option {
+      color: $list-text-color;
+      background: $list-bg-color;
+      border: 1px solid $list-bg-color;
+      border-radius: $ui-box-radius;
+      margin-bottom: 2px;
+      padding: (($ui-box-height - $ui-line-height - 2px) / 2) 5px;
+      box-sizing: border-box;
+      white-space: pre-wrap;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      // active
+      &:active {
+        color: $list-text-color-active;
+        background-color: $list-bg-color-active;
+        border-color: $list-bd-color-active;
+      }
+
+      // selected
+      &[aria-selected="true"] {
+        color: $list-text-color-selected;
+        background-color: $list-bg-color-selected;
+        border-color: $list-bd-color-selected;
+        cursor: default;
+      }
+
+      // disabled
+      &[aria-disabled="true"] {
+        @include inactive;
+      }
+    }
+
+    // hovered
+    .select2-results__option--highlighted {
+      color: $list-text-color-hover;
+      background-color: $list-bg-color-hover;
+      border-color: $list-bd-color-hover;
+    }
+  }
+  
+  // options expanded
+  &.select2-container--open {
+    .select2-selection {
+      .select2-selection__arrow {
+        b {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  // disabled
+  &.select2-container--disabled {
+    .select2-selection {
+      @include inactive;
+      @include clickable(false);
+        
+      // select box
+      .select2-selection__rendered {
+        color: $textfield-text-color !important;
+        background: $textfield-bg-color !important;
+        border-color: $textfield-bd-color !important;
+      }
+      .select2-selection__arrow {
+        background-color: $textfield-bg-color !important;
+        border-color: $textfield-bd-color !important;
+
+        b {
+          border-top-color: $textfield-caret-color !important; 
+        }
+      }
+    }
+  }
+}

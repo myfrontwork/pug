@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>퍼블리싱 설명문서 | 한컴 플래너</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style>
+        html {
+            line-height: 1.6em;
+            word-break: keep-all;
+            font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+            font-size: 87.5%;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smonothing: grayscale;
+        }
+
+        body {
+            max-width: 70em;
+            margin: auto;
+            padding: 3rem 2rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 2em 0 .5em;
+            line-height: 1.6em;
+            font-weight: normal;
+        }
+
+        h1:first-of-type {
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+        }
+
+        h5,
+        h6 {
+            font-size: 1rem;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        p+p {
+            margin-top: 1em;
+        }
+
+        a {
+            color: hsl(205, 70%, 44%);
+        }
+
+        ul {
+            padding-left: 1.5em;
+            list-style: disc;
+        }
+
+        ul li {
+            margin: .2em 0;
+        }
+
+        code,
+        pre {
+            background: hsl(48, 52%, 92%);
+            color: hsl(48, 52%, 25%);
+            margin: .1em 0 1em;
+            padding: 2px .25em;
+            font-family: "Source Sans Pro", "Consolas", "Monaco", "monospace", monospace;
+            line-height: normal;
+            letter-spacing: 0;
+            overflow-wrap: break-word;
+        }
+
+        .heading {
+            border-bottom: 1px dotted #ddd;
+            padding-bottom: .25em;
+        }
+
+        .heading::before {
+            content: "›";
+            margin-top: -.15em;
+            margin-left: -1em;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>퍼블리싱 구조 설명문서</h1>
+    <section>
+        <h2 class="heading">주요 DOM 트리</h2>
+        <ul>
+            <li>헤드 <code>head</code>
+                <ul>
+                    <li>메타태그 <code>meta</code></li>
+                    <li>페이지 제목 <code>title</code></li>
+                    <li>CSS <code>link</code></li>
+                </ul>
+            </li>
+            <li>바디 <code>body</code>
+                <ul>
+                    <li>헤더 <code>.header</code>
+                        <ul>
+                            <li>브랜드 표시 <code>.header-masthead</code></li>
+                            <li>계정 메뉴 <code>.header-nav</code></li>
+                        </ul>
+                    </li>
+                    <li>컨텐츠 <code>.content</code>
+                        <ul>
+                            <li>메뉴 패널 <code>.sidebar</code></li>
+                            <li>캘린더 <code>.main</code>
+                                <ul>
+                                    <li>캘린더 제어판 <code>.main-nav</code></li>
+                                    <li>캘린더 뷰 <code>.main-view</code>
+                                        <ul>
+                                            <li>일간 <code>.mv-cols-day</code></li>
+                                            <li>주간 <code>.mv-cols-week</code></li>
+                                            <li>월간 <code>.mv-month</code></li>
+                                            <li>일정목록 <code>.mv-list</code></li>
+                                            <li>검색목록 <code>.mv-searched</code></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>팝업 오버레이 <code>.overlay</code></li>
+                    <li>팝업 <code>.modal</code>* N개</li>
+                    <li>JavaScript <code>script</code></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h2 class="heading">공통</h2>
+        <ul>
+            <li>모든 HTML 엘리먼트는 1개 이상의 <code>className</code>을 가집니다.</li>
+            <li><code>className</code>은 <code>id</code>를 대신할 수 있을 정도로 구체적이고 특징적이어야 합니다.</li>
+            <li>가급적 <code>box-half box-scroll box-bordered</code>와 같은 기능성 <code>className</code>을 사용하지 않습니다. 기능성 스타일셋은 Sass 내에서 <code>mixin</code>을 만들고 <code>extend</code>로 사용합니다.</li>
+            <li>버튼 역할을 하는 링크의 <code>href</code>값은 <code>javascript:;</code>로 통일합니다.</li>
+            <li>자바스크립트에 의해 특수한 이벤트가 바인딩되는 컴포넌트는 그 컨테이너에 <code>.js-sch</code>처럼 js-로 시작하는 <code>className</code>을 갖습니다.</li>
+            <li><code>select</code>&nbsp;태그의 드랍다운 레이어에는 디자인을 입힐 수 없으므로, 모든 선택상자는 <code>select2</code>&nbsp;모듈을 사용하도록 작성합니다. 사용방법은
+                <a href="./module.html">module.html</a>에서 확인할 수 있습니다.</li>
+        </ul>
+    </section>
+    <section>
+        <h2 class="heading">메뉴 패널</h2>
+        <p>메뉴 패널은 포함하는 서브컴포넌트의 기능에 따라 [새 일정], [미니 캘린더], [캘린더 설정] 서브섹션으로 나뉩니다. 캘린더 설정 섹션은 섹션 제목을 클릭했을 때 slideUp 또는 slideDown 토글을 지원합니다. 이 이벤트는<code>ui.js</code>에 정의되어 있으며, <code>사이드바: 위젯 숨기고 펼치기</code>&nbsp;문자열로 검색 가능합니다</p>
+        <section>
+            <h3>메뉴 패널: 새 일정</h3>
+            <p>`새 일정` 버튼을 포함합니다. 새 일정 추가 팝업을 열고 닫는 이벤트는 <code>ui.js</code>에 정의되어 있으며, <code>사이드바: 새 일정</code>&nbsp;문자열로 검색 가능합니다.</p>
+        </section>
+        <section>
+            <h3>메뉴 패널: 미니 캘린더</h3>
+            <p>
+                <a rel="external" href="http://api.jqueryui.com/1.11/datepicker/">jQuery DatePicker 플러그인</a>을 사용한 미니 캘린더를 포함합니다. DatePicker 모듈의 기본 설정은 <code>ui.js</code>에 정의되어 있으며, 링크된 페이지에서 API에 대한 설명을 확인할 수 있습니다.</p>
+        </section>
+        <section>
+            <h3>메뉴 패널: 캘린더 설정</h3>
+            <p>캘린더 선택은 HTML checkbox를 사용하며, 추가 메뉴를 열고닫는 이벤트는<code>ui.js</code>에 정의되어 있고, <code>사이드바: 캘린더 &gt;&gt; 추가 메뉴</code>&nbsp;문자열로 검색 가능합니다.</p>
+            <p>(*주의: 새 캘린더 항목을 추가할 때, 클라이언트단에서 동적으로 추가하면 추가 메뉴 이벤트를 별도로 바인딩해야 합니다.)</p>
+            <p>`구글 캘린더` 항목은 싱크 및 해제 등의 추가 메뉴를 갖고 있고, 이 메뉴는 <code>ui.js</code>에 정의된 스크립트에 의해 팝업과 연결되어 있습니다.<code>구글 캘린더</code>&nbsp;문자열로 검색 가능합니다.</p>
+        </section>
+    </section>
+    <section>
+        <h2 class="heading">캘린더 제어판</h2>
+        <p>캘린더 뷰 상단에 고정된 영역입니다. 캘린더 타이틀, 내비게이션 버튼, 검색상자를 포함합니다.</p>
+        <section>
+            <h3>캘린더 제어판: 캘린더 타이틀</h3>
+            <p>현재 보고 있는 캘린더의 타이틀입니다. (예: 2017.11.16) 이 부분은 뷰 모드마다 서로 다른 텍스트가 나타나지만, 퍼블리싱단에서는 제어하지 않습니다.</p>
+        </section>
+        <section>
+            <h3>캘린더 제어판: 내비게이션 버튼</h3>
+            <p>HTML radio button을 사용합니다.<code>change</code>&nbsp;이벤트에 의해 캘린더 뷰가 전환되는 액션은 <code>ui.js</code>상에 정의되어 있으며, <code>캘린더 내비게이션: 일/주/월/일정 탭 전환</code>&nbsp;문자열로 검색 가능합니다.</p>
+        </section>
+        <section>
+            <h3>캘린더 제어판: 검색상자</h3>
+            <p>검색상자입니다.<code>form</code>&nbsp;태그를 사용하지 않았고, 사용한 버전이 필요할 경우 해당 영역 HTML에 딸린 주석을 참조할 수 있습니다.</p>
+            <p>검색상자 안에 글자를 입력하면 `x(초기화)` 버튼이 나타나고, 글자를 모두 지우면 버튼이 사라집니다. 이 액션은<code>ui.js</code>상에 정의되어 있으며, <code>검색 폼의 화면 출력을 제어</code>&nbsp;문자열로 검색 가능합니다.</p>
+            <p>(초기화 버튼이 나타나는 액션은 일정 파일 첨부 팝업에도 사용되고 있습니다.)</p>
+        </section>
+    </section>
+    <section>
+        <h2 class="heading">월간 보기</h2>
+        <p>웹개발팀의 필요에 맞게<code>table</code>태그로 구성되어 있습니다. 모든 행은 한 개의 table이 아닌 별도의 마크업으로 되어 있으며, 각 행은 배경 및 테두리선을 그려주는 <code>.mv-month-body-row-bg</code>&nbsp;table, 그리고 날짜 + 일정 데이터를 표시하는 <code>.mv-month-body-row-data</code>&nbsp;table을 겹쳐 표현합니다. 셀 색상 등 셀 테마에
+            관련된 CSS는 전자에 정의되어야 합니다.</p>
+        <p>캘린더 높이는 브라우저 윈도우를 세로로 수축시킬 경우, 날짜마다 일정이 최소 1개 보이는 높이까지 줄어들 수 있습니다. 이 부분은 CSS flexbox로 구현되어 있습니다.</p>
+        <p>일정의 스타일 속성은 월간, 주간, 일간 사이에서 공유되어 있습니다. <code>className</code>에 따라 스타일이 정의되는 것이 아니며, Sass 내에서 <code>./src/scss/views/common.scss</code>에 정의된 모듈을 <code>@extend</code>함으로써 속성을 공유합니다.</p>
+    </section>
+    <section>
+        <h2 class="heading">주간, 일간, 선택범위 보기</h2>
+        <p>월간 보기와 다르게 캘린더의 높이는 고정되어 있으며, 스크롤 가능합니다. 브라우저에 따라 스크롤바의 너비가 달라질 수 있는데, CSS flexbox로 처리했으므로 스크롤바의 너비가 달라져도 알맞게 레이아웃이 조절됩니다.</p>
+        <p>일정은 그리드 열이 끝나는 부분에 순차적으로 삽입됩니다. <code>style=&quot;top: 250px&quot;</code>처럼 Y축 offset 값을 지정해 주어야 하며, 공식은 (19px * grid rows)입니다.</p>
+        <p>현재 시각을 나타내는 <code>.now-indicator</code>&nbsp;역시 위와 같이 Y축 offset 값을 지정해 주어 나타냅니다.</p>
+        <p>같은 시간대에 겹치는 일정은 <code>.sch-group</code>이라는 컨테이너 안에 넣으면 동일 행에서 표현 가능합니다. 이 부분은 CSS flexbox로 구현되어 있으며, 최소 너비가 0px로 지정되어 있어서 아주 많은 일정이 같은 컨테이너 안에 표현될 경우 눈에 보이지 않는 너비까지 줄어들 수 있습니다.</p>
+    </section>
+    <section>
+        <h2 class="heading">일정목록, 검색결과</h2>
+        <p>목록 보기 모드입니다.</p>
+        <p>일정을 클릭하면 나타나는 일정확인 팝업에 컬러브릭 값을 전달해야 하므로, 이 컬러브릭 값을 <code>.list-sch</code>&nbsp;요소에 <code>data-color</code>&nbsp;attribute에 저장합니다. (HTML 주석 참조)</p>
+    </section>
+    <section>
+        <h2 class="heading">팝업</h2>
+        <p>팝업은 크게 2종류가 있습니다. </p>
+        <ul>
+            <li><code>.modal-simple</code>(알림 팝업): Y/N을 묻거나 주어진 선택지 중 하나를 선택하는, 단일 기능을 수행합니다. </li>
+            <li><code>.modal-advanced</code>(복잡한 팝업): 여러 가지 정보가 나열되어 있으며, 다양한 인터랙션이 가능합니다.</li>
+        </ul>
+        <p>모든 팝업은 <code>ui.js</code>에 정의된 `Modal` 생성자를 사용해 활성화 가능하며, <code>.overlay</code>라는 공통의 오버레이 마스크를 사용합니다. 오버레이 마스크를 클릭하면 열린 팝업이 모두 닫히고, Esc 키를 눌러도 동일한 액션이 일어납니다.</p>
+        <p>팝업 레이어 안에<code>.js-modal-closer</code>&nbsp;className을 부여한 엘리먼트가 존재하면, 이 엘리먼트를 클릭했을 때 해당 팝업이 닫힙니다.</p>
+        <p>팝업의 위치는 Tether + jQuery UI를 사용해 정의했습니다.
+            <a rel="external" href="https://jqueryui.com/position/">jQuery .position() method</a>에서 .position() API를 확인할 수 있습니다.</p>
+    </section>
+    <section>
+        <h2 class="heading">스타일시트 (Sass)</h2>
+        <p>서브디렉토리는 다음과 같이 정의 가능합니다.</p>
+        <table style="margin: 1em 0;">
+            <colgroup>
+                <col style="width: 7em;">
+                <col style="width: auto;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>_mixins</th>
+                    <td>Sass @mixin의 모음입니다. 헬퍼 스타일셋 또는 함수들</td>
+                </tr>
+                <tr>
+                    <th>_variables</th>
+                    <td>Sass 코어 변수들의 모음입니다. 컬러링, 글꼴, 일부 중요한 레이아웃 속성값</td>
+                </tr>
+                <tr>
+                    <th>base</th>
+                    <td>HTML 기본 스타일 리셋 &amp; element selector에 배정된 기초 속성</td>
+                </tr>
+                <tr>
+                    <th>modals</th>
+                    <td>팝업 레이어</td>
+                </tr>
+                <tr>
+                    <th>modules</th>
+                    <td>className 기반의 모듈 (_mixin은 private 모듈, 이 폴더는 public 모듈이라 할 수 있습니다.)</td>
+                </tr>
+                <tr>
+                    <th>static</th>
+                    <td>고정된 영역 (헤더, 사이드바, 캘린더 제어판)</td>
+                </tr>
+                <tr>
+                    <th>vendors</th>
+                    <td>사용중인 오픈소스 라이브러리의 커스텀 테마</td>
+                </tr>
+                <tr>
+                    <th>views</th>
+                    <td>캘린더 뷰 영역</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>테마 제작을 위한 템플릿 시트는 <code>./src/scss/views/_theme.scss</code>&nbsp;경로에서 확인 가능합니다. 테마를 추가할 경우, 이 템플릿을 기반으로 해서 스타일셋을 추가해나가면 됩니다. (table 기반의 마크업을 사용하면서 여러 workaround가 사용되었습니다. 이 점에 주의하며 기존 스타일을 깨뜨리지 않도록 충분한 테스트를 거치며 테마를 제작하는 것을 추천합니다.)</p>
+    </section>
+    <section>
+        <h2 class="heading">자바스크립트</h2>
+        <p>모든 변수 및 함수는 <code>onclick</code>등 외부에서 참조할 수 없게 되어 있습니다. 외부에서 참조가 필요한 경우, <code>exportModule</code>을 이용해 수동으로 전역 컨텍스트로 끌어냅니다. 현재는 다음 모듈이 export되어 있습니다.
+            <ul>
+                <li><code>noty</code></li>
+                <li><code>select2</code></li>
+                <li><code>timepicker</code></li>
+            </ul>
+        </p>
+        <section>
+            <h3>`Modal` 생성자</h3>
+            <p>팝업을 활성화할 수 있는 생성자입니다. 다음과 같은 구문으로 활성화합니다.</p><pre>new Modal({
+  context: ".mv-month",
+  trigger: ".mv-month-body-row",
+  layer: ".modal-schedule-edit",
+  position: {
+    of: function($trigger) {
+        return $(".content"); 
+    },
+    my: "center",
+    at: "center"
+  }
+});</pre>
+            <table>
+                <tr>
+                    <th>context</th>
+                    <td>이벤트 핸들러를 delegate시킬 대상 엘리먼트의 선택자입니다. delegate가 필요하지 않다면 정의하지 않아도 됩니다.</td>
+                </tr>
+                <tr>
+                    <th>trigger</th>
+                    <td>클릭했을 때 팝업이 나타나고 사라지는 트리거 엘리먼트의 선택자입니다.</td>
+                </tr>
+                <tr>
+                    <th>layer</th>
+                    <td>팝업 컨테이너 엘리먼트의 선택자입니다.</td>
+                </tr>
+                <tr>
+                    <th>position</th>
+                    <td>팝업의 포지션을 결정할 객체입니다. 위에 있는 예시처럼, of는 function의 형태로, my와 at은
+                        <a rel="external" href="https://jqueryui.com/position/">jQuery .position() API</a>에 따라 작성하면 됩니다.</td>
+                </tr>
+                <tr>
+                    <th>overlay</th>
+                    <td>overlay를 사용하지 않으려면 false로 설정합니다. 기본값은 true입니다.</td>
+                </tr>
+                <tr>
+                    <th>onShow</th>
+                    <td>팝업이 나타날 때 실행할 콜백 함수입니다.</td>
+                </tr>
+                <tr>
+                    <th>onHide</th>
+                    <td>팝업이 숨겨질 때 실행할 콜백 함수입니다.</td>
+                </tr>
+                <tr>
+                    <th>stopPropagation</th>
+                    <td>트리거 엘리먼트가 이벤트 버블링에 의해 다중 액션을 실행하는 것을 금지합니다.</td>
+                </tr>
+            </table>
+        </section>
+    </section>
+</body>
+
+</html>

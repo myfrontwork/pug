@@ -1,0 +1,202 @@
+// a map-set function (not included with Sass)
+@function map-set($map, $key, $value) {
+  $new: ($key: $value);
+  @return map-merge($map, $new);
+}
+
+// 1px, 1em, 1rem, 1ex, 1% 등 단위값을 가진 숫자값인지 여부를 Boolean으로 반환
+@function is-valid-length($value) {
+  @return (type-of($value) == "number" and not unitless($value))
+    or (index(auto initial inherit 0, $value) != null);
+}
+
+// 퍼센티지를 1에 대한 소수점으로 바꿔 반환
+@function percent-to-decimal($percent) {
+  @return $percent / 100%;
+}
+
+// 입력한 사이드의 반대편 사이드 이름을 반환
+// opposite-position(left) -> right
+@function opposite-position($side) {
+  $side: to-lower-case($side);
+  $opposite: null;
+  $opposites: (
+    top:    bottom,
+    right:  left,
+    bottom: top,
+    left:   right
+  );
+
+  @if map-has-key($opposites, $side) { 
+    $opposite: map-get($opposites, $side);
+  } @else {
+    @warn "No opposite position can be found for `#{$side}`. Direction omitted.";
+  }
+ 
+  @return $opposite;
+}
+
+// display: none 또는 visibility: hidden을 쓰지 않고 엘리먼트를 감춤
+// SEO나 유저 인터랙션을 해치지 않고 시각적으로만 감추는 용도
+@mixin nonvisual {
+  border: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  font-size: 1px !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+}
+
+// 특정 위치에 포지셔닝
+@mixin position($type, $args) {
+  $args-size: length($args);
+  $top: null;
+  $right: null;
+  $bottom: null;
+  $left: null;
+  $translate-x: 0;
+  $translate-y: 0;
+  
+  @for $i from 1 through $args-size {
+    $curr: nth($args, $i);
+    
+    @if $curr == center {
+      @if $left or $right {
+        $top: 50%;
+        $translate-y: -50%;
+      } @else if $bottom == null {
+        $left: 50%;
+        $translate-x: -50%;
+
+        @if $args-size == 1 {
+          $top: 50%;
+          $translate-y: -50%;
+        }
+      }
+    } @else {
+      $next: if($i < $args-size, nth($args, $i+1), null);
+
+      @if $curr == top {
+        $top: if(is-valid-length($next), $next, 0);
+      } @else if $curr == right {
+        $right: if(is-valid-length($next), $next, 0);
+      } @else if $curr == bottom {
+        $bottom: if(is-valid-length($next), $next, 0);
+      } @else if $curr == left {
+        $left: if(is-valid-length($next), $next, 0);
+      }
+    }
+  }
+  
+  position: unquote($type);
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+
+  @if ($translate-x != 0 or $translate-y != 0) {
+    transform: translate(#{$translate-x}, #{$translate-y});
+  }
+}
+
+// 특정 위치에 absolute 포지셔닝
+// @include absolute(top);
+// @include absolute(left top);
+// @include absolute(right 5px);
+// @include absolute(right 5px bottom 5%);
+// @include absolute(left 1em center);
+@mixin absolute($args: null) {
+  @include position(absolute, $args);
+}
+
+// 특정 위치에 fixed 포지셔닝
+// @include fixed(top);
+// @include fixed(left top);
+// @include fixed(right 5px);
+// @include fixed(right 5px bottom 5%);
+// @include fixed(left 1em center);
+@mixin fixed($args: null) {
+  @include position(fixed, $args);
+}
+
+// 컨테이너를 완전히 덮음
+// @include overwrap;
+@mixin overwrap($position: absolute, $trbl: false) {
+  @if $trbl {
+    position: $position;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  } @else {
+    width: 100%;
+    height: 100%;
+    position: $position;
+    top: 0;
+    left: 0;
+  }
+}
+
+@mixin centerize($width, $height, $h: true, $v: true, $use-transform: false) {
+  @if $use-transform {
+    @include absolute(center center);
+  } @else {
+    $left: if($h, 50%, 0);
+    $top: if($v, 50%, 0);
+    @include absolute(left $left top $top);
+    margin: {
+      top: if($v, -($height / 2), null);
+      left: if($h, -($width / 2), null);
+    }
+  }
+}
+
+// float 클리어링
+@mixin contains-float {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+// Flexbox: 세로 플렉스박스
+@mixin flex-vertical {
+  display: flex;
+  flex-direction: column;
+}
+// Flexbox: 남은 공간에 걸쳐 넓어지는 박스
+@mixin flex-expand($threshold: 1) {
+  flex: $threshold 1 0%;
+}
+// Flexbox: 남은 공간과 상관없이 늘어나지도 줄어들지도 않는 박스
+@mixin flex-static {
+  flex: 0 0 auto;
+}
+
+// 너비와 높이 비율을 유지하며 스케일링하는 반응형 컨테이너로 지정
+// @include aspect-ratio(16, 9);
+@mixin aspect-ratio($x, $y) {
+  position: relative;
+  
+  &::before {
+    content: " ";
+    display: block;
+    width: 100%;
+    padding-top: percentage($y / $x);
+  }
+}
+
+// 레이어의 z-index를 미리 정의한 맵에서 추출
+// 매개변수에 매칭하는 z-index 값이 없을 경우, 경고만 띄우고 스킵
+// @include z-index(header);
+@mixin z-index($name) {
+  @if map-has-key($z-index, $name) {
+    z-index: map-get($z-index, $name);
+  } @else if {
+    @warn "No component defined for `#{$name}` in `$z-index` map.";
+  }
+}

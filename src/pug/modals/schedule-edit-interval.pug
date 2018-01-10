@@ -1,0 +1,23 @@
+aside.modal.modal-advanced.modal-schedule-edit-inr(role="dialog")
+  .modal-inner(role="presentation")
+    header.modal-head
+      h2.modal-head-title 반복 설정
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        fieldset.modal-fieldset
+          legend.modal-fieldset-legend
+            span.text 반복 주기
+          .modal-fieldset-row
+            +radio("매주")(name="setSchInr", id="setSchInr1", checked)
+          .modal-fieldset-row
+            +radio("매월")(name="setSchInr", id="setSchInr2")
+          .modal-fieldset-row
+            +radio("매년")(name="setSchInr", id="setSchInr3")
+
+      .modal-actions
+        .modal-actions-group
+          a.modal-actions-item(role="button", href="javascript:;") 확인
+          a.modal-actions-item.js-modal-closer(role="button", href="javascript:;") 취소

@@ -1,0 +1,26 @@
+extends includes/layout
+block navigation
+  +calendarNav("2017.11.16", 2)
+block view
+  .main-view-panel
+    include views/daily
+  .main-view-panel
+    include views/weekly
+  .main-view-panel.is-active
+    include views/monthly
+  .main-view-panel
+    include views/list
+  .main-view-extra
+    // 일치하는 검색어가 없을 경우
+    include views/searched-0
+    // /일치하는 검색어가 없을 경우
+
+    // 검색 결과
+    include views/searched-1
+    // /검색 결과
+
+    // 로딩 알림상자 띄우기
+    // var s = noty.add({ text: "검색결과를 불러오는 중", type: "loading" });
+    
+    // 로딩 알림상자 내리기
+    // noty.remove(s);

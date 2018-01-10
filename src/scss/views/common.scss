@@ -1,0 +1,152 @@
+$view-head-height: 27px;
+
+// 휴일
+%cell-holiday {
+  color: #bf4545;
+}
+// 평일 선택
+%cell-week-selected {
+  background-color: alpha-non-opaque($color-W1, 7%);
+  color: $color-T1;
+  & > .fill {
+    background-color: alpha-non-opaque($color-W1, 7%);
+  }
+}
+// 주말 선택
+%cell-weekend-selected {
+  background-color: alpha-non-opaque($color-W1, 7%);
+
+  & > .fill {
+    background-color: alpha-non-opaque($color-W1, 7%);
+  }
+}
+// 지난 날짜
+%cell-pastdays {
+
+}
+// 오늘
+%cell-date-today {
+  color: $color-W3;
+  background-color: $color-B-b1;
+  border-color: $color-L-b1;
+  font-weight: bold;
+
+  & > .fill {
+    background-color: $color-B-b1;
+  }
+}
+
+// 각 뷰 모드 루트 엘리먼트
+%view {
+  color: $color-T1;
+  width: 100%;
+  height: 100%;
+}
+
+// 일정
+%schedule {
+  display: block;
+  min-width: 0 !important; // 0px까지 flex-shrink 가능
+  height: 18px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  line-height: 18px;
+  text-decoration: none;
+  font: {
+    size: 12px;
+    weight: normal;
+  }
+  &:hover{ //(한컴)추가
+    cursor: pointer;
+  }
+  &:focus{ //(한컴)추가
+    cursor: move;
+  }
+  @include clickable;
+  @include non-selectable;
+  @include focus-unstyled;
+}
+.pastdays {
+  .all-sche {
+    @for $i from 1 through length($schedule-color-map) {
+      $schedule-color: nth($schedule-color-map, $i);
+      
+      &.txt-clr-#{$i} {
+        color: alpha-non-opaque(map-get($schedule-color, text), 50%);
+      }
+      &.bg-clr-#{$i} {
+        background-color: alpha-non-opaque(map-get($schedule-color, entity), 20%);
+      }
+      &.bd-clr-#{$i} {
+        border-color: alpha-non-opaque(map-get($schedule-color, entity), 50%);
+      }
+    }
+  }
+  .sch-time {
+    opacity: .5;
+  }
+}
+%schedule-row {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.sch-clr {
+  border: {
+    style: solid;
+    width: 1px;
+  }
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  color: black; //(한컴) 디폴트 컬러 추가
+  border-color: darkgray;; //(한컴) 디폴트 컬러 추가
+  background-color: lightgray; //(한컴) 디폴트 컬러 추가
+
+
+  @for $i from 1 through length($schedule-color-map) { //(한컴)
+    $schedule-color: nth($schedule-color-map, $i);
+    &.cal-clr-#{$i} {
+      background-color:map-get($schedule-color, entity) !important;
+    }
+     // 일정 텍스트색
+    &.txt-clr-#{$i} {
+      color: map-get($schedule-color, text) !important;
+    }
+    // 일정 테두리색
+    &.bd-clr-#{$i} {
+      border-color: map-get($schedule-color, entity) !important;
+    }
+    &.bg-clr-#{$i} {
+      background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%) !important;
+    }
+  }
+}
+
+.sch-pad {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.sch-def {
+  @include text-ellipsis;
+}
+.sch-when {
+  font-weight: bold;
+}
+.sch-name {
+  @include text-ellipsis;
+}
+.sch-icon {
+  @include flex-static;
+  display: inline-flex;
+  align-items: center;
+
+  [class^="icon-"] {
+    margin-left: 4px;
+  }
+}

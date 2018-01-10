@@ -1,0 +1,13 @@
+mixin icon(name, text)
+  i(class=`icon-${name}`, role=(text ? null : "presentation"))&attributes(attributes)
+    if (text)
+      span.nonvisual= text
+
+mixin icon-repeat
+  +icon("repeat")(title="반복일정")
+
+mixin icon-alarm
+  +icon("notice")(title="알림")
+
+mixin icon-attached
+  +icon("attached")(title="첨부파일")

@@ -1,0 +1,8 @@
+extends includes/layout
+block title
+  title 주간 보기 | 한컴 플래너
+block navigation
+  +calendarNav("2017.11.13 ~ 2017.11.19", 1)
+block view
+  .main-view-panel.is-active
+    include views/weekly

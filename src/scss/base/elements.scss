@@ -1,0 +1,78 @@
+// 문서
+html {
+  height: 100%;
+  height: 100vh;
+  line-height: $base-line-height;
+  text-rendering: optimizeLegibility;
+  word-break: keep-all;
+  @include text-antialias;
+  font: {
+    family: $base-font-family;
+    size: $base-font-size;
+    weight: 400;
+  }
+
+  // 페이지 컨트롤
+  &.scroll-blocked {
+    overflow: hidden;
+  }
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+// 텍스트 레벨
+a {
+  background-color: $color-none;
+  //color: initial;
+
+  &:hover {
+    //color: initial;
+  }
+  
+  // phone number, date, address, email detection in iOS
+  &[href^="x-apple-data-detectors:"] {
+    color: inherit;
+  }
+}
+
+em {
+  font-style: normal; // 한국어는 이탤릭으로 강조하지 않음. 이탤릭체가 필요하면 i 태그를 사용합니다.
+}
+
+// 임베드된 컨텐츠
+iframe {
+  border: 0;
+  overflow: hidden;
+}
+
+img {
+  -ms-interpolation-mode: nearest-neighbor;
+
+  &[src$=".gif"],
+  &[src$=".png"] {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+// 테이블
+table {
+  border-spacing: 0;
+}
+th,
+td {
+  padding: 0;
+}
+
+// 입력 폼
+input {
+  &:required {
+    &:invalid {
+      outline-width: 1px;
+    }
+  }
+}

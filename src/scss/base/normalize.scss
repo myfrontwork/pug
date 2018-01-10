@@ -1,0 +1,141 @@
+// Document
+html {
+  -webkit-text-size-adjust: 100%; // iOS
+  -ms-text-size-adjust: 100%; // IE
+}
+
+// Sections
+body {
+  margin: 0;
+}
+
+// HTML5 polyfill
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
+}
+template {
+  display: none;
+}
+[hidden] {
+  display: none;
+}
+
+// Groups
+hr {
+  box-sizing: content-box; // FF
+  height: 0; // FF
+  overflow: visible; // Edge/IE
+}
+
+// Text-level
+a {
+  background-color: $color-none; // IE
+  -webkit-text-decoration-skip: objects; // iOS
+}
+
+abbr {
+  &[title] {
+    border-bottom: none; // 1
+    text-decoration: underline; // Webkit, Edge/IE
+    text-decoration: underline dotted; // Webkit, Edge/IE
+  }
+}
+
+b,
+strong {
+  font-weight: 700; // Webkit
+}
+
+sub,
+sup {
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub {
+  bottom: -0.25em;
+}
+sup {
+  top: -0.5em;
+}
+
+// Embedded contents
+img {
+  border-style: none; // IE
+}
+svg {
+  &:not(:root) {
+    overflow: hidden; // IE
+  }
+}
+
+// Forms
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font: inherit;
+}
+button,
+input {
+  overflow: visible; // Edge
+}
+button,
+select {
+  text-transform: none; // FF, Edge/IE
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; // iOS, Safari
+
+  &::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  &::-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+}
+legend {
+  color: inherit; // IE
+  display: table; // Edge/IE
+  max-width: 100%; // Edge/IE
+  padding: 0;
+  box-sizing: border-box; // Edge/IE
+  white-space: normal; // Edge/IE
+}
+textarea {
+  overflow: auto; // IE
+}
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; // IE
+  padding: 0; // IE
+}
+[type="number"] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    height: auto; // Chrome
+  }
+}
+[type="search"] {
+  -webkit-appearance: textfield; // Chrome, Safari
+  outline-offset: -2px; // Safari
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+}

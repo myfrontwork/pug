@@ -1,0 +1,79 @@
+.mode-view.mv-list.mv-searched(data-view="list-view")
+  table.mv-list-table
+    caption.nonvisual 일정 목록
+    thead
+      tr
+        th.col-date(scope="col")
+          .fill(role="presentation") 날짜
+        th.col-time(scope="col")
+          .fill(role="presentation") 시간
+        th.col-desc(scope="col")
+          .fill(role="presentation") 일정
+    tbody
+      // 
+      tr.holiday.txt-clr-2
+        td.date 2017.11.12 (일)
+        td
+          i.sch-color.bg-clr-7
+          | 종일
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="7") 일정관리 시스템 미팅
+      tr.txt-clr-2
+        td.date 2017.11.13 (월)
+        td
+          i.sch-color.bg-clr-3
+          | 종일
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="3") 한컴오피스 NEO2
+            span.icons
+              +icon-repeat
+              +icon-alarm
+              +icon-attached
+      tr.txt-clr-2
+        td.date(rowspan="2") 2017.11.14 (화)
+        td
+          i.sch-color.bg-clr-9
+          | 오전 9:00 ~ 오전 10:00
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="9") 한컴오피스 NEO2
+      tr.txt-clr-5.row-selected
+        td
+          i.sch-color.bg-clr-4
+          | 오전 9:00 ~ 오전 10:00
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="4") 일정관리 시스템 미팅
+      tr.txt-clr-5
+        td.date 2017.11.16 (목)
+        td
+          i.sch-color.bg-clr-2
+          | 종일
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="2") Foo
+      tr.txt-clr-5
+        td.date 2017.11.16 (목)
+        td
+          i.sch-color.bg-clr-1
+          | 종일
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="1") Bar
+      tr.txt-clr-7
+        td.date 2017.11.16 (목)
+        td
+          i.sch-color.bg-clr-6
+          | 오전 9:00 ~ 오전 10:00
+        td
+          // data-color에 일정 색상값을 1~10의 숫자 형태로 넣어주세요.
+          // 클릭했을 때 팝업에 표시되는 아이콘 색깔을 결정하게 됩니다.
+          a.list-sch(href="javascript:;", data-color="6") Baz

@@ -1,0 +1,18 @@
+# 2017-12-05
+
+## 마크업 변경
+
+### 주간/일간 보기(cols-view) 상단 고정 영역(.mv-cols-head)
+- table 태그를 div.mv-cols-head-content 로 감싸고, 바로 뒤에 div.mv-cols-head-scroll 추가
+- table 안의 th.mv-cols-head-dayname-scroll, td.mv-cols-head-daylong-scroll 제거
+- className을 가지지 않았던 table 태그에 className 추가
+    .mv-cols-head-table,
+    .mv-cols-head-daylong-bg-table,
+    .mv-cols-head-daylong-data-table
+
+### 주간/일간 보기(cols-view) 일정 영역(.mv-cols-body)
+- .sch-group에 필요하지 않은 .col-1 className 제거
+
+## 기타 리소스 변경
+- src/views/*.scss 갱신
+- src/js/index.js 갱신 (Modal constructor)

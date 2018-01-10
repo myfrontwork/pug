@@ -1,0 +1,260 @@
+.modal-schedule-add-file {
+  //width: 600px;
+  //height: 380px;
+  @include modal-size(600px, 380px);
+
+  .modal-body {
+    flex-direction: column;
+  }
+  .modal-content {
+    background-color: $color-none;
+    border-width: 0;
+    @include flex-expand;
+  }
+  .modal-actions {
+    margin-left: 0;
+    flex-basis: 40px;
+  }
+  .modal-actions-group {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .modal-actions-item {
+    width: 86px;
+    margin: 0 0 0 6px;
+  }
+
+  .modal-content-ctrl {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-content-search {
+  }
+  .modal-content-view {
+  }
+  .modal-content-view-toggler {
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    &::before {
+      content: "";
+    }
+  }
+  .modal-content-panel-group {
+    height: 200px;
+    position: relative;
+  }
+  .modal-content-panel-view {
+    display: none;
+    @include overwrap;
+
+    &.for-list {
+      margin-top: 12px;
+    }
+    &.for-grid {
+      margin-top: 20px;
+    }
+  }
+
+  $file-manager-toggler-map: (
+    list: grid,
+    grid: list
+  );
+  @each $view, $icon in $file-manager-toggler-map {
+    &[data-file-view="#{$view}"] {
+      .modal-content-view-toggler {
+        &::before {
+          @extend .icon-#{$icon};
+        }
+        &:hover {
+          &::before {
+            @extend .icon-#{$icon}-hover;
+          }
+        }
+        &:active {
+          &::before {
+            @extend .icon-#{$icon}-active;
+          }
+        }
+      }
+      .modal-content-panel-view {
+        &.for-#{$view} {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// 파일: 리스트 뷰
+.file-list {
+  color: $color-T1;
+  background: $color-B1;
+  height: 100%;
+  @include flex-vertical;
+  line-height: $ui-line-height;
+}
+%file-list-row {
+  display: flex;
+}
+%file-list-cell {
+  margin-left: -1px;
+  padding: 4px 7px;
+  box-sizing: border-box;
+
+  &:first-child {
+    @include flex-expand;
+  }
+  &:nth-child(2) {
+    width: 175px;
+  }
+  &:nth-child(3) {
+    width: 65px;
+  }
+}
+.file-list-head {
+  background: $color-B3;
+  border: 1px solid $color-L3;
+  flex: none;
+  display: flex;
+  box-sizing: border-box;
+}
+.file-list-head-row {
+  @extend %file-list-row;
+  padding: 0 2px;
+  @include flex-expand;
+}
+.file-list-head-cell {
+  @extend %file-list-cell;
+  border-right: 1px solid $color-L3;
+  padding-bottom: 5px;
+
+  &:last-child {
+    border-right-width: 0;
+  }
+}
+.file-list-head-outset {
+  height: 5px;
+  overflow-y: scroll;
+  visibility: hidden;
+  flex: none;
+  @include scrollbar;
+}
+.file-list-body {
+  border: 1px solid $color-L3;
+  border-top: 0;
+  box-sizing: border-box;
+  @include flex-expand;
+  @include scrollable(null, 100%);
+  @include non-selectable;
+}
+.file-list-body-row {
+  @extend %file-list-row;
+  border: 1px solid $color-none;
+  border-radius: $ui-box-radius;
+  margin: 1px 2px;
+
+  &:hover {
+    color: $color-T-b2;
+    background-color: $color-B-b1;
+    border-color: $color-L-b1;
+  }
+  &:active {
+    background-color: $color-B-b2;
+    border-color: $color-L-b2;
+  }
+}
+.file-list-body-cell {
+  @extend %file-list-cell;
+
+  &:nth-child(2) {
+    padding-left: 12px;
+  }
+  &:nth-child(3) {
+    padding-left: 12px;
+  }
+}
+
+// 파일: 그리드 뷰
+.file-grid {
+  height: 100%;
+  overflow-x: hidden;
+  @include scrollable(null, 100%);
+}
+.file-grid-group {
+  min-height: 100%;
+  margin: 0 -10px;
+  padding-right: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  font-size: 12px;
+}
+.file-grid-item {
+  width: 50%;
+  margin: 0;
+  padding: 7px 10px;
+  box-sizing: border-box;
+}
+.file-grid-item-block {
+  color: $color-T1;
+  background: $color-none;
+  border: 1px solid $color-none;
+  border-radius: $ui-box-radius;
+  display: block;
+  width: 186px;
+  margin: auto;
+  padding: 10px 10px 12px;
+  box-sizing: content-box;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-T-b1;
+    background-color: $color-B-b1;
+    border-color: $color-L-b1;
+    font-weight: bold;
+  }
+  &:active {
+    color: $color-T-b2;
+    background-color: $color-B-b2;
+    border-color: $color-L-b2;
+  }
+
+  .file-grid-item.horizontal & {
+    width: 248px;
+  }
+}
+.file-grid-item-preview {
+  width: 100%;
+  height: 248px; // 3:4
+  display: flex;
+  align-items: flex-end;
+
+  &:empty {
+    background: $color-B1;
+    border: 1px solid $color-L4;
+    @include aspect-ratio(3, 4);
+  }
+  .file-grid-item.horizontal & {
+    &:empty {
+      @include aspect-ratio(4, 3);
+    }
+  }
+}
+.file-grid-item-preview-thumb {
+  background: $color-B1;
+  border: 1px solid $color-L4;
+  @include layer-shadow;
+  display: block;
+  @include fluid-image;
+  box-sizing: border-box;
+}
+.file-grid-item-name {
+  margin-top: 12px;
+  padding: 0 8px;
+}

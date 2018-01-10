@@ -1,0 +1,59 @@
+$throbber-size: 36px;
+$throbber-thickness: 12px;
+
+%throbber {
+  width: $throbber-size;
+  height: $throbber-size;
+  transform: translateZ(0);
+  animation: radar 1.4s linear infinite;
+}
+%throbber-border {
+  &::before,
+  &::after {
+    content: "";
+    border-radius: $throbber-size;
+    width: $throbber-size;
+    height: $throbber-size;
+    position: absolute;
+  }
+  &::before {
+    content: "";
+    background: linear-gradient(to bottom, $color-B1 10%, mix($color-W2, $color-B1, 50%) 90%);
+    clip: rect(0, $throbber-size / 2, $throbber-size, 0);
+  }
+  &::after {
+    background: linear-gradient(to bottom, $color-W2 10%, mix($color-W2, $color-B1, 50%) 90%);
+    clip: rect(0, $throbber-size, $throbber-size, $throbber-size / 2);
+  }
+}
+%throbber-center {
+  background: $color-B1;
+  border-radius: 50%;
+  width: $throbber-size - $throbber-thickness;
+  height: $throbber-size - $throbber-thickness;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.loading {
+  @extend %throbber;
+}
+.loading-border {
+  @extend %throbber-border;
+}
+.loading-center {
+  @extend %throbber-center;
+}
+
+@keyframes radar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

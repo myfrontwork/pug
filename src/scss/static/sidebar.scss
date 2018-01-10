@@ -1,0 +1,251 @@
+.sidebar {
+  background: $color-B1;
+  border: solid $color-L3;
+  border-width: 0 1px 0 0;
+}
+.sidebar-widget {
+}
+.sidebar-widget-heading {
+  color: $color-T1;
+  background: #f7f7f7;
+  border: solid $color-L3;
+  border-width: 1px 0 0;
+  margin: 0;
+  line-height: 16px;
+  font: {
+    size: 13px;
+    weight: bold;
+  }
+}
+.sidebar-widget-toggler {
+  color: inherit;
+  display: block;
+  padding: 8px 12px 8px 25px;
+  position: relative;
+  text-decoration: none;
+
+  &::before {
+    content: "";
+    @include icon(unfold);
+    margin-top: -2px;
+    @include absolute(top 50% left 10px);
+    transform: rotate(-90deg);
+    transition: transform .3s;
+  }
+
+  &.is-active {
+    &::before {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+// 새 일정
+.add-new-event {
+  padding: {
+    top: 14px;
+    bottom: 14px;
+  }
+  text-align: center;
+}
+.add-new-event-button {
+  @include button-unstyled(true);
+  color: white;
+  background: $color-W1;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 180px;
+  height: 32px;
+  padding: 7px 0;
+  box-sizing: border-box;
+  line-height: 18px;
+  font: {
+    size: 15px;
+    weight: bold;
+  }
+  @include focus-unstyled;
+
+  &:hover {
+    background-color: $color-W2;
+  }
+  &:active {
+    background-color: $color-W3;
+  }
+}
+
+// 미니 캘린더
+.mini-calendar {
+  padding: 10px 0 25px;
+  
+  .js-datepicker {
+    @extend %loading;
+    display: block;
+    width: 150px;
+    height: 160px;
+    margin: auto;
+
+    &.is-init {
+      height: auto;
+    }
+  }
+  .ui-datepicker {
+    width: 100%;
+    padding: 0;
+  }
+  .ui-datepicker-title {
+    font-size: 16px;
+  }
+  .ui-datepicker-calendar {
+    font-size: 12px;
+  }
+}
+
+// 그룹 리스트
+.my-groups {
+  @include list-unstyled;
+  padding: 10px 0;
+}
+.my-groups-list-item {
+  width: 100%;
+  height: 27px;
+  padding: 0 10px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.my-groups-list-item-check {
+  @include nonvisual;
+}
+.my-groups-list-item-label {
+  color: inherit;
+  flex: 1;
+  display: flex;
+  padding: 6px 0 6px 26px;
+  @include overwrap;
+  box-sizing: border-box;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+
+  .tick {
+    background: $color-B4;
+    border-radius: 50%;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 7px;
+    position: relative;
+    top: 1px;
+
+    .icon-check-white {
+      display: none;
+      margin: {
+        top: -6px;
+        left: -6px;
+      }
+      @include absolute(left 50% top 50%);
+    }
+
+    @for $i from 1 through length($schedule-color-map) {
+      $schedule-color: nth($schedule-color-map, $i);
+      &.clr-#{$i} {
+        background-color: map-get($schedule-color, entity);
+      }
+    }
+  }
+  .my-groups-list-item-check:checked + & {
+    background: $color-B2;
+
+    .icon-check-white {
+      display: block;
+    }
+  }
+}
+%my-groups-list-item-addin {
+  margin-left: 6px;
+  line-height: 0;
+  position: relative;
+  visibility: hidden;
+  z-index: 1;
+
+  .my-groups-list-item:hover & {
+    visibility: visible;
+  }
+}
+.my-groups-list-item-refresh {
+  @extend %my-groups-list-item-addin;
+}
+.my-groups-list-item-more {
+  @extend %my-groups-list-item-addin;
+  border-color: $static-ui-bd-color;
+  width: 15px;
+  height: 15px;
+
+  &.is-active {
+    transform: rotate(180deg);
+  }
+}
+
+// 추가 메뉴
+.my-groups-list-item-onoff {
+  @extend %dropdown;
+  border-color: $color-L3;
+  @include layer-shadow(10%);
+  left: 100%;
+  min-width: 170px;
+  margin: {
+    top: -4px;
+    left: -25px;
+  }
+  padding: 0 2px;
+  line-height: 15px;
+  font-size: 12px;
+}
+%my-groups-list-item-onoff-row  {
+  border-top: 1px solid $color-L3;
+  width: 100%;
+  height: 25px;
+  box-sizing: border-box;
+
+  &:first-child {
+    border-top: 0;
+  }
+}
+%my-groups-list-item-onoff-button {
+  @extend %button-borderless;
+  padding: 0 4px;
+}
+.my-groups-list-item-onoff-entry {
+  @extend %my-groups-list-item-onoff-row;
+  display: flex;
+  align-items: center;
+}
+.my-groups-list-item-onoff-entry-id {
+  color: $color-T-b1;
+  display: block;
+  height: 20px;
+  padding-left: 5px;
+  line-height: 20px;
+  text-indent: 1px;
+  @include text-ellipsis;
+  font-weight: bold;
+  flex: 1;
+}
+.my-groups-list-item-onoff-off {
+  @extend %my-groups-list-item-onoff-button;
+  margin-left: 20px;
+  @include flex-static;
+}
+.my-groups-list-item-onoff-ctrl {
+  @extend %my-groups-list-item-onoff-row;
+  display: table;
+  padding: 2px 0;
+}
+.my-groups-list-item-onoff-on {
+  @extend %my-groups-list-item-onoff-button;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}

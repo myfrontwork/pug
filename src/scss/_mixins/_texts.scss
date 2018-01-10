@@ -1,0 +1,19 @@
+// 텍스트 노드를 감춤
+@mixin text-hidden {
+  overflow: hidden;
+  text-indent: -9999px;
+  white-space: nowrap;
+}
+
+// 말줄임표로 박스를 벗어난 텍스트 축약
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 앤티앨리어싱 추가
+@mixin text-antialias {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smonothing: grayscale;
+}

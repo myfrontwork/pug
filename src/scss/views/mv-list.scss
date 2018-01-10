@@ -1,0 +1,100 @@
+$mv-list-row-height: 34px;
+
+// 일치하는 검색결과가 없을 때
+.mv-list-empty {
+  border-top: 1px solid $color-L2;
+  margin: 0;
+  padding: 14px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+// 검색 결과
+.mv-list-table {
+  @extend %view;
+  @include table-unstyled;
+
+  .col-date { width: 135px; }
+  .col-time { width: 255px; }
+  .col-desc { width: auto; }
+
+  thead {
+    background-color: #f7f7f7;
+    font-size: 12px;
+
+    th {
+      border: 1px solid;
+      border-color: $color-L2 transparent;
+      height: $view-head-height - 1px;
+      padding-left: 10px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      text-align: left;
+    }
+  }
+
+  tbody {
+    color: $color-T1;
+    background: $color-B1;
+    font-size: 13px;
+    
+    tr {
+      vertical-align: middle;
+
+      &.row-selected {
+        background-color: $color-B2;
+      }
+    }
+    th,
+    td {
+      border-bottom: 1px solid alpha-non-opaque($color-L2, 60%);
+      height: $mv-list-row-height;
+      padding-left: 10px;
+      position: relative;
+      box-sizing: border-box;
+      font-weight: normal;
+
+      &.date {
+        color: $color-T1;
+      }
+      &.desc {
+        padding-left: 10px;
+      }
+    }
+    tr {
+      &.holiday {
+        td:first-child {
+          @extend %cell-holiday;
+        }
+      }
+    }
+  }
+
+  .sch-color {
+    border-radius: 50%;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 7px;
+    position: relative;
+    top: 1px;
+  }
+  .icons {
+    margin-left: 10px;
+
+    [class^="icon"] {
+      margin-left: 6px;
+    }
+  }
+  .list-sch {
+    display: block;
+    max-width: 100%;
+    line-height: $mv-list-row-height;
+    @include text-ellipsis;
+  }
+}
+.list-sch {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}

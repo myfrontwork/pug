@@ -1,0 +1,191 @@
+.main-nav {
+  color: $color-T1;
+  height: 60px;
+  padding: 0 17px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.main-nav-front {
+  margin-right: 12px;
+  @include flex-expand;
+  display: flex;
+  align-items: center;
+  
+  &:not(.is-active) {
+    display: none;
+  }
+}
+
+// 제목
+.main-nav-title {
+  margin-right: 11px;
+  font: {
+    size: 16px;
+    weight: normal;
+  }
+}
+
+// 이전/다음, 오늘 이동
+.main-nav-move {
+  display: flex;
+}
+%main-nav-move-arrow {
+  border-color: $static-ui-bd-color;
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  &:hover,
+  &:active {
+    z-index: 1;
+  }
+}
+.main-nav-move-prev {
+  @extend %main-nav-move-arrow;
+  border: {
+    top-right-radius: 0;
+    bottom-right-radius: 0;
+  }
+}
+.main-nav-move-next {
+  @extend %main-nav-move-arrow;
+  border: {
+    top-left-radius: 0;
+    bottom-left-radius: 0;
+  }
+  margin-left: -1px;
+}
+.main-nav-move-today {
+  border-color: $static-ui-bd-color;
+  width: 39px;
+  min-width: auto;
+  max-width: none;
+  margin-left: 2px;
+}
+
+// 일, 주, 월, 일정 전환
+.main-nav-switch {
+  @include list-unstyled;
+  font: {
+    size: 13px;
+    weight: bold;
+  }
+  @include flex-static;
+  display: flex;
+  
+  &:not(.is-active) {
+    display: none;
+  }
+}
+.main-nav-switch-item {
+  margin-left: -1px;
+}
+.main-nav-switch-radio {
+  @extend .nonvisual;
+}
+.main-nav-switch-label {
+  @extend %button-basic;
+  border: {
+    color: $static-ui-bd-color;
+    radius: 0;
+  }
+  width: 60px;
+  height: 30px;
+  padding: 5px;
+  position: relative;
+  line-height: 17px;
+  flex: 0 0 60px;
+
+  .main-nav-switch-item:first-child & {
+    border-radius: $ui-box-radius 0 0 $ui-box-radius;
+    margin-left: 0;
+  }
+  .main-nav-switch-item:last-child & {
+    border-radius: 0 $ui-box-radius $ui-box-radius 0;
+  }
+
+  &:hover,
+  &:active {
+    z-index: 1;
+  }
+
+  .main-nav-switch-radio:checked + & {
+    color: $color-W3;
+    background-color: $color-B-b1;
+    border-color: $color-L-b2;
+    z-index: 1;
+  }
+}
+
+// 검색
+.main-nav-rear {
+  margin-left: 12px;
+  @include flex-expand;
+  display: flex;
+  justify-content: flex-end;
+}
+.main-nav-search {
+  @extend %search-container;
+}
+.main-nav-search-field {
+  @extend %search-field;
+  border-color: $static-ui-bd-color;
+  @include hide-reset-when-empty("& ~ .main-nav-search-ctrl .main-nav-search-reset");
+}
+.main-nav-search-ctrl {
+   @extend %search-control;
+}
+.main-nav-search-reset {
+  @extend %search-reset;
+}
+.main-nav-search-submit {
+  @extend %search-submit;
+}
+
+// 검색결과 페이지용 프론트
+.main-nav-front-alt {
+  @extend .main-nav-front;
+  display: flex;
+  align-items: center;
+
+  &:not(.is-active) {
+    display: none;
+  }
+}
+.main-nav-back {
+  width: 44px;
+  height: 28px;
+  margin-right: 16px;
+  position: relative;
+
+  &:hover {
+    .icon-prev {
+      @extend .icon-prev-hover;
+    }
+  }
+  &:active {
+    .icon-prev {
+      @extend .icon-prev-active;
+    }
+  }
+}
+.main-nav-search-count {
+  font-size: 14px;
+
+  .value {
+    color: $color-T-b1;
+  }
+}
+
+@media only screen and (max-width: 979px) {
+  .main-nav-switch {
+    @include flex-expand;
+    justify-content: flex-end;
+  }
+  .main-nav-rear {
+    display: none;
+    flex: none;
+  }
+}

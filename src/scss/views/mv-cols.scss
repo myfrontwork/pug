@@ -1,0 +1,401 @@
+$col-row-cell-height  : 20px;
+$col-offset-width     : 60px;
+
+.mv-cols {
+  @extend %view;
+  @include flex-vertical;
+  
+  // 선택한 시간
+  .time-selected {
+    background-color: alpha-non-opaque(#4c73d5, 7%);
+  }
+  // 종일일정
+  .all-sche {
+    @extend %schedule;
+    margin: 0 7px 2px 0;
+    line-height: 16px;
+    .sch-pad {
+      padding: 0 6px;
+      display: flex;
+    }
+  }
+  // 부분일정 그룹
+  .sch-group {
+    display: flex;
+    width: 100%;
+    padding: 0 1px 0 0;  //한컴 수정 20171207
+    position: absolute;
+    z-index: 5; // now-indicator: 1
+    box-sizing: border-box;
+    transform: translateY(-1px);
+    
+    .sch-time {
+      @include flex-expand;
+      &.js-sch{  //str (한컴)추가
+        height: inherit;
+        .scalable{
+           display: none;
+           margin-top: -10px;
+           height: 10px;
+           cursor: n-resize;
+           .icon-drag{
+            @extend %icon; background-position: -2px -368px; width: 8px; height: 8px;
+            margin-left: -4px;
+            position: absolute;
+            left: 50%;
+           }
+        }
+        &:hover{
+          .scalable {
+            display: block !important;
+          }
+        }
+        &:active, &:focus{
+          cursor: move;
+        }
+      } //end (한컴)추가
+    }
+  }
+  // 부분일정
+  .sch-time {
+    @extend %schedule;
+    line-height: 16px;
+
+    &:not(:first-child) {
+      margin-left: 1px;
+    }
+    // @for $i from 1 through 48 { //한컴 수정 20171207
+    //   &.row-#{$i} {
+    //     height: 17px + 19px * ($i - 1);
+    //   }
+    // }
+    .sch-pad {
+      padding: 0 7px;
+    }
+    .sch-def,
+    .sch-desc {
+      display: block;
+    }
+    @for $i from 1 through 48 { //(한컴)위치 이동
+      &.row-#{$i} {
+        height: 16px + 19px * ($i - 1);
+      }
+    }
+  }
+}
+.mv-cols-head {
+  border-width: 1px 0;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  text-align: left;
+  flex: none;
+  display: flex;
+  align-content: stretch;
+}
+.mv-cols-head-dayname-bg {
+  background-color: #f7f7f7;
+  border: 1px solid $color-L2;
+  border-width: 1px 0;
+  width: 100%;
+  height: $view-head-height - 1px;
+  @include absolute(top left);
+  box-sizing: border-box;
+}
+.mv-cols-head-content {
+  @include flex-expand;
+}
+.mv-cols-head-scroll {
+  position: relative;
+  @include flex-static;
+
+  // fake left border
+  &::before {
+    content: "";
+    border-left: 1px solid $color-L2;
+    @include absolute(top $view-head-height left bottom);
+  }
+
+  .placeholder {
+    min-height: 10px;
+    @include scrollable(null, $scrollbar-width);
+    overflow-y: scroll;
+    visibility: hidden;
+  }
+}
+.mv-cols-head-bg {
+  @extend %mv-cols-head-dayname-bg;
+  border: {
+    left: 0 hidden transparent !important;
+    right: 0 hidden transparent !important;
+  }
+  width: 100%;
+  height: $view-head-height;
+  box-sizing: border-box;
+  @include absolute(top left);
+  z-index: -1;
+}
+
+.mv-cols-body {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  position: relative;
+  @include flex-expand;
+  @include scrollable(null, auto);
+}
+// 시간대 열
+%mv-cols-offset {
+  width: $col-offset-width;
+  padding: 0 8px 0 0;
+  box-sizing: content-box;
+  text-align: right;
+}
+%mv-cols-timeline-label {
+  clear: both;
+  float: right;
+  position: relative;
+  top: -9px;
+  line-height: 15px;
+  text-align: right;
+}
+
+// 고정된 헤더
+.mv-cols-head-table {
+  @include calendar-table-group;
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+}
+// 일요일 ~ 토요일
+%mv-cols-head-dayname-bg {
+  background-color: #f7f7f7;
+  border: 1px solid;
+  border-color: $color-L2 transparent;
+}
+.mv-cols-head-dayname-offset {
+  @extend %mv-cols-offset;
+}
+.mv-cols-head-dayname-item {
+  @extend %mv-cols-head-dayname-bg;
+  height: $view-head-height - 1px;
+  padding-left: 10px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  text-align: left;
+  font-weight: inherit;
+
+  &.date-today {
+    @extend %cell-date-today;
+    border-style: double;
+  }
+  &.offrange {
+    opacity: .5;
+  }
+  
+  // 음력
+  .lunar {
+    color: alpha-non-opaque($color-T1, 50%);
+    height: $view-head-height - 1px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: $view-head-height - 1px;
+    font-weight: normal;
+  }
+}
+
+// 종일일정
+.mv-cols-head-daylong {
+  td {
+    border: {
+      top: none; // date-today 셀의 파란 테두리선을 방해하지 않도록
+    }
+  }
+}
+.mv-cols-head-daylong-offset {
+  border: 1px solid $color-L2;
+  border: {
+    bottom-color: transparent;
+  }
+  padding-right: 8px;
+  vertical-align: top;
+
+  .label {
+    @extend %mv-cols-timeline-label;
+    margin-top: 16px;
+    top: auto;
+  }
+}
+.mv-cols-head-daylong-group {
+  min-height: ($col-row-cell-height * 2.5) - 10;
+  padding-bottom: 10px;
+  margin: { left: -1px; }
+  position: relative;
+}
+.mv-cols-head-daylong-bg {
+  @include overwrap;
+}
+.mv-cols-head-daylong-bg-table {
+  @include calendar-table-group;
+  border-left-style: solid; // 오버랩핑 테이블 hidden 버그 fix
+  height: 100%;
+}
+.mv-cols-head-daylong-bg-item {
+  border: 1px solid $color-L2;
+  margin: 0;
+  padding: 0;
+  &.date-today {
+    background-color: #f8fafe !important;
+  }
+}
+.mv-cols-head-daylong-data {
+  position: relative;
+}
+.mv-cols-head-daylong-data-table {
+  @include calendar-table-group;
+
+  tr:first-child {
+    .mv-cols-head-daylong-data-item {
+      padding-top: 3px;
+    }
+  }
+}
+.mv-cols-head-daylong-data-item {
+  border: 1px hidden $color-none;
+  position: relative;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+// 행 균등분배
+%mv-cols-body-row-group {
+  height: 100%;
+  position: relative;
+  @include flex-vertical;
+}
+// 셀 기본 형식
+%mv-cols-body-row-cell {
+  border: solid $color-none;
+  border-width: 1px 0;
+  margin-top: -1px;
+  box-sizing: border-box;
+  @include flex-static;
+}
+
+// 일정 영역
+.mv-cols-body-grid {
+  position: relative; // 일정 박스를 표시할 기준점. 이 하위 노드에는 relative/absolute를 쓰지 말 것
+  @include flex-expand;
+  @include calendar-table-group;
+}
+.mv-cols-body-grid-offset {
+  @extend %mv-cols-offset;
+}
+.mv-cols-body-grid-col {
+  border: solid $color-L2;
+  border-width: 0 1px;
+  vertical-align: top;
+  overflow: hidden;
+  &.date-seleted {
+    @extend %cell-week-selected;
+  }
+  &.date-today {
+    background-color: #f8fafe !important;
+  }
+}
+.mv-cols-body-grid-group {
+  @extend %mv-cols-body-row-group;
+  margin-right: 10px;  //(한컴)추가 
+}
+.mv-cols-body-grid-cell { 
+  @extend %mv-cols-body-row-cell;
+  border-color: #e0e0e0;
+  height: $col-row-cell-height;
+  margin-right: -10px; //(한컴)추가
+  position:relative; //(한컴)추가
+  &:nth-child(even) {
+    border-top-color: alpha-non-opaque(#e7e7e7, 60%);
+  }
+}
+// 시간대 표
+.mv-cols-body-timeline {
+  @extend %mv-cols-body-row-group;
+  @extend %mv-cols-offset;
+}
+.mv-cols-body-timeline-stop {
+  @extend %mv-cols-body-row-cell;
+  height: ($col-row-cell-height * 2) - 1px;
+  position: relative;
+  text-align: right;
+}
+.mv-cols-body-timeline-stop-label {
+  position: relative;
+  top: -9px;
+  line-height: 15px;
+  text-align: right;
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-end;
+
+  .ampm {
+    margin-right: 5px;
+  }
+  .mv-cols-body-timeline-stop:first-child & {
+    top: -2px;
+  }
+}
+
+// 현재 시각 표시
+.now-indicator {
+  background: {
+    image: linear-gradient(to right, #ff8c7a 80%, rgba(255,255,255,0) 0%);
+    position: bottom;
+    size: 6px 2px;
+    repeat: repeat-x;
+  }
+  height: 2px;
+  position: absolute;
+  left: 0;
+  right: -1px;
+  z-index: 1;
+  pointer-events: none;
+  margin-right: -10px; //(한컴)추가
+}
+
+// 일간 모드
+.mv-cols-day {
+  .sch-time {
+    &::after {
+      content: "";
+      @include icon(drag);
+      margin-left: -4px;
+      @include absolute(left 50% bottom 2px);
+      visibility: hidden;
+    }
+    &:hover {
+      cursor: move;
+      cursor: -webkit-grab;
+      cursor: -moz-grab;
+      cursor: grab;
+
+      &::after {
+        visibility: visible;
+      }
+    }
+    &:active {
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+      cursor: grabbing;
+    }
+  }
+  .mv-cols-head-dayname-item {
+    border: {
+      style: solid;
+      width: 1px 0;
+    }
+    text-align: center;
+  }
+  .mv-cols-head-bg {
+    @extend %cell-date-today;
+  }
+}

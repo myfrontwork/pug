@@ -1,0 +1,42 @@
+.list {
+  @include list-unstyled;
+  padding: 2px;
+}
+.list-frame {
+  color: $textfield-text-color;
+  background: $textfield-bg-color;
+  border: 1px solid $textfield-bd-color;
+}
+.list-item {
+  & + & {
+    margin-top: 2px;
+  }
+}
+.list-item-link {
+  color: $list-text-color;
+  background: $list-bg-color;
+  border: 1px solid $list-bd-color;
+  border-radius: $ui-box-radius;
+  display: block;
+  height: $ui-box-height;
+  padding: (($ui-box-height - $ui-line-height) / 2) 5px;
+  box-sizing: border-box;
+  line-height: $ui-line-height;
+  text-decoration: none;
+
+  &:hover {
+    color: $list-text-color-hover !important;
+    background-color: $list-bg-color-hover !important;
+    border-color: $list-bd-color-hover !important;
+  }
+  &:active {
+    color: $list-text-color-active !important;
+    background-color: $list-bg-color-active !important;
+    border-color: $list-bd-color-active !important;
+  }
+  &.is-active {
+    color: $list-text-color-selected !important;
+    background-color: $list-bg-color-selected !important;
+    border-color: $list-bd-color-selected !important;
+  }
+}

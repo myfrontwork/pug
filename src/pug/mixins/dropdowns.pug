@@ -1,0 +1,11 @@
+mixin dropdownLink(item, classes)
+  a(class=classes.link, role="menuitem", href=item.href || "javascript:void 0")&attributes(attributes)= item.text
+
+mixin dropdownItem(item, classes)
+  li(class=classes.item, role="presentation")&attributes(attributes)
+    +dropdownLink(item)
+
+mixin dropdown(items, classes)
+  ul(class=classes.group, role="menu")&attributes(attributes)
+    each item in items
+      +dropdownItem(item, classes)

@@ -1,0 +1,97 @@
+aside.modal.modal-advanced.modal-schedule-add-file(role="dialog", data-file-view="list")
+  .modal-inner(role="presentation")
+    header.modal-head
+      h2.modal-head-title 파일 선택
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        ul.modal-content-switch
+          li.modal-content-switch-item
+            input.modal-content-switch-radio(type="radio", name="modalFileMngTab", id="modalFileMngTabNetffice", checked)
+            label.modal-content-switch-label(for="modalFileMngTabNetffice") 넷피스 24
+          li.modal-content-switch-item
+            input.modal-content-switch-radio(type="radio", name="modalFileMngTab", id="modalFileMngTabLocal")
+            label.modal-content-switch-label(for="modalFileMngTabLocal") 컴퓨터
+        .modal-content-ctrl
+          +search("modal-content-search")
+          .modal-content-view
+            a.modal-content-view-toggler(role="button", href="javascript:;", title="격자 보기")
+              span.nonvisual 격자 보기
+        .modal-content-panel-group
+          // 파일 선택: 넷피스 24
+          .modal-content-panel.is-active
+            // 파일: 리스트 뷰
+            .modal-content-panel-view.for-list
+              .file-list
+                .file-list-head
+                  .file-list-head-row
+                    .file-list-head-cell 이름
+                    .file-list-head-cell 수정한 날짜
+                    .file-list-head-cell 크기
+                  .file-list-head-outset
+                .file-list-body
+                  .file-list-body-row.folder
+                    .file-list-body-cell Documents
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell
+                  .file-list-body-row.folder
+                    .file-list-body-cell Pictures
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 2KB
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 6KB
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 7KB
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 7KB
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 7KB
+                  .file-list-body-row.file
+                    .file-list-body-cell 파일.hwp
+                    .file-list-body-cell 2014-12-26 오전 10:39
+                    .file-list-body-cell 7KB
+            // /파일: 리스트 뷰
+            
+            // 파일: 그리드 뷰
+            .modal-content-panel-view.for-grid
+              .file-grid
+                .file-grid-group
+                  figure.file-grid-item
+                    a.file-grid-item-block(href="javascript:;")
+                      .file-grid-item-preview
+                      figcaption.file-grid-item-name 새 문서
+                  figure.file-grid-item
+                    a.file-grid-item-block(href="javascript:;")
+                      .file-grid-item-preview
+                        img.file-grid-item-preview-thumb(src="./ui/images/_file-thumb-1.png", alt="급료대장")
+                      figcaption.file-grid-item-name 급료대장
+                  figure.file-grid-item
+                    a.file-grid-item-block(href="javascript:;")
+                      .file-grid-item-preview
+                        img.file-grid-item-preview-thumb(src="./ui/images/_file-thumb-1.png", alt="급료대장")
+                      figcaption.file-grid-item-name 급료대장
+                  figure.file-grid-item.horizontal
+                    a.file-grid-item-block(href="javascript:;")
+                      .file-grid-item-preview
+                        img.file-grid-item-preview-thumb(src="./ui/images/_file-thumb-2.png", alt="간이기안문")
+                      figcaption.file-grid-item-name 간이기안문
+            // /파일: 그리드 뷰
+          // /파일 선택: 넷피스 24
+      .modal-actions
+        .modal-actions-group
+          a.modal-actions-item.js-modal-closer(role="button", href="javascript:;") 취소
+          a.modal-actions-item(role="button", href="javascript:;") 확인

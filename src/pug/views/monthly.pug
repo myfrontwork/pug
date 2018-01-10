@@ -1,0 +1,283 @@
+// [모드] 월간
+.mode-view.mv-month(data-view="month-view")
+
+  // 일요일 ~ 토요일
+  .mv-month-head
+    table.mv-month-head-dayname
+      thead
+        th.mv-month-head-dayname-item.holiday 일
+        th.mv-month-head-dayname-item 월
+        th.mv-month-head-dayname-item 화
+        th.mv-month-head-dayname-item 수
+        th.mv-month-head-dayname-item 목
+        th.mv-month-head-dayname-item 금
+        th.mv-month-head-dayname-item 토
+  // /일요일 ~ 토요일
+
+  // 달력 행 컨테이너
+  .mv-month-body(data-part="month-main-body")
+    .mv-month-body-row(class=extend("row-month"))
+      .mv-month-body-row-data
+        table.sch-grid
+          tbody
+            tr.mv-month-body-row-data-day
+              +monthDayCell(29).offrange.pastdays.holiday
+              +monthDayCell(30).offrange.pastdays
+              +monthDayCell(31).offrange.pastdays
+              +monthDayCell(1)
+              +monthDayCell(2)
+              +monthDayCell(3)
+              +monthDayCell(4)
+            +monthRestRow
+        .mv-month-body-row-bg
+          table.sch-view-line
+            tbody
+              tr.mv-month-body-row-bg-line
+                +monthBgCell.pastdays.holiday
+                +monthBgCell.time-selected
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+    .mv-month-body-row(class=extend("row-month"))
+      .mv-month-body-row-data
+        table.sch-grid
+          tbody
+            tr.mv-month-body-row-data-day
+              +monthDayCell(5).holiday
+              +monthDayCell(6)
+              +monthDayCell(7)
+              +monthDayCell(8)
+              +monthDayCell(9)
+              +monthDayCell(10)
+              +monthDayCell(11)
+            tr.mv-month-body-row-data-sch
+              td
+              td
+              td
+              td
+                +daylongEvent({ txtColor: 7, bgColor: 7, bdColor: 7, name: "일정내용" })
+              td
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td
+              td
+              td
+              td
+                +daylongEvent({ txtColor: 5, bgColor: 5, bdColor: 5, name: "일정내용" })
+              td
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td
+              td
+              td
+              td
+                +partialEventMv({ txtColor: 10, time: "오후 3:30", name: "일정내용", attached: true })
+              td
+              td
+              td
+            +monthRestRow
+        .mv-month-body-row-bg
+          table.sch-view-line
+            tbody
+              tr.mv-month-body-row-bg-line
+                +monthBgCell.holiday
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+    .mv-month-body-row(class=extend("row-month"), class="current")
+      .mv-month-body-row-data
+        table.sch-grid
+          tbody
+            tr.mv-month-body-row-data-day
+              +monthDayCell(12).holiday.weekend-selected
+              +monthDayCell(13).week-selected
+              +monthDayCell(14).week-selected
+              +monthDayCell(15).week-selected
+              +monthDayCell(16)
+              +monthDayCell(17)
+              +monthDayCell(18)
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+                +daylongEvent({ txtColor: 1, bgColor: 1, bdColor: 1, name: "일정내용" })
+              td.week-selected
+              td
+                +daylongEvent({ txtColor: 9, bgColor: 9, bdColor: 9, name: "일정내용" })
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td(colspan="2")
+                +daylongEvent({ txtColor: 3, bgColor: 3, bdColor: 3, name: "일정내용" })
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td(colspan="2")
+                +daylongEvent({ txtColor: 2, bgColor: 2, bdColor: 2, name: "일정내용 일정내용 일정내용 일정내용 일정내용 일정내용 일정내용 일정내용 일정내용 일정내용 일정내용" })
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td
+                +partialEventMv({ txtColor: 9, time: "오후 2:00", name: "일정내용" })
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td
+                +partialEventMv({ txtColor: 8, time: "오후 4:30", name: "일정내용 일정내용 일정내용 일정내용 일정내용 일정내용", alarm: true, attached: true, repeat: true })
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td
+                +partialEventMv({ txtColor: 2, time: "오후 6:00", name: "일정내용", alarm: true, attached: true, repeat: true })
+              td
+              td
+            tr.mv-month-body-row-data-sch
+              td.holiday.weekend-selected
+              td.week-selected
+              td.week-selected
+              td.week-selected
+              td
+                +partialEventMv({ txtColor: 5, time: "오후 7:00", name: "일정내용" })
+              td
+              td
+            +monthRestRow
+        .mv-month-body-row-bg
+          table.sch-view-line
+            tbody
+              tr.mv-month-body-row-bg-line
+                +monthBgCell.holiday
+                +monthBgCell.day-selected 
+                td.mv-month-body-row-bg-cell&attributes(attributes).date-today 
+                  span 오늘표시
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+    .mv-month-body-row(class=extend("row-month"))
+      .mv-month-body-row-data
+        table.sch-grid
+          tbody
+            tr.mv-month-body-row-data-day
+              +monthDayCell(19).holiday
+              +monthDayCell(20)
+              +monthDayCell(21)
+              +monthDayCell(22)
+              +monthDayCell(23)
+              +monthDayCell(24)
+              +monthDayCell(25)
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +partialEventMv({ txtColor: 4, time: "오후 2:00", name: "일정내용" })
+            +monthRestRow
+        .mv-month-body-row-bg
+          table.sch-view-line
+            tbody
+              tr.mv-month-body-row-bg-line
+                +monthBgCell.holiday
+                +monthBgCell.day-selected
+                +monthBgCell.day-selected
+                +monthBgCell.day-selected
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+    .mv-month-body-row(class=extend("row-month"))
+      .mv-month-body-row-data
+        table.sch-grid
+          tbody
+            tr.mv-month-body-row-data-day
+              +monthDayCell(26).holiday
+              +monthDayCell(27)
+              +monthDayCell(28)
+              +monthDayCell(29)
+              +monthDayCell(30)
+              +monthDayCell(1).offrange
+              +monthDayCell(2).offrange
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +daylongEvent({ txtColor: 6, bgColor: 6, bdColor: 6, name: "일정내용" })
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +daylongEvent({ txtColor: 1, bgColor: 1, bdColor: 1, name: "일정내용" })
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +partialEventMv({ txtColor: 2, time: "오후 2:00", name: "일정내용" })
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +partialEventMv({ txtColor: 8, time: "오후 3:00", name: "일정내용" })
+            tr.mv-month-body-row-data-sch
+              td.holiday
+              td
+              td
+              td
+              td
+              td
+              td
+                +partialEventMv({ txtColor: 10, time: "오후 4:00", name: "일정내용" })
+            +monthRestRow
+        .mv-month-body-row-bg
+          table.sch-view-line
+            tbody
+              tr.mv-month-body-row-bg-line
+                +monthBgCell.holiday
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+                +monthBgCell
+// /[모드] 월간

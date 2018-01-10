@@ -1,0 +1,8 @@
+mixin listItem(text, link)
+  li.list-item&attributes(attributes)
+    a.list-item-link(href=link || "javascript:;")= text
+
+mixin list(items)
+  ul.list.list-frame&attributes(attributes)
+    each item in items
+      +listItem(item.text, item.link)

@@ -1,0 +1,113 @@
+mixin eventName(obj)
+  span.sch-name= obj.name
+
+mixin eventIcon(obj)
+  span.sch-icon
+    if (obj.repeat)
+      +icon-repeat
+    if (obj.alarm)
+      +icon-alarm
+    if (obj.attached)
+      +icon-attached
+
+//- (한컴)신규생성
+mixin eventsch(obj) 
+  -
+    var colorClassList = [];
+    if (obj.bgColor) colorClassList.push(`bg-clr-${obj.bgColor}`);
+    if (obj.bdColor) colorClassList.push(`bd-clr-${obj.bdColor}`);
+    if (obj.txtColor) colorClassList.push(`txt-clr-${obj.txtColor}`);
+
+  a.js-sch.sch-clr(style=`top: ${0}px; left: ${0}px;`, href="javascript:;", class=colorClassList.join(" "), class=attributes.class)
+    span.sch-pad
+      span.sch-def
+        if (obj.time)
+          span.sch-when= obj.time
+          |&nbsp;
+        if (obj.break)
+          +eventIcon(obj)
+        else
+          +eventName(obj)
+      if (obj.break)
+        +eventName(obj)
+      else
+        +eventIcon(obj)
+    .scalable(aria-hidden="true")
+      .icon-drag
+        
+//- (한컴)이벤트 수정     
+mixin event(obj)
+  -
+    var colorClassList = [];
+    if (obj.bgColor) colorClassList.push(`bg-clr-${obj.bgColor}`);
+    if (obj.bdColor) colorClassList.push(`bd-clr-${obj.bdColor}`);
+    if (obj.txtColor) colorClassList.push(`txt-clr-${obj.txtColor}`);
+
+  a.js-sch.sch-clr(style=`top: ${0}px; left: ${0}px;`, href="javascript:;", class=colorClassList.join(" "), class=attributes.class)
+    span.sch-pad
+      span.sch-def
+        if (obj.time)
+          span.sch-when= obj.time
+          |&nbsp;
+        if (obj.break)
+          +eventIcon(obj)
+        else
+          +eventName(obj)
+      if (obj.break)
+        +eventName(obj)
+      else
+        +eventIcon(obj)
+
+mixin daylongEvent(obj)
+  +event(obj).all-sche
+
+//- (한컴)이벤트명 수정
+mixin partialEvent(obj)
+  +eventsch(obj).sch-time 
+
+//- (한컴)이벤트명 추가 
+mixin partialEventMv(obj)
+  +event(obj).sch-time 
+
+mixin monthBgCell
+  td.mv-month-body-row-bg-cell&attributes(attributes)
+
+mixin monthDayCell(day)
+  td&attributes(attributes)
+    a.day-number(href="javascript:;", data-toggle="modal")= day
+
+mixin monthRestRow
+  tr.mv-month-body-row-data-rest
+    - var i = 7;
+    while (i--)
+      td
+        a.mv-month-body-row-data-rest-count(href="javascript:;", title="일정 더 보기")
+
+mixin colsDaylongCell(events)
+  - var i = 0;
+  .mv-cols-head-daylong-cell.js-sch-cell(role="gridcell")&attributes(attributes)
+    if (events)
+      each event in events
+        +scheduleGroup(i++, event, event.plain, false)
+      //- +scheduleRest(0)
+
+mixin colsBgCell(day)
+  .mv-cols-body-row-bg-cell&attributes(attributes)
+
+mixin colsCell(events)
+  - var i = 0;
+  .mv-cols-body-grid-cell.js-sch-cell(role="gridcell")&attributes(attributes)
+    if (events)
+      each event in events
+        +scheduleGroup(i++, event, !event.allday, !event.plain)
+      //- +scheduleRest(0)
+
+mixin colsTimelineCell(time, meridiem)
+  .mv-cols-body-timeline-stop&attributes(attributes)
+    span.mv-cols-body-timeline-stop-label
+      if (meridiem)
+        b.ampm= meridiem + " "
+      span.time= time
+
+mixin nowIndicator(yPos)
+  .now-indicator(style=`top: ${yPos};`)

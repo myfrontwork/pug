@@ -1,0 +1,8 @@
+extends includes/layout
+block title
+  title 일간 보기 | 한컴 플래너
+block navigation
+  +calendarNav("2017.11.16", 0)
+block view
+  .main-view-panel.is-active
+    include views/daily

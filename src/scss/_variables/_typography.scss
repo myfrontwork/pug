@@ -1,0 +1,9 @@
+// 글꼴 정의
+$font-generic       : sans-serif;
+$font-system        : system-ui, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo";
+
+// 글꼴 설정
+$base-font-family   : $font-system, $font-generic;
+$base-font-size     : 12px;
+$base-line-height   : (20px / $base-font-size) * 1em;
+$base-tracking      : null;

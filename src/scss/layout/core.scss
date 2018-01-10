@@ -1,0 +1,60 @@
+%core-layer {
+  position: relative;
+  box-sizing: border-box;
+}
+%fluid-layer {
+  min-width: 1000px; //한컴 수정 20171207
+}
+.header {
+  @extend %core-layer;
+  @extend %fluid-layer;
+  height: $header-height;
+  z-index: 300;
+  flex: 0 0 $header-height;
+}
+.content {
+  @extend %core-layer;
+  @extend %fluid-layer;
+  padding-top: $header-height;
+  @include overwrap(fixed);
+  display: flex;
+  align-content: stretch;
+  align-items: stretch;
+}
+.sidebar {
+  @extend %core-layer;
+  width: $sidebar-width;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.main {
+  @extend %core-layer;
+  padding: 0 17px;
+  padding-top: 60px;
+  z-index: 100;
+  flex: 1;
+}
+.main-nav {
+  width: 100%;
+  height: 60px;
+  @include absolute(left top);
+  box-sizing: border-box;
+}
+.main-view {
+  height: 100%;
+}
+.main-view-panel,
+.main-view-extra {
+  display: none;
+  @include overwrap(null, false);
+
+  &.is-active {
+    display: block;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .content{
+    position: relative;
+    padding-top: 0px;
+  }
+}

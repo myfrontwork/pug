@@ -1,0 +1,103 @@
+aside.modal.modal-advanced.modal-schedule-edit(role="dialog")
+  .modal-inner(role="presentation")
+    header.modal-head
+      // 일정 색상에 따라 컬러를 바꿉니다.
+      h2.modal-head-title 일정
+      a.modal-closer.js-modal-closer(role="button", href="javascript:;")
+        +icon("close")
+        span.nonvisual 닫기
+    .modal-body
+      .modal-content
+        fieldset.modal-fieldset
+          legend.modal-fieldset-legend
+            span.text 필드 제목
+          .modal-fieldset-row
+            .modal-fieldset-row-label 일정:
+            .modal-fieldset-row-field
+              +textfield("주간보고")
+          .modal-fieldset-row.date
+            .modal-fieldset-row-label 날짜:
+            .modal-fieldset-row-field
+              .modal-fieldset-row-field-wrap
+                +datepicker(2017, 11, 16)
+                +timepicker("오전 10:30")
+                span.joiner
+                  span.nonvisual ~
+                +datepicker(2017, 11, 16)
+                +timepicker("오전 10:30", false)
+          // 반복에 체크할 경우, 아래 `modal-fieldset-row repeat` className에 `repeating`을 추가해 주세요.
+          .modal-fieldset-row.repeat
+            .modal-fieldset-row-label
+            .modal-fieldset-row-field
+              .modal-fieldset-row-field-wrap
+                +checkbox("종일")(name="row", id="setScheduleDaylong")
+                +checkbox("반복")(name="row", id="setScheduleRepeat").schedule-repeat
+                +aButton("수정 버튼").js-modal-schedule-edit-inr-opener
+              .schedule-inr 반복: 매주
+          .modal-fieldset-row.location
+            .modal-fieldset-row-label 위치:
+            .modal-fieldset-row-field
+              .modal-fieldset-row-field-wrap.js-input-select
+                +textfield.js-input-select-field
+                +iconButton("지도 확인", null, "map-pointer").addin.js-location-map-show
+                +iconButton("지도 삭제", null, "close").addin.js-modal-map-delete-opener
+                // 위치 검색어 제안
+                .modal-fieldset-row-sugg.js-input-select-dropdown
+                  +list([
+                    {text: "한컴타워"},
+                    {text: "한컴빌딩"},
+                    {text: "한컴시큐어"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                    {text: "항목"},
+                  ])
+                // /위치 검색어 제안
+              // 구글 지도
+              .modal-fieldset-row-map.js-location-map#mdLocationMapEdit
+              // /구글 지도
+          .modal-fieldset-row.my-calendar
+            .modal-fieldset-row-label 캘린더:
+            .modal-fieldset-row-field
+              +select([
+                {value: "test1", text: "내 캘린더"},
+                {value: "test2", text: "구글 캘린더"}
+              ], {placeholder: "캘린더를 선택해 주세요.", width: "216px"})
+          .modal-fieldset-row.attachment
+            .modal-fieldset-row-label 첨부:
+            .modal-fieldset-row-field
+              .add-file
+                input.add-file-input.nonvisual(type="file")
+                +aButton("파일 첨부", null, "attached").js-modal-schedule-add-file-opener
+              .added-file
+          .modal-fieldset-row
+            .modal-fieldset-row-label 메모:
+            .modal-fieldset-row-field
+              +textarea("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.").w-full(rows="3")
+          .modal-fieldset-row
+            .modal-fieldset-row-label 일정 색상:
+            .modal-fieldset-row-field
+              +palette("scheduleEdit", true)
+          hr.modal-fieldset-divider
+          .modal-fieldset-row.alarm
+            .modal-fieldset-row-label 미리알림:
+            .modal-fieldset-row-field
+              +select([
+                {value: "test1", text: "없음"},
+                {value: "test2", text: "5분 전"},
+                {value: "test3", text: "10분 전"},
+                {value: "test4", text: "30분 전"}
+              ], {width: "77px"})
+
+      .modal-actions
+        .modal-actions-group
+          a.modal-actions-item(role="button", href="javascript:;") 확인
+          a.modal-actions-item.js-modal-schedule-delete-opener(role="button", href="javascript:;") 삭제
+        .modal-actions-group
+          a.modal-actions-item.js-modal-closer(role="button", href="javascript:;") 취소

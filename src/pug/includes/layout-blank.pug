@@ -1,0 +1,63 @@
+//- mixins
+include mixins
+
+doctype
+html(lang="ko", dir="ltr")
+  head
+    block head
+      include metatags
+      block title
+        title 한컴 플래너
+      include styles
+      style.
+        code,
+        pre { background: hsl(48, 52%, 92%); color: hsl(48, 52%, 25%); margin: .1em 0 1em; padding: 2px .25em; font-family: "Source Sans Pro", "Consolas", "Monaco", "monospace", monospace; line-height: normal; letter-spacing: 0; overflow-wrap: break-word; }
+        ::selection { background: hsl(145, 63%, 49%); color: white; }
+        
+        .link { color: hsl(205, 70%, 44%); text-decoration: underline; text-decoration-color: hsla(205, 70%, 44%, .25); text-underline-position: under; cursor: pointer; }
+        .link:hover { text-decoration-color: hsla(205, 70%, 44%, .75); }
+        .link[rel="external"]::after { content: ""; background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5cHgiIGhlaWdodD0iOXB4IiB2aWV3Qm94PSIwIDAgOSA5Ij48cGF0aCBmaWxsPSIjMjQ3REJGIiBkPSJNNyw1djRIMFYyaDR2MUgxdjVoNVY1SDd6IE01LDB2MWgyLjI5M0w0LjA1LDQuMjQzTDQuNzU3LDQuOTVMOCwxLjcwN1Y0aDFWMEg1eiIvPjwvc3ZnPg==) no-repeat; display: inline-block; width: 9px; height: 9px; margin-left: .2em; position: relative; top: -.25em; vertical-align: middle; }
+
+        ul.notelist,
+        ul.notelist ul { padding-left: 2em; list-style-type: disc; }
+        dl.history > dt { font-weight: 700; }
+        dl.history > dd { display: list-item; margin-left: 2em; list-style-type: disc; }
+
+        .info { color: hsl(208, 100%, 40%); }
+        .success { color: hsl(89, 89%, 30%); }
+        .warning { color: hsl(36, 100%, 36%); }
+        .error { color: hsl(357, 92%, 43%); }
+
+        .content-blank { width: 1020px; margin: 0 auto; padding: 15px 10px 30px; box-sizing: border-box; }
+
+        .tbl-idx { width: 100%; margin: 1em 0; border-collapse: separate; border-spacing: 0; line-height: 22px; font-size: 13px; }
+        .tbl-idx > caption { background: hsl(218, 57%, 42%); box-shadow: 0 1px 1px rgba(0, 0, 0, .1); color: white; text-shadow: 0 1px 1px hsla(0, 0%, 0%, .05); padding: .75em 1rem; text-align: left; font-size: 1.25em; font-weight: normal; }
+        .tbl-idx > tbody > tr { vertical-align: top; }
+        .tbl-idx > * > tr > th,
+        .tbl-idx > * > tr > td { background: white; padding: .5em 1rem; text-align: left; }
+        .tbl-idx > * > tr > th { font-weight: normal; }
+        .tbl-idx > thead > tr > th,
+        .tbl-idx > tfoot > tr > td { color: white; padding-top: .65em; padding-bottom: .65em; text-align: left; }
+        .tbl-idx > thead > tr > th,
+        .tbl-idx > tfoot > tr > td { background: hsl(218, 54%, 54%); text-shadow: 0 1px 1px hsla(0, 0%, 0%, .05); }
+        .tbl-idx > tfoot > tr > td { text-align: right; padding-left: 20px; padding-right: 20px; }
+        .tbl-idx > tbody > tr > th,
+        .tbl-idx > tbody > tr > td { border: 1px solid hsl(0, 0%, 87%); border-width: 0 0 1px 1px; position: relative; }
+        .tbl-idx > tbody > tr > td:last-child { border-right-width: 1px; }
+        .tbl-idx > tbody > tr:nth-child(even) > th,
+        .tbl-idx > tbody > tr:nth-child(even) > td { background: hsl(0, 0%, 98%); }
+        .tbl-idx .index { text-align: center; }
+        .tbl-idx .tag { margin-left: .5em; }
+        .tbl-idx .note ul { margin: 0; padding-left: 1.75em; font-size: 93.3333%; line-height: 1.4em; word-break: keep-all; }
+        .tbl-idx .note ul li { margin: .125em 0; }
+  body
+    block body
+      // 컨텐츠
+      .content-blank
+        block content
+      // /컨텐츠
+
+      // UI 스크립트
+      block script
+        include scripts
+      // /UI 스크립트

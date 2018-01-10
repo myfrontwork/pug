@@ -1,0 +1,289 @@
+// 테마를 만들 때는 아래 형식에 알맞은 스타일 선언을 넣어 완성합니다.
+
+html.theme-custom {
+
+  // [보기 모드] 월간
+  //------------------------------------------------------------
+  // 전체 컨테이너
+  .mv-month {
+
+    // 모듈: 종일일정
+    .all-sche {
+      
+    }
+    // 모듈: 부분일정
+    .sch-time {
+      
+    }
+  }
+
+  // 헤드
+  .mv-month-head {
+    
+  }
+  // 본문
+  .mv-month-body {
+    
+  }
+  
+  // 헤드: table
+  .mv-month-head-dayname {
+  }
+  // 헤드: table cell
+  .mv-month-head-dayname-item {
+  
+    // 모듈: 휴일
+    &.holiday {
+
+    }
+  }
+
+  // 달력의 반복되는 행 구간
+  .mv-month-body-row {
+
+  }
+
+  // 행: 셀 배경
+  .mv-month-body-row-bg {
+    
+    // 셀 배경: table
+    .sch-view-line {
+
+    }
+  }
+  // 셀 배경: table cell
+  .mv-month-body-row-bg-cell {
+    
+    // 모듈: 휴일
+    &.holiday {
+
+    }
+    // 모듈: 선택한 날짜
+    &.week-selected {
+
+    }
+    // 모듈: 선택한 휴일
+    &.weekend-selected {
+
+    }
+    // 모듈: 오늘 날짜
+    &.date-today {
+
+    }
+  }
+
+  // 행: 일정 데이터
+  .mv-month-body-row-data {
+    
+    // 일정 데이터: table
+    .sch-grid {
+
+    }
+  }
+
+  // 일정 데이터: table row "날짜" (29, 30, 1, 2, 3...)
+  .mv-month-body-row-data-day {
+    // 일정 데이터: table cell "날짜"
+    td {
+      // 모듈: 휴일
+      &.holiday {
+
+      }
+      // 모듈: 선택한 날짜
+      &.week-selected {
+
+      }
+      // 모듈: 선택한 휴일
+      &.weekend-selected {
+
+      }
+      // 모듈: 지난 날짜
+      &.pastdays {
+
+      }
+      // 모듈: 이번 달이 아닌 날짜
+      &.offrange {
+
+      }
+      // 모듈: 오늘 날짜
+      &.date-today {
+
+      }
+    }
+  }
+
+  // 일정 데이터: table row "반복되는 일정" (일정, 일정...)
+  .mv-month-body-row-data-sch {
+
+  }
+
+  // 일정 데이터: table row "숨겨진 일정 카운터" (+n)
+  .mv-month-body-row-data-rest {
+
+  }
+  // 숨겨진 일정 카운터: anchor (a tag)
+  .mv-month-body-row-data-rest-count {
+
+  }
+
+  // [보기 모드] 주간/일간/선택범위
+  //------------------------------------------------------------
+  
+  // 전체 컨테이너
+  .mv-cols {
+    
+    // 모듈: 선택한 시간
+    .time-selected {
+
+    }
+    // 모듈: 종일일정
+    .all-sche {
+
+    }
+    // 모듈: 부분일정 묶음
+    .sch-group {
+
+    }
+    // 모듈: 부분일정
+    .sch-time {
+
+    }
+  }
+
+  // 헤드
+  .mv-cols-head {
+    
+  }
+  // 본문
+  .mv-cols-body {
+
+  }
+
+  // 헤드: fake 배경색 (헤드 배경색은 여기에 지정해야 합니다.)
+  .mv-cols-head-dayname-bg {
+
+  }
+  // 헤드: 스크롤 영역
+  .mv-cols-head-scroll {
+
+    // fake 왼쪽 테두리선
+    &::before {
+
+    }
+  }
+
+  // 헤드: table
+  .mv-cols-head-table {
+
+  }
+  // 헤드: table row "일요일 ~ 토요일"
+  .mv-cols-head-dayname {
+
+  }
+  // 일요일 ~ 토요일: 일정 셀
+  .mv-cols-head-dayname-item {
+  
+    // 모듈: 오늘 날짜
+    &.date-today {
+
+    }
+    
+    // 음력 날짜 표시
+    .lunar {
+
+    }
+  }
+
+  // 헤드: table row "종일일정"
+  .mv-cols-head-daylong {
+    td {
+
+    }
+  }
+  // 종일일정: 시간대 셀
+  .mv-cols-head-daylong-offset {
+  
+    // 시간대 글자
+    .label {
+
+    }
+  }
+  // 종일일정: 배경
+  .mv-cols-head-daylong-bg {
+  }
+  // 종일일정: 배경 table
+  .mv-cols-head-daylong-bg-table {
+
+  }
+  // 종일일정: 배경 table cell
+  .mv-cols-head-daylong-bg-item {
+
+  }
+  // 종일일정: 일정 데이터
+  .mv-cols-head-daylong-data {
+
+  }
+  // 종일일정: 일정 데이터 table
+  .mv-cols-head-daylong-data-table {
+
+  }
+  // 종일일정: 일정 데이터 table cell
+  .mv-cols-head-daylong-data-item {
+
+  }
+
+  // 일정 영역
+  .mv-cols-body-grid {
+
+  }
+  // 일정 영역: 왼쪽 시간대 행
+  .mv-cols-body-grid-offset {
+
+  }
+  // 일정 영역: 일정 행
+  .mv-cols-body-grid-col {
+    
+  }
+  // 일정 영역: 일정 행 내 각 셀
+  .mv-cols-body-grid-cell {
+
+  }
+
+  // 시간대 열
+  .mv-cols-body-timeline {
+
+  }
+  // 시간대 열: 각 시간대
+  .mv-cols-body-timeline-stop {
+
+  }
+  // 시간대 열: 각 시간대 글자
+  .mv-cols-body-timeline-stop-label {
+      
+    // AM, PM 부분
+    .ampm {
+
+    }
+  }
+
+  // 현재 시각 표시하는 선
+  .now-indicator {
+
+  }
+
+  // [보기 모드] 주간
+  //------------------------------------------------------------
+  .mv-cols-week {
+    
+  }
+  // [보기 모드] 일간
+  //------------------------------------------------------------
+  .mv-cols-day {
+    
+  }
+  // [보기 모드] 선택범위
+  //------------------------------------------------------------
+  .mv-cols-range {
+    
+  }
+}

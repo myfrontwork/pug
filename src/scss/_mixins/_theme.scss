@@ -1,0 +1,71 @@
+// 목록 태그의 기본 속성 제거
+@mixin list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// 표 태그의 기본 속성 제거
+@mixin table-unstyled {
+  width: 100%;
+  box-sizing: border-box;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+@mixin calendar-table-group {
+  @include table-unstyled;
+  background: $color-none;
+  border: {
+    left: 0 hidden $color-none;
+    right: 0 hidden $color-none;
+  }
+}
+
+// 박스 테두리에 그림자 추가
+@mixin layer-shadow($alpha: 10%) {
+  box-shadow: 1px 1px 2px rgba(black, percent-to-decimal($alpha));
+}
+
+// 불투명한 상태로
+@function alpha-non-opaque($color, $alpha: 10%) {
+  @return mix($color, white, $alpha);
+}
+
+// 투명도를 % 단위로 입력
+// @include opacity(60%);
+@mixin inactive($percent: $ui-alpha-fade) {
+  opacity: percent-to-decimal($percent);
+  @include clickable(false);
+}
+
+// placeholder 속성 스타일링
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:ms-input-placeholder {
+    @content;
+  }
+}
+
+// 삼각형 화살표
+// @include caret(top, #ccc, 5px, 3px);
+@mixin caret($dir, $color: currentcolor, $width: 5px, $height: 3px) {
+  border-#{opposite-position($dir)}: $height solid $color;
+
+  $perpendicular-border: ($width / 2) solid $color-none;
+
+  @if $dir == top or $dir == bottom {
+    border-left: $perpendicular-border;
+    border-right: $perpendicular-border;
+  } @else if $dir == left or $dir == right {
+    border-bottom: $perpendicular-border;
+    border-top: $perpendicular-border;
+  }
+  
+  width: 0;
+  height: 0;
+}
