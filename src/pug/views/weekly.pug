@@ -104,28 +104,28 @@
             .mv-cols-body-grid-cell.js-sch-cell(role="gridcell")
           // top 값: (19px * number of grid rows), (한컴) 수정
           .sch-group.sch-time.row-2(style=`top: ${19 * 18}px;  left: 0%; width: 10%; z-index: ;`)
-            +partialEvent({ txtColor: 10, bgColor: 10, bdColor: 10, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 10, bgColor: 10, bdColor: 10, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true, pst: true })
           .sch-group.sch-time.row-2(style=`top: ${19 * 18}px;  left: 10%; width: 10%; z-index: ;`)
-            +partialEvent({ txtColor: 9, bgColor: 9, bdColor: 9, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 9, bgColor: 9, bdColor: 9, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true, pst: true })
           .sch-group.sch-time.row-5(style=`top: ${19 * 18}px; left: 20%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 8, bgColor: 8, bdColor: 8, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 8, bgColor: 8, bdColor: 8, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true, pst: true })
           .sch-group.sch-time.row-5(style=`top: ${19 * 18}px; left: 30%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 7, bgColor: 7, bdColor: 7, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 7, bgColor: 7, bdColor: 7, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true, pst: true })
           .sch-group.sch-time.row-5(style=`top: ${19 * 18}px; left: 40%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 6, bgColor: 6, bdColor: 6, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 6, bgColor: 6, bdColor: 6, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-13(style=`top: ${19 * 18}px; left: 50%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 5, bgColor: 5, bdColor: 5, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 5, bgColor: 5, bdColor: 5, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-13(style=`top: ${19 * 18}px; left: 60%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 4, bgColor: 4, bdColor: 4, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 4, bgColor: 4, bdColor: 4, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-13(style=`top: ${19 * 18}px; left: 70%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 3, bgColor: 3, bdColor: 3, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 3, bgColor: 3, bdColor: 3, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-10(style=`top: ${19 * 18}px; left: 80%; width: 10%;  z-index: ;`)
-            +partialEvent({ txtColor: 2, bgColor: 2, bdColor: 2, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 2, bgColor: 2, bdColor: 2, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-2(style=`top: ${19 * 18}px; left: 90%; width: 10%; z-index: ;`)
-            +partialEvent({ txtColor: 1, bgColor: 1, bdColor: 1, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 1, bgColor: 1, bdColor: 1, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
 
           .sch-group.sch-time.row-2(style=`top: ${19 * 21}px; left: 20%; width: 80%; z-index: ;`)
-            +partialEvent({ txtColor: 5, bgColor: 5, bdColor: 5, break: true, time: "오전 10:00 ~ 오후 1:30", name: "일정내용", alarm: true, attached: true, repeat: true })
+            +partialEvent({ txtColor: 5, bgColor: 5, bdColor: 5, break: true, time: "오전 10:00 ~ 오후 1:30", name: "일정내용", alarm: true, attached: true, repeat: true, drgic:true })
       // /월
       // 화
       td.mv-cols-body-grid-col
@@ -144,11 +144,11 @@
             .mv-cols-body-grid-cell.js-sch-cell(role="gridcell") 
           // top 값: (19px * rowIndex - 1), (한컴) 수정
           .sch-group.sch-time.row-3(style=`top: ${19 * 18}px;  left: 0%; width: 33.3333333%; z-index: ;`)
-            +partialEvent({ txtColor: 10, bgColor: 10, bdColor: 10, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 10, bgColor: 10, bdColor: 10, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-3(style=`top: ${19 * 18}px;  left: 33.3333333%; width: 33.3333333%; z-index: ;`)
-            +partialEvent({ txtColor: 9, bgColor: 9, bdColor: 9, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 9, bgColor: 9, bdColor: 9, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
           .sch-group.sch-time.row-3(style=`top: ${19 * 18}px;  left: 66.666666%; width: 33.3333333%; z-index: ;`)
-            +partialEvent({ txtColor: 8, bgColor: 8, bdColor: 8, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용" })
+            +partialEvent({ txtColor: 8, bgColor: 8, bdColor: 8, break: true, time: "오전 9:00 ~ 오전 10:00", name: "일정내용", drgic:true })
 
           
           // 현재 시각 표시

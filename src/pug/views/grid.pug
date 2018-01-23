@@ -11,16 +11,16 @@ mixin eventIcon(obj)
       +icon-attached
 
 //- (한컴)신규생성
-mixin eventsch(obj) 
+mixin event(obj) 
   -
     var colorClassList = [];
     if (obj.bgColor) colorClassList.push(`bg-clr-${obj.bgColor}`);
     if (obj.bdColor) colorClassList.push(`bd-clr-${obj.bdColor}`);
-    if (obj.txtColor) colorClassList.push(`txt-clr-${obj.txtColor}`);
+    if (obj.txtColor) colorClassList.push(`txt-clr-${obj.txtColor}`); 
 
-  a.js-sch.sch-clr(style=`top: ${0}px; left: ${0}px;`, href="javascript:;", class=colorClassList.join(" "), class=attributes.class)
+  a.js-sch.sch-clr(style=`top: ${0}px; left: ${0}px;`, class=(obj.pst === true ? " pastdays" : ""), href="javascript:;", class=colorClassList.join(" "), class=attributes.class)
     span.sch-pad
-      span.sch-def
+      span.sch-def(class=colorClassList.length[0])
         if (obj.time)
           span.sch-when= obj.time
           |&nbsp;
@@ -32,42 +32,17 @@ mixin eventsch(obj)
         +eventName(obj)
       else
         +eventIcon(obj)
-    .scalable(aria-hidden="true")
-      .icon-drag
-        
-//- (한컴)이벤트 수정     
-mixin event(obj)
-  -
-    var colorClassList = [];
-    if (obj.bgColor) colorClassList.push(`bg-clr-${obj.bgColor}`);
-    if (obj.bdColor) colorClassList.push(`bd-clr-${obj.bdColor}`);
-    if (obj.txtColor) colorClassList.push(`txt-clr-${obj.txtColor}`);
-
-  a.js-sch.sch-clr(style=`top: ${0}px; left: ${0}px;`, href="javascript:;", class=colorClassList.join(" "), class=attributes.class)
-    span.sch-pad
-      span.sch-def
-        if (obj.time)
-          span.sch-when= obj.time
-          |&nbsp;
-        if (obj.break)
-          +eventIcon(obj)
-        else
-          +eventName(obj)
-      if (obj.break)
-        +eventName(obj)
-      else
-        +eventIcon(obj)
+    if (obj.drgic)
+      .scalable(aria-hidden="true")
+        .icon-drag
 
 mixin daylongEvent(obj)
   +event(obj).all-sche
 
 //- (한컴)이벤트명 수정
 mixin partialEvent(obj)
-  +eventsch(obj).sch-time 
+  +event(obj).sch-time
 
-//- (한컴)이벤트명 추가 
-mixin partialEventMv(obj)
-  +event(obj).sch-time 
 
 mixin monthBgCell
   td.mv-month-body-row-bg-cell&attributes(attributes)

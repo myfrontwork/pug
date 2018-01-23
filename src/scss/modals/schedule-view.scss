@@ -55,7 +55,7 @@
     width: 60px;
   }
 
-  // 색상
+  // (한컴)색상
   @for $i from 1 through length($schedule-color-map) {
     &[data-schedule-color="#{$i}"] {
       .modal-sch-icon {

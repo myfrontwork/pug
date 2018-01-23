@@ -16,47 +16,80 @@
       padding: 0 6px;
       display: flex;
     }
-  }
-  // 부분일정
-  .sch-time {
-    @extend %schedule;
-    @extend %schedule-row;
-    margin: 0 2px 2px;
-    background-color: transparent; //(한컴)추가
-    border-color: transparent; //(한컴)추가
-    .sch-clr {
-      border: {
-        width: 0;
+   @for $i from 1 through length($schedule-color-map) {
+    $schedule-color: nth($schedule-color-map, $i);
+    &.pastdays{
+      &.cal-clr-#{$i} {
+        background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%);
       }
-      
-      // 컬러 브릭 색상은 부분일정의 `txt-clr-N`을 참조
-      @for $i from 1 through length($schedule-color-map) {
-        &.txt-clr-#{$i} {
-          .sch-def::before {
-            @extend .bg-clr-#{$i};
+      // (한컴)텍스트색
+      &.txt-clr-#{$i} {
+        color: alpha-non-opaque(map-get($schedule-color, text), 50%);
+      }
+      // (한컴) 배경색
+      // 일정/캘린더 컬러박스에 적용되는 알파 50%의 배경색은 /views/common.scss 참조
+      &.bg-clr-#{$i} {
+        background-color: alpha-non-opaque(map-get($schedule-color, entity), 30%);
+      }
+     // (한컴) 테두리색
+      &.bd-clr-#{$i} {
+        border-color: alpha-non-opaque(map-get($schedule-color, entity), 20%);
+      }
+    }
+  } //$schedule-color-map
+  // 부분일정
+}//.all-sch
+
+@for $i from 1 through length($schedule-color-map) {
+    $schedule-color: nth($schedule-color-map, $i);
+    .sch-time.sch-clr {
+      @extend %schedule;
+      @extend %schedule-row;
+      margin: 0 2px 2px;
+      background-color: transparent !important; //(한컴)추가
+      border-color: transparent !important; //(한컴)추가
+      .sch-pad {
+        padding: 0 7px;
+        display: flex;
+      }
+      &.bg-clr-#{$i}{
+        background-color: transparent;
+        .sch-def {
+         &::before{
+            background-color: map-get($schedule-color, entity);
+         }
+        }
+        &.pastdays{
+          .sch-def {
+            background-color: transparent !important;
+            &::before {
+              background-color:  alpha-non-opaque(map-get($schedule-color, entity), 50%);
+            }
           }
         }
       }
-    }
-    .sch-pad {
-      padding: 0 7px;
-      display: flex;
-    }
-    // 컬러 브릭
-    .sch-def {
-      &::before {
-        content: "";
-        background: $color-L5;
-        border-radius: 50%;
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        margin-right: 5px;
+      &.pastdays{
+        .sch-def {
+          &::before {
+            background-color:  alpha-non-opaque($color-L5, 50%);
+          }
+        }
       }
+      .sch-def {
+        &::before {
+          content: "";
+          background: $color-L5;
+          border-radius: 50%;
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 5px;
+        }
+      } //.sch-def
     }
   }
+    
 }
-
 .mv-month-head {
   @include table-unstyled;
 }
@@ -142,7 +175,7 @@
   &.weekend-selected {
     @extend %cell-week-selected;
   }
-  &.day-selected {
+  &.date-selected {
     @extend %cell-week-selected;
   }
   // &.pastdays {
@@ -163,13 +196,14 @@
     border: 1px solid $color-L-b1 !important;
     overflow:hidden;
     }
-    & span{
+    & span{ //(한컴) 추가, IE에서만 필요한 태그
       display: none;
       text-indent: -500000px;
     }
   }
 }
 
+//(한컴)IE10~11대응용 스타일
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .mv-month-body-row-bg{
     bottom: 0px;
@@ -270,7 +304,7 @@
         opacity: .5;
       }
     }
-    &.date-today {
+    &.date-today { //(한컴)추가/수정 
       @extend %cell-date-today;
       background-color: $color-none;
       border-color: $color-none;

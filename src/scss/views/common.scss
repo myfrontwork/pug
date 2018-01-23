@@ -21,7 +21,7 @@ $view-head-height: 27px;
   }
 }
 // 지난 날짜
-%cell-pastdays {
+%cell-pastdays { 
 
 }
 // 오늘
@@ -67,26 +67,7 @@ $view-head-height: 27px;
   @include non-selectable;
   @include focus-unstyled;
 }
-.pastdays {
-  .all-sche {
-    @for $i from 1 through length($schedule-color-map) {
-      $schedule-color: nth($schedule-color-map, $i);
-      
-      &.txt-clr-#{$i} {
-        color: alpha-non-opaque(map-get($schedule-color, text), 50%);
-      }
-      &.bg-clr-#{$i} {
-        background-color: alpha-non-opaque(map-get($schedule-color, entity), 20%);
-      }
-      &.bd-clr-#{$i} {
-        border-color: alpha-non-opaque(map-get($schedule-color, entity), 50%);
-      }
-    }
-  }
-  .sch-time {
-    opacity: .5;
-  }
-}
+
 %schedule-row {
   overflow: hidden;
   display: flex;
@@ -105,23 +86,41 @@ $view-head-height: 27px;
   color: black; //(한컴) 디폴트 컬러 추가
   border-color: darkgray;; //(한컴) 디폴트 컬러 추가
   background-color: lightgray; //(한컴) 디폴트 컬러 추가
-
-
-  @for $i from 1 through length($schedule-color-map) { //(한컴)
+  @for $i from 1 through length($schedule-color-map) {
     $schedule-color: nth($schedule-color-map, $i);
     &.cal-clr-#{$i} {
-      background-color:map-get($schedule-color, entity) !important;
+      background-color: map-get($schedule-color, entity);
     }
-     // 일정 텍스트색
+    // (한컴)텍스트색
     &.txt-clr-#{$i} {
-      color: map-get($schedule-color, text) !important;
+      color: map-get($schedule-color, text);
     }
-    // 일정 테두리색
-    &.bd-clr-#{$i} {
-      border-color: map-get($schedule-color, entity) !important;
-    }
+    // (한컴) 배경색
+    // 일정/캘린더 컬러박스에 적용되는 알파 50%의 배경색은 /views/common.scss 참조
     &.bg-clr-#{$i} {
-      background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%) !important;
+      background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%);
+    }
+   // (한컴) 테두리색
+    &.bd-clr-#{$i} {  
+      border-color: map-get($schedule-color, entity);
+    }
+    &.pastdays{
+      &.cal-clr-#{$i} {
+        background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%) !important;
+      }
+      // (한컴)텍스트색
+      &.txt-clr-#{$i} {
+        color: alpha-non-opaque(map-get($schedule-color, text), 50%) !important;
+      }
+      // (한컴) 배경색
+      // 일정/캘린더 컬러박스에 적용되는 알파 50%의 배경색은 /views/common.scss 참조
+      &.bg-clr-#{$i} {
+        background-color: alpha-non-opaque(map-get($schedule-color, entity), 30%) !important;
+      }
+     // (한컴) 테두리색
+      &.bd-clr-#{$i} {
+        border-color: alpha-non-opaque(map-get($schedule-color, entity), 80%) !important;
+      }
     }
   }
 }
