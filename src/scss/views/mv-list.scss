@@ -38,13 +38,42 @@ $mv-list-row-height: 34px;
     background: $color-B1;
     font-size: 13px;
     
-    tr {
-      vertical-align: middle;
-
-      &.row-selected {
-        background-color: $color-B2;
+    @for $i from 1 through length($schedule-color-map) {
+        $schedule-color: nth($schedule-color-map, $i);
+      tr {
+          vertical-align: middle;
+          background-color: transparent !important;
+          &.row-selected {
+            background-color: $color-B2;
+          }
+        i.sch-color{
+          background-color: $color-L5 !important;
+        }
+        &.pastdays{
+          color: alpha-non-opaque($color-L5, 50%) !important;
+          td{
+            color: alpha-non-opaque($color-L5, 50%) !important;
+          }
+          background-color: transparent !important;
+          i.sch-color{
+              background-color: alpha-non-opaque($color-L5, 50%) !important;
+          }
+          &.bg-clr-#{$i}{
+            i.sch-color{
+              background-color: alpha-non-opaque(map-get($schedule-color, entity), 50%) !important;
+            }
+          }
+          &.txt-clr-#{$i}{
+            color: alpha-non-opaque(map-get($schedule-color, text), 50%) !important;
+          }
+        } 
+        &.bg-clr-#{$i}{
+          i.sch-color{
+            background-color: map-get($schedule-color, entity)  !important;
+          }
+        }
       }
-    }
+    } //(한컴) 일정목록의 컬러 설정 통일화
     th,
     td {
       border-bottom: 1px solid alpha-non-opaque($color-L2, 60%);

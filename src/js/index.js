@@ -1,5 +1,5 @@
 // Utility variables ------------------------------------------
-var VIEWPORT_MIN_WIDTH = 1000; //(수정) 일정확인 팝업 정중앙 대응 사이즈
+var VIEWPORT_MIN_WIDTH = 1000; //(한컴) 일정확인 팝업 정중앙 대응 사이즈
 var $document = $(document);
 
 // Module definitions -----------------------------------------
