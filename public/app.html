@@ -91,7 +91,7 @@
                         </li>
                         <li class="my-groups-list-item">
                             <input class="my-groups-list-item-check" type="checkbox" id="myGroup2">
-                            <label class="my-groups-list-item-label" for="myGroup2"><span class="tick bg-clr-1"><i class="icon-check-white" role="presentation"></i></span>구글 캘린더</label>
+                            <label class="my-groups-list-item-label" for="myGroup2"><span class="tick bg-clr-2"><i class="icon-check-white" role="presentation"></i></span>구글 캘린더</label>
                             <a class="my-groups-list-item-refresh js-modal-gcalendar-sync-opener" role="button" href="javascript:;" title="새로고침">
                                 <i class="icon-refresh" role="presentation"></i>
                             </a>
@@ -115,16 +115,21 @@
                         </li>
                         <li class="my-groups-list-item">
                             <input class="my-groups-list-item-check" type="checkbox" id="myGroup3">
-                            <label class="my-groups-list-item-label" for="myGroup3"><span class="tick bg-clr-2"><i class="icon-check-white" role="presentation"></i></span>대한민국 휴일</label>
-                            <a class="my-groups-list-item-refresh" role="button" href="javascript:;" title="새로고침">
+                            <label class="my-groups-list-item-label" for="myGroup3"><span class="tick bg-clr-6"><i class="icon-check-white" role="presentation"></i></span>대한민국 휴일</label>
+                            <a class="my-groups-list-item-refresh js-modal-gcalendar-sync-opener" role="button" href="javascript:;" title="새로고침">
                                 <i class="icon-refresh" role="presentation"></i>
                             </a>
                             <a class="icon-button my-groups-list-item-more" role="button" href="javascript:;" title="추가 메뉴 보기"><span class="nonvisual">추가 메뉴 보기</span>
                                 <i class="icon-caret-down"></i>
                             </a>
                             <div class="my-groups-list-item-onoff">
+                                <!-- 연결되지 않았을 때-->
+                                <div class="my-groups-list-item-onoff-ctrl">
+                                    <a class="my-groups-list-item-onoff-on js-modal-closer js-modal-gcalendar-link-opener" role="button" href="javascript:;">구글 캘린더 연결</a>
+                                </div>
+                                <!-- 연결됐을 때-->
                                 <div class="my-groups-list-item-onoff-entry"><span class="my-groups-list-item-onoff-entry-id">adfag212</span>
-                                    <a class="my-groups-list-item-onoff-off js-modal-closer" role="button" href="javascript:;">해제</a>
+                                    <a class="my-groups-list-item-onoff-off js-modal-closer js-modal-gcalendar-unlink-opener" role="button" href="javascript:;">해제</a>
                                 </div>
                                 <!-- 캘린더 설정-->
                                 <div class="my-groups-list-item-onoff-ctrl">
@@ -1620,7 +1625,7 @@
                                         <a class="list-sch" href="javascript:;" data-color="7">일정관리 시스템 미팅</a>
                                     </td>
                                 </tr>
-                                <tr class="txt-clr-2 pastdays bg-clr-3">
+                                <tr class="pastdays">
                                     <td class="date">2017.11.13 (월)</td>
                                     <td class="time">
                                         <i class="sch-color"></i>종일</td>

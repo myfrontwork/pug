@@ -51,9 +51,6 @@ $mv-list-row-height: 34px;
         }
         &.pastdays{
           color: alpha-non-opaque($color-L5, 50%) !important;
-          td{
-            color: alpha-non-opaque($color-L5, 50%) !important;
-          }
           background-color: transparent !important;
           i.sch-color{
               background-color: alpha-non-opaque($color-L5, 50%) !important;
