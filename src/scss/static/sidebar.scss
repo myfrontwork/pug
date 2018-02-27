@@ -186,14 +186,6 @@
   &.is-active {
     transform: rotate(180deg);
   }
-  + .is-active{ //한컴 추가(is-active 메뉴 disable 처리 추가)
-    .my-groups-list-item-onoff-ctrl:first-child{
-      display: none;
-    }
-    .my-groups-list-item-onoff-entry{
-      border-top: none !important;
-    }
-  }
 }
 
 // 추가 메뉴
@@ -210,6 +202,12 @@
   padding: 0 2px;
   line-height: 15px;
   font-size: 12px;
+  .is-active{
+    display: none;
+    & + div{
+      border-top: none !important;
+    }
+  }
 }
 %my-groups-list-item-onoff-row  {
   border-top: 1px solid $color-L3;

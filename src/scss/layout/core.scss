@@ -52,9 +52,9 @@
     display: block;
   }
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) { //한컴 추가(1000px 이하에서  overflow contents 스크롤 가능하게 수정)
   .content{
     position: relative;
-    padding-top: 0px;
+    margin-top: -48px !important;
   }
-}
+} 

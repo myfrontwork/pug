@@ -58,8 +58,30 @@
     }
     // 파일 첨부
     &.attachment {
+      .add-file {
+        .modal-fieldset-row-field{
+          a{
+           display: none;
+          }
+        }
+      }
       .added-file {
-        display: none;
+        .modal-fieldset-row-field{
+          a{
+            background-color: transparent;
+            padding: 3px  15px  3px  3px ;
+            margin-top: 5px;
+            display: inline-block;
+            border: 1px solid red;
+            white-space: nowrap;
+            border-radius: 2px;
+            max-width: 350px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: middle;
+            line-height: 1.2em;
+          }
+        }
       }
       &.has-attachment {
         .add-file {

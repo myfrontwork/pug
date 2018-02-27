@@ -1,3 +1,7 @@
+.content{ //한컴 추가(일정목폭  overflow contents 스크롤 가능하게 수정)
+    position: relative !important;
+    margin-top: -48px !important;
+ }
 .list {
   @include list-unstyled;
   padding: 2px;
