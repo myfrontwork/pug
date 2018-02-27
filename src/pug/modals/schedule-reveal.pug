@@ -1,15 +1,19 @@
 mixin scheduleListItem(obj)
+
   li.sch-list-item
-    a.sch-list-item-link.js-modal-schedule-view-opener(class=`txt-clr-${obj.color || 0}`, href="javascript:;")
-      span.time= obj.time
-      span.name= obj.name
-      span.icon
-        if (obj.repeat)
-          +icon-repeat
-        if (obj.alarm)
-          +icon-alarm
-        if (obj.alarm)
-          +icon-attached
+    //- (한컴수정)클래스 수정 및 span 태그 구조 수정
+    a.sch-list-item-link.js-modal-schedule-view-opener(class=`txt-clr-${obj.color || 0} bg-clr-${obj.color || 0}` , href="javascript:;") 
+      span.sch-pad
+        span.sch-def
+          span.time= obj.time
+          span.name= obj.name
+          span.icon
+            if (obj.repeat)
+              +icon-repeat
+            if (obj.alarm)
+              +icon-alarm
+            if (obj.alarm)
+              +icon-attached
 
 aside.modal.modal-simple.modal-schedule-reveal(role="dialog")
   .modal-inner(role="presentation")

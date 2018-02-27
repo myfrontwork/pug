@@ -29,17 +29,17 @@
   text-decoration: none;
 
   &:hover {
-    color: $list-text-color-hover !important;
+    color: $list-text-color-hover; //(한컴수정) important 삭제
     background-color: $list-bg-color-hover !important;
     border-color: $list-bd-color-hover !important;
   }
   &:active {
-    color: $list-text-color-active !important;
+    color: $list-text-color-active; //(한컴수정) important 삭제
     background-color: $list-bg-color-active !important;
     border-color: $list-bd-color-active !important;
   }
   &.is-active {
-    color: $list-text-color-selected !important;
+    color: $list-text-color-selected; //(한컴수정) important 삭제
     background-color: $list-bg-color-selected !important;
     border-color: $list-bd-color-selected !important;
   }

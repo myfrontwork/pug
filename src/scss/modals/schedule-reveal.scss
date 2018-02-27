@@ -15,24 +15,90 @@
 .sch-list-item {
   @extend .list-item;
 }
-.sch-list-item-link {
-  @extend .list-item-link;
-  display: flex;
-  align-items: center;
 
-  .time {
-    margin-right: .25em;
-  }
-  .name {
-    @include text-ellipsis;
-  }
-  .icon {
-    @include flex-static;
-    display: inline-flex;
-    align-items: center;
+@for $i from 1 through length($schedule-color-map) { //(한컴)추가 tooltip 일정 수정
+    $schedule-color: nth($schedule-color-map, $i);
+    .sch-list-item-link {
+      @extend .list-item-link;
+      display: flex;
+      align-items: center;
+      line-height: 1.2em;
+      &:hover {
+        color: $list-text-color-hover;
+       }
+      .sch-pad {
+        padding: 0 7px;
+        display: flex;
+      }
+      &.txt-clr-#{$i}{
+        &:hover {
+          color: map-get($schedule-color, text);
+        }
+        &.is-active {
+          color: map-get($schedule-color, text);
+        }
+      }
+      &.bg-clr-#{$i}{
+        background-color: transparent !important;
+        &:hover {
+          background-color: $list-bg-color-hover !important;
+          border-color: $list-bd-color-hover !important;
+        }
+        &.is-active {
+          background-color: $list-bg-color-selected !important;
+          border-color: $list-bd-color-selected !important;
+        }
+        .sch-def {
+         &::before{
+            background-color: map-get($schedule-color, entity);
+         }
+          .time {
+            margin-right: .25em;
+          }
+          .name {
+            @include text-ellipsis;
+          }
+          .icon {
+            @include flex-static;
+            display: inline-flex;
+            align-items: center;
 
-    [class^="icon"] {
-      margin-left: 4px;
+            [class^="icon"] {
+              margin-left: 4px;
+            }
+          }
+        }
+        &.pastdays{
+          &:hover {
+            color: $list-text-color-hover !important;
+            background-color: $list-bg-color-hover !important;
+            border-color: $list-bd-color-hover !important;
+          }
+          .sch-def {
+            background-color: transparent !important;
+            &::before {
+              background-color:  alpha-non-opaque(map-get($schedule-color, entity), 50%);
+            }
+          }
+        }
+      }
+      &.pastdays{
+        .sch-def {
+          &::before {
+            background-color:  alpha-non-opaque($color-L5, 50%);
+          }
+        }
+      }
+      .sch-def {
+        &::before {
+          content: "";
+          background: $color-L5;
+          border-radius: 50%;
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 5px;
+        }
+      } //.sch-def
     }
   }
-}
