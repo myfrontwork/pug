@@ -1,12 +1,16 @@
-.modal {
+.modal { //(한컴) 수정 모달 높이에 따라 scroll 되도록 수정
   color: $modal-text-color;
   background: $modal-bg-color;
   border: 1px solid $modal-bd-color;
+  box-sizing: border-box;
+  position: absolute; //(한컴)추가
+  margin-bottom: 50px !important; //(한컴)추가
+  left: 50%; //(한컴)추가
+  top: 50%; //(한컴)추가
   @include layer-shadow(15%);
   width: $modal-min-width;
   margin: auto;
   z-index: 2000; // 오버레이: 2000, select2: 2000
-  @include fixed(left 50% top 50%);
   box-sizing: border-box;
 
   &:not(.is-active) {
@@ -177,13 +181,14 @@
 }
 
 // 오버레이
-.overlay {
+.overlay { //(한컴) 수정 모달 높이에 따라 scroll 되도록 수정
   opacity: 0;
-  @include overwrap(fixed);
+  @include overwrap(absolute);
   visibility: hidden;
   z-index: 2000;
   transition: opacity .2s cubic-bezier(0.215, 0.61, 0.355, 1), visibility 0s linear .2s;
-
+  display: block;
+  overflow-y: auto;
   &.is-active {
     opacity: 1;
     visibility: visible;

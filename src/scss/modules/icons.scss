@@ -55,6 +55,9 @@
 .icon-drag { @extend %icon; background-position: -2px -368px; width: 8px; height: 8px; }
 .icon-unfold { @extend %icon; background-position: -17px -268px; width: 8px; height: 4px; }
 .icon-fold { @extend %icon; background-position: -42px -348px; width: 4px; height: 8px; }
+.icon-attachedfile-delete { @extend %icon; background-position: -50px -88px; width: 14px; height: 14px; } //(한컴)추가
+.icon-attachedfile-delete-hover { @extend %icon; background-position: -50px -105px; width: 14px; height: 14px; } //(한컴)추가
+.icon-attachedfile-delete-active { @extend %icon; background-position: -50px -122px; width: 14px; height: 14px; } //(한컴)추가
 
 $icon-with-state-list: grid, list, view, close, map-pointer, prev, caret-down, caret-left, caret-right, caret-up, close, refresh;
 

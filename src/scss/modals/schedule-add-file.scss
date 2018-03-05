@@ -2,7 +2,7 @@
   //width: 600px;
   //height: 380px;
   @include modal-size(600px, 380px);
-
+  position: fixed !important;
   .modal-body {
     flex-direction: column;
   }

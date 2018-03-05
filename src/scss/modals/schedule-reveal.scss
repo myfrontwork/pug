@@ -1,3 +1,13 @@
+.overflow-div{
+  position: fixed;
+  display: block;
+  overflow-y: auto;
+  .modal{
+    box-sizing: border-box;
+    position: relative;
+  }
+}
+
 .modal-schedule-reveal {
   width: 212px;
   height: 220px;

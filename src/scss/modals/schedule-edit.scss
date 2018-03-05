@@ -60,26 +60,59 @@
     &.attachment {
       .add-file {
         .modal-fieldset-row-field{
-          a{
+          div{
            display: none;
           }
         }
       }
-      .added-file {
+      .added-file{
         .modal-fieldset-row-field{
-          a{
+          margin-left: -3px;
+          margin-right: -3px;
+          div{
             background-color: transparent;
-            padding: 3px  15px  3px  3px ;
+            padding: 0px 3px 2px 26px;
             margin-top: 5px;
             display: inline-block;
-            border: 1px solid red;
+            border: 1px solid #dcdcdc;
             white-space: nowrap;
             border-radius: 2px;
             max-width: 350px;
-            text-overflow: ellipsis;
-            overflow: hidden;
             vertical-align: middle;
-            line-height: 1.2em;
+            line-height: 1.6em;
+            cursor: pointer;
+            position: relative;
+            margin-right: 3px;
+            margin-left: 3px;
+            span{
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              left: 6px;
+              top: 4px;
+              position: absolute;
+              background-color: red;
+            }
+            em{
+              display: inline-block;
+              height: 17px;
+              position: relative;
+              max-width: 322px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              top: 2px;
+            }
+            a{
+              width: 16px;
+              height: 16px;
+              display: inline-block;
+              margin-top: 4px;
+            }
+            &:hover{
+              border-color: #91a6dd;
+              background-color: #eaeffb;
+            }
           }
         }
       }

@@ -1,5 +1,6 @@
 .modal-simple {
   @include modal-size(300px, 160px);
+  z-index: 1000; //(한컴)추가
 
   .modal-body {
     height: 100%;
