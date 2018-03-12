@@ -64,6 +64,9 @@
            display: none;
           }
         }
+        &.is-active{
+          @extend .added-file;
+        }
       }
       .added-file{
         .modal-fieldset-row-field{
@@ -72,7 +75,7 @@
           div{
             background-color: transparent;
             padding: 0px 3px 2px 26px;
-            margin-top: 5px;
+            margin-top: 3px;
             display: inline-block;
             border: 1px solid #dcdcdc;
             white-space: nowrap;
@@ -89,9 +92,8 @@
               width: 16px;
               height: 16px;
               left: 6px;
-              top: 4px;
+              top: 5px;
               position: absolute;
-              background-color: red;
             }
             em{
               display: inline-block;
@@ -108,6 +110,20 @@
               height: 16px;
               display: inline-block;
               margin-top: 4px;
+              border: 0px;
+              position: relative;
+              top: -2px;
+              background: transparent !important;
+              &:hover{
+                i{
+                  @extend .icon-attachedfile-delete-hover;
+                }
+              }
+              &:focus{
+                i{
+                  @extend .icon-attachedfile-delete-active;
+                }
+              }
             }
             &:hover{
               border-color: #91a6dd;

@@ -55,6 +55,33 @@
     width: 60px;
   }
 
+  .modal-fieldset-row-field.files{
+    margin-top: 0px;
+    div{
+      display: inline-block;
+      white-space: nowrap;
+      border-radius: 2px;
+      max-width: 254px;
+      line-height: 1.2em;
+      position:relative;
+      padding: 0px 0px 0px 26px;
+      span{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        left: 6px;
+        position: absolute;
+      }
+      em{
+        display: inline-block;
+        max-width: 254px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+
   // (한컴)색상
   @for $i from 1 through length($schedule-color-map) {
     &[data-schedule-color="#{$i}"] {

@@ -75,13 +75,18 @@ aside.modal.modal-advanced.modal-schedule-edit(role="dialog")
               .add-file
                 input.add-file-input.nonvisual(type="file")
                 +aButton("파일 첨부", null, "attached").js-modal-schedule-add-file-opener
+                // /(한컴)추가
                 .modal-fieldset-row-field
                   div
-                    span
+                    // /span 태그에 넷피스 24 파일 썸네일을 적용해주세요.
+                    span.file-thumnail
+                      img(src="/image", alt="text")
                     em 플래너화면설계서.show
                     +iconButton("첨부파일삭제", null, "attachedfile-delete")
                   div
-                    span
+                    // /span 태그에 넷피스 24 파일 썸네일을 적용해주세요.
+                    span.file-thumnail
+                      img(src="/image", alt="text")
                     em 플래너화면설계서.show
                     +iconButton("첨부파일삭제", null, "attachedfile-delete")
               .added-file
