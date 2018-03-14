@@ -98,16 +98,6 @@ aside.modal.modal-advanced.modal-schedule-edit(role="dialog")
             .modal-fieldset-row-label 일정 색상:
             .modal-fieldset-row-field
               +palette("scheduleEdit", true)
-          hr.modal-fieldset-divider
-          .modal-fieldset-row.alarm
-            .modal-fieldset-row-label 미리알림:
-            .modal-fieldset-row-field
-              +select([
-                {value: "test1", text: "없음"},
-                {value: "test2", text: "5분 전"},
-                {value: "test3", text: "10분 전"},
-                {value: "test4", text: "30분 전"}
-              ], {width: "77px"})
 
       .modal-actions
         .modal-actions-group

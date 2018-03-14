@@ -7,6 +7,7 @@
 
   .modal-fieldset-row-label {
     width: 60px;
+    letter-spacing: -1px;
   }
   .modal-fieldset-row {
     // 일시
@@ -163,8 +164,7 @@
   }
   // 일정색상 피커 영역
   .palette {
-    margin-top: 2px;
-    margin-left: 16px;
+    margin-top: 3px; 
   }
 }
 
