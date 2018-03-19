@@ -657,8 +657,8 @@
         </div>
     </aside>
     <!-- /[popup] 숨겨진 일정 보기-->
-    <!-- [popup] 반복 일정 삭제-->
-    <aside class="modal modal-simple modal-schedule-delete-related" role="dialog">
+    <!-- [alert] 반복 일정 삭제-->
+    <aside class="modal modal-simple modal-select modal-schedule-delete-related" role="dialog">
         <div class="modal-inner" role="presentation">
             <header class="modal-head">
                 <h2 class="modal-head-title">알림</h2>
@@ -667,22 +667,19 @@
             </header>
             <div class="modal-body">
                 <div class="modal-content">
-                    <fieldset class="modal-fieldset">
-                        <p class="modal-fieldset-notice">반복 일정을 삭제하시겠습니까?</p>
-                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption1" checked="checked"/><label class="radio-label" for="deleteRelatedOption1">이 일정만 삭제</label></span></div>
-                        <div class="modal-fieldset-row"><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption2"/><label class="radio-label" for="deleteRelatedOption2">이 일정부터 이후 일정 모두 삭제</label></span></div>
-                    </fieldset>
+                    <div class="modal-dialog">
+                        <p>반복일정을 삭제하시겠습니까?</p>
+                        <div class="modal-select-group"><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption1" checked="checked"/><label class="radio-label" for="deleteRelatedOption1">이 일정만 삭제</label></span><span class="radio"><input class="radio-input" type="radio" name="deleteRelatedOption" id="deleteRelatedOption2"/><label class="radio-label" for="deleteRelatedOption2">이 일정부터 이후 일정 모두 삭제</label></span></div>
+                    </div>
                 </div>
                 <div class="modal-actions">
-                    <div class="modal-actions-group">
-                        <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
-                        <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
-                    </div>
+                    <a class="modal-actions-item js-modal-closer" role="button" href="javascript:;">취소</a>
+                    <a class="modal-actions-item" role="button" href="javascript:;">확인</a>
                 </div>
             </div>
         </div>
     </aside>
-    <!-- /[popup] 반복 일정 삭제-->
+    <!-- [alert] 반복 일정 삭제-->
     <!-- [alert] 반복 일정 편집-->
     <aside class="modal modal-simple modal-select modal-repeating-schedule-edit" role="dialog">
         <div class="modal-inner" role="presentation">

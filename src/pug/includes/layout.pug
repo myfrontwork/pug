@@ -43,9 +43,16 @@ html(lang="ko", dir="ltr")
         include ../modals/schedule-reveal
         // /[popup] 숨겨진 일정 보기
 
-        // [popup] 반복 일정 삭제
-        include ../modals/schedule-delete-related
-        // /[popup] 반복 일정 삭제
+        // [alert] 반복 일정 삭제
+        +selectModal("알림", "반복일정을 삭제하시겠습니까?", [
+          {name: "deleteRelatedOption", text: "이 일정만 삭제", selected: true},
+          {name: "deleteRelatedOption", text: "이 일정부터 이후 일정 모두 삭제"}
+        ], [
+          {link: null, text: "취소"},
+          {link: null, text: "확인"}
+        ]).modal-schedule-delete-related
+        // [alert] 반복 일정 삭제
+
 
         // [alert] 반복 일정 편집
         +selectModal("알림", "반복일정을 수정하시겠습니까?", [
