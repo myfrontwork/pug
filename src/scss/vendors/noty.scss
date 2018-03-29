@@ -3,7 +3,7 @@ $noty-types: info, success, warning;
 // 베이직 검은 반투명 토스트 (type: info, success, warning)
 .noty_theme__basic {
   color: white;
-  @include layer-shadow;
+  // @include layer-shadow;
   width: 380px;
   margin: 4px 0; // `box-shadow`용 안전 마진
   overflow: hidden;

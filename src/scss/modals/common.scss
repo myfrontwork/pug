@@ -10,7 +10,7 @@
   @include layer-shadow(15%);
   width: $modal-min-width;
   margin: auto;
-  z-index: 2000; // 오버레이: 2000, select2: 2000
+  z-index: 3000; // 오버레이: 2000, select2: 2000
   box-sizing: border-box;
 
   &:not(.is-active) {
@@ -39,18 +39,35 @@
   font-size: 12px;
 }
 .modal-closer {
+  @include button-unstyled;
+  border: 1px solid transparent;
+  border-radius: $ui-box-radius;
   width: 13px;
   height: 13px;
+  padding: 1px 4px;
   position: relative;
+  margin: 1px 0;
+  box-sizing: content-box;
+  @include non-selectable;
+  @include focus-unstyled;
 
-  .icon-close {
-    @include absolute(left top);
-  }
+  // hovered
   &:hover {
+    color: $button-text-color-hover;
+    background-color: $button-bg-color-hover;
+    border-color: $button-bd-color-hover;
     .icon-close { @extend .icon-close-hover; }
   }
+  // touched
   &:active {
+    color: $button-text-color-active;
+    background-color: $button-bg-color-active;
+    border-color: $button-bd-color-active;
     .icon-close { @extend .icon-close-active; }
+  }
+  .icon-close {
+    @include absolute(top right bottom left);
+    margin: auto;
   }
 }
 .modal-body {

@@ -6,6 +6,16 @@
   font-size: 12px;
 
   // 종일일정
+  .sch-list-item-link{
+    .name{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 196px;
+      display: inline-block;
+      line-height: 1.2em;
+    }
+  }
   .all-sche {
     @extend %schedule;
     margin: 0 2px 2px;
@@ -15,6 +25,11 @@
     .sch-pad {
       padding: 0 6px;
       display: flex;
+      & > span{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
     }
    @for $i from 1 through length($schedule-color-map) {
     $schedule-color: nth($schedule-color-map, $i);
@@ -49,14 +64,23 @@
       background-color: transparent !important; //(한컴)추가
       border-color: transparent !important; //(한컴)추가
       .sch-pad {
-        padding: 0 7px;
+        padding: 0 7px 0 5px;
         display: flex;
       }
       &.bg-clr-#{$i}{
         background-color: transparent;
         .sch-def {
          &::before{
+            content: "";
+            border-radius: 50%;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 0px;
             background-color: map-get($schedule-color, entity);
+         }
+         & .sch-when{
+            margin-left: -1px;
          }
         }
         &.pastdays{
@@ -69,13 +93,14 @@
         }
       }
       &.pastdays{
+        color: alpha-non-opaque(map-get($schedule-color, text), 50%);
         .sch-def {
           &::before {
             background-color:  alpha-non-opaque($color-L5, 50%);
           }
         }
       }
-      .sch-def {
+      &.no-clr-setting .sch-def {
         &::before {
           content: "";
           background: $color-L5;
@@ -181,6 +206,10 @@
   // &.pastdays {
   //   @extend %cell-pastdays;
   // }
+  & span{ //(한컴) 추가, IE에서만 필요한 태그
+    display: none;
+    text-indent: -500000px;
+  }
   &.date-today {
     background-color: $color-B-b1 !important;
     position:relative;
@@ -247,6 +276,9 @@
     tr {
       &.is-hidden {
         visibility: hidden; // JS 토글러 모듈을 위해 `display: none;`을 쓰지 말 것
+        position: absolute;
+        left: -1000px;
+        top: -1000px;
       }
     }
   }
@@ -301,7 +333,7 @@
     }
     &.offrange {
       .day-number {
-        opacity: .5;
+        opacity: .4;
       }
     }
     &.date-today { //(한컴)추가/수정 

@@ -1,11 +1,15 @@
 .modal-schedule-view {
-  width: 500px;
+  //width: 500px;
+  width: 515px;
   height: auto;
   margin: 0;
   top: auto;
   left: auto;
 
   .textfield {
+    &[disabled]{
+      color :#8a8a8a;
+    }
     border: {
       color: $color-L3;
       radius: 3px;
@@ -17,12 +21,11 @@
   }
   .modal-sch-def {
     border-bottom: 1px solid $color-L3;
-    display: block;
     margin-bottom: 5px;
-    padding-bottom: 4px;
-    line-height: 17px;
-    font-weight: bold;
-    position: relative;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    line-height: 18px;
     font: {
       size: 15px;
       weight: bold;

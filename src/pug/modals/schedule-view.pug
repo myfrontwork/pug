@@ -47,7 +47,7 @@ aside.modal.modal-advanced.modal-schedule-view(role="dialog", data-schedule-colo
           .modal-fieldset-row
             .modal-fieldset-row-label 메모:
             .modal-fieldset-row-field
-              +textarea("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")(class="w-full", rows="3", readonly)
+              +textarea("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")(onfocus="this.blur();", class="w-full", rows="3", disabled)
 
       .modal-actions
         .modal-actions-group

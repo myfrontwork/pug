@@ -144,6 +144,12 @@ $datepicker-cell-bd-color-current   : $color-L-b1;
       padding: 0;
       box-sizing: border-box;
       text-align: center;
+      user-drag: none; 
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
     }
     .ui-state-hover {
       background-color: $color-B3;

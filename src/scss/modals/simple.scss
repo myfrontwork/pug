@@ -1,6 +1,6 @@
 .modal-simple {
   @include modal-size(300px, 160px);
-  z-index: 2000; //(한컴)추가
+  z-index: 4000; //(한컴)추가
 
   .modal-body {
     height: 100%;
@@ -9,7 +9,9 @@
   }
   .modal-content {
     padding: 16px 0;
-    @include flex-expand;
+    // @include flex-expand;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0%;
     display: flex;
     align-items: center;
     justify-content: center;

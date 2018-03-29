@@ -39,7 +39,7 @@ $col-offset-width     : 60px;
            height: 10px;
            cursor: n-resize;
            .icon-drag{
-            @extend %icon; background-position: -2px -368px; width: 8px; height: 8px;
+            @extend .icon-drag;
             margin-left: -4px;
             position: absolute;
             left: 50%;
@@ -189,7 +189,7 @@ $col-offset-width     : 60px;
     border-style: double;
   }
   &.offrange {
-    opacity: .5;
+    opacity: .4;
   }
   
   // 음력
@@ -245,6 +245,9 @@ $col-offset-width     : 60px;
   margin: 0;
   padding: 0;
   &.date-today {
+    background-color: #f8fafe !important;
+  }
+  &.date-selected {
     background-color: #f8fafe !important;
   }
 }

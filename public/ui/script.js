@@ -1148,7 +1148,16 @@ function switchColor(el, colorIndex) {
 
 function switchModalIconColor(modal) {
     var triggerColor = (function($el) {
-        return $el.data("color") || $el.find(".sch-clr").attr("class").match(colorClassNamePatt)[2];
+        var colorData, classMatch, $schedule;
+        
+        colorData = $el.data("color");
+
+        if (colorData) return colorData;
+
+        $schedule = $el.hasClass("sch-clr") ? $el : $el.find(".sch-clr");
+        classMatch = $schedule.attr("class").match(colorClassNamePatt);
+
+        return classMatch[2] || null;
     })(modal.$trigger);
 
     if (isNaN(triggerColor) || triggerColor < 1 || 10 < triggerColor) {
